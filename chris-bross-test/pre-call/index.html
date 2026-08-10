@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>evereffect.com · A Look Before We Talk · EverEffect</title>
+<meta name="description" content="Three things found looking at evereffect.com before our call, and the agenda for our 30 minutes.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#1B4712; --forest-deep:#0A1C08; --ink:#14210F;
+  --ee:#2F8C19; --lime:#8EC63F;
+  --paper:#F7F9F5; --line:rgba(27,71,18,.14); --mist:#5F6E58;
+  --good:#2e8b57; --warn:#c9762d; --bad:#c0392b;
+  --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+*,*:before,*:after{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+header.hero{background:linear-gradient(160deg,var(--forest-deep),var(--forest));color:#fff;padding:3.4rem 0 2.8rem}
+.hero-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:2.2rem}
+.brand{font-family:var(--serif);font-weight:900;font-size:1.15rem;color:var(--lime)}
+.brand small{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.25em;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:.2rem}
+.stamp{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:rgba(255,255,255,.5);text-transform:uppercase;text-align:right;line-height:1.8}
+h1.big{font-family:var(--serif);font-weight:900;font-size:clamp(1.9rem,4.4vw,3.2rem);line-height:1.06;letter-spacing:-.02em}
+h1.big em{font-style:italic;color:var(--lime)}
+.hero-sub{margin-top:1.1rem;color:rgba(255,255,255,.75);max-width:640px;line-height:1.7;font-size:.97rem}
+.hero-stats{display:flex;gap:2.4rem;flex-wrap:wrap;margin-top:2.1rem}
+.hstat b{display:block;font-family:var(--serif);font-weight:900;font-size:1.7rem;color:var(--lime)}
+.hstat span{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+nav.tabbar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);
+  display:flex;gap:.25rem;overflow-x:auto;padding:.6rem clamp(1rem,4vw,2.5rem)}
+nav.tabbar button{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  background:none;border:1px solid transparent;border-radius:99px;padding:.55rem 1.05rem;cursor:pointer;
+  color:var(--mist);white-space:nowrap;transition:all .25s}
+nav.tabbar button:hover{color:var(--forest)}
+nav.tabbar button.on{background:var(--forest);color:#fff}
+nav.tabbar button:focus-visible{outline:2px solid var(--ee);outline-offset:2px}
+section.panel{display:none;padding:2.8rem 0 3.4rem}
+section.panel.on{display:block}
+h2.sec{font-family:var(--serif);font-weight:900;font-size:clamp(1.4rem,2.6vw,2.1rem);color:var(--forest);margin-bottom:.5rem}
+.sec-sub{color:var(--mist);font-size:.88rem;margin-bottom:2rem;max-width:640px;line-height:1.65}
+h3.sub{font-family:var(--serif);font-weight:900;font-size:1.15rem;color:var(--forest);margin:2.4rem 0 1rem}
+.grid{display:grid;gap:1rem}
+.g3{grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(20rem,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.5rem}
+.card h3{font-family:var(--serif);font-weight:600;font-size:1.06rem;color:var(--forest);margin-bottom:.55rem}
+.card p{font-size:.86rem;color:#3f4d3a;line-height:1.65}
+.card p + p{margin-top:.65rem}
+.badge{display:inline-block;font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;
+  text-transform:uppercase;border-radius:99px;padding:.28rem .7rem;margin-bottom:.75rem}
+.b-num{background:rgba(47,140,25,.1);color:var(--ee);border:1px solid rgba(47,140,25,.35)}
+.ev{margin-top:.95rem;padding-top:.85rem;border-top:1px dashed var(--line);font-size:.77rem;color:var(--mist);line-height:1.6}
+.ev b{font-family:var(--mono);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ee);display:block;margin-bottom:.35rem}
+.ev a,.srcs a,.card p a,.note a{color:var(--ee);text-decoration:none;border-bottom:1px solid rgba(47,140,25,.32);word-break:break-word}
+.ev a:hover,.srcs a:hover,.card p a:hover,.note a:hover{border-bottom-color:var(--ee)}
+.ev a:after,.srcs a:after{content:" \2197";font-size:.78em;opacity:.65}
+.ev ul{list-style:none;margin-top:.5rem;display:grid;gap:.3rem}
+.ev li:before{content:"\2022";color:var(--ee);margin-right:.45rem}
+.srcs{margin-top:1.8rem;padding:1.2rem 1.4rem;background:#fff;border:1px solid var(--line);border-radius:12px}
+.srcs .lab{font-family:var(--mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ee);margin-bottom:.75rem}
+.srcs ul{list-style:none;display:grid;gap:.5rem}
+.srcs li{font-size:.8rem;line-height:1.55;color:var(--mist)}
+.srcs li b{color:var(--forest);font-weight:600}
+.steps{display:grid;gap:.6rem;counter-reset:s;margin-top:1.4rem}
+.step{display:grid;grid-template-columns:2rem 1fr auto;gap:.85rem;align-items:start;font-size:.86rem;
+  color:#3f4d3a;line-height:1.6;background:#fff;border:1px solid var(--line);border-radius:11px;padding:1.05rem 1.15rem}
+.step i{counter-increment:s;font-style:normal;font-family:var(--serif);font-weight:900;color:var(--ee);
+  background:rgba(47,140,25,.1);border:1px solid rgba(47,140,25,.35);border-radius:99px;width:1.8rem;height:1.8rem;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex:none}
+.step i:before{content:counter(s)}
+.step b{display:block;font-weight:650;color:var(--forest);font-size:.94rem;margin-bottom:.2rem}
+.step .who{font-family:var(--mono);font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);
+  border:1px solid var(--line);border-radius:6px;padding:.25rem .6rem;white-space:nowrap;align-self:center}
+.note{background:rgba(142,198,63,.13);border:1px solid rgba(47,140,25,.35);border-radius:12px;
+  padding:1.15rem 1.35rem;font-size:.86rem;line-height:1.7;color:#2b3d25;margin-top:1.6rem}
+.note b{color:var(--forest)}
+footer.f{padding:2.2rem 0 3rem;border-top:1px solid var(--line);margin-top:1rem;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
+@media(max-width:620px){.step{grid-template-columns:2rem 1fr}.step .who{grid-column:2;justify-self:start}.hero-stats{gap:1.4rem}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="brand">EverEffect<small>Before We Talk</small></div>
+      <div class="stamp">Prepared for Chris Bross<br>2026-08-10 &middot; 2:30pm EDT</div>
+    </div>
+    <h1 class="big">A quick look at your own site<br>before our <em>2:30 today.</em></h1>
+    <p class="hero-sub">Chris, this is a test run of the pre-call format using evereffect.com itself
+    as the subject, so nothing here is invented. Three real findings, sourced, plus the agenda for
+    our thirty minutes.</p>
+    <div class="hero-stats">
+      <div class="hstat"><b>~17 mo</b><span>Since the last blog post</span></div>
+      <div class="hstat"><b>0</b><span>Review schema, despite real testimonials</span></div>
+      <div class="hstat"><b>4.8/5</b><span>Public rating not shown on-site</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabbar" id="tabs">
+  <button data-p="found" class="on">What We Found</button>
+  <button data-p="agenda">Our 30 Minutes</button>
+  <button data-p="how">How We Work</button>
+</nav>
+
+<div class="wrap">
+
+<section class="panel on" id="p-found">
+  <h2 class="sec">Three things worth knowing before we speak</h2>
+  <p class="sec-sub">All of this came from evereffect.com and public sources, read live on
+  10 August 2026.</p>
+
+  <div class="grid g3">
+    <div class="card"><span class="badge b-num">Finding 01</span>
+      <h3>The blog has been quiet for about seventeen months</h3>
+      <p>The last real post is "EverEffect is a 2025 Google Premier Partner," published 5 March
+      2025. The template itself is not the problem: that post carries correct Article and Person
+      schema. The gap is cadence, not capability.</p>
+      <p>This is the same pattern flagged on Rhoads &amp; Rhoads earlier this year: a working blog
+      that has gone silent.</p>
+      <div class="ev"><b>Where this came from</b>
+      <a href="https://www.evereffect.com/post-sitemap.xml" target="_blank" rel="noopener">The blog's own sitemap</a>,
+      sorted by last-modified date, and
+      <a href="https://www.evereffect.com/blog/evereffect-is-a-2025-google-premier-partner/" target="_blank" rel="noopener">the post itself</a>,
+      read live 10 August 2026.</div>
+    </div>
+
+    <div class="card"><span class="badge b-num">Finding 02</span>
+      <h3>Real testimonials, zero review schema</h3>
+      <p>The homepage shows genuine, specific client testimonials, including one client who says
+      they've worked with EverEffect for over fifteen years. A third-party directory shows a public
+      4.8 out of 5 rating. None of it is marked up, so none of it can surface as a star rating in a
+      search result.</p>
+      <div class="ev"><b>Where this came from</b>
+      <a href="https://www.evereffect.com/" target="_blank" rel="noopener">The homepage</a> testimonials,
+      and the public rating on
+      <a href="https://www.rankwatch.com/agency/company/evereffect/" target="_blank" rel="noopener">RankWatch</a>,
+      both read 10 August 2026. No <code>aggregateRating</code> or <code>Review</code> schema found
+      in the homepage source.</div>
+    </div>
+
+    <div class="card"><span class="badge b-num">Finding 03</span>
+      <h3>What is genuinely working</h3>
+      <p>The homepage itself is technically solid: a proper title tag, meta description, Open Graph
+      tags, a canonical link, and valid WebSite schema are all present and correct. This is not a
+      site with broken basics, it is a site with unused upside.</p>
+      <div class="ev"><b>Where this came from</b>
+      <a href="https://www.evereffect.com/" target="_blank" rel="noopener">Homepage source</a>,
+      read 10 August 2026.</div>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>One small, fixable thing spotted along the way.</b> The About page was updated as recently as
+    6 August, and the newest team photo uploaded that month ships with no alt text. Two minutes to
+    fix, worth doing while that page is already being touched.
+  </div>
+
+  <div class="srcs">
+    <div class="lab">Every source on this page, in one place</div>
+    <ul>
+      <li><b>Site structure:</b>
+        <a href="https://www.evereffect.com/sitemap_index.xml" target="_blank" rel="noopener">sitemap_index.xml</a>,
+        <a href="https://www.evereffect.com/post-sitemap.xml" target="_blank" rel="noopener">post-sitemap.xml</a>,
+        <a href="https://www.evereffect.com/page-sitemap.xml" target="_blank" rel="noopener">page-sitemap.xml</a>
+      </li>
+      <li><b>Pages read directly:</b>
+        <a href="https://www.evereffect.com/" target="_blank" rel="noopener">Homepage</a>,
+        <a href="https://www.evereffect.com/about-us/" target="_blank" rel="noopener">About Us</a>,
+        <a href="https://www.evereffect.com/blog/evereffect-is-a-2025-google-premier-partner/" target="_blank" rel="noopener">last blog post</a>
+      </li>
+      <li><b>External rating:</b>
+        <a href="https://www.rankwatch.com/agency/company/evereffect/" target="_blank" rel="noopener">RankWatch agency profile</a>
+      </li>
+      <li><b>Method:</b> raw HTML, sitemaps and headers fetched directly on 10 August 2026. Nothing
+        here is estimated or taken from a third-party summary.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="p-agenda">
+  <h2 class="sec">The agenda for our thirty minutes</h2>
+  <p class="sec-sub">This run is testing the format itself: booking confirmation, this brief, and a
+  fuller findings write-up after. Feel free to react to all three, not just the content.</p>
+  <div class="steps">
+    <div class="step"><i></i>
+      <div><b>Whether the three findings land</b>
+      Do they read as genuinely useful, or as generic audit filler? Real test of the "we look
+      before we recommend" promise.</div>
+      <span class="who">10 min</span>
+    </div>
+    <div class="step"><i></i>
+      <div><b>The format itself</b>
+      Tabs, tone, length, the sourcing convention. What would you change before this goes to a real
+      lead?</div>
+      <span class="who">10 min</span>
+    </div>
+    <div class="step"><i></i>
+      <div><b>The pipeline mechanics</b>
+      Booking confirm, pre-call brief, post-call findings, all as real sends this time. Did
+      anything feel off in the sequence or the timing?</div>
+      <span class="who">10 min</span>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="p-how">
+  <h2 class="sec">How we approach this, for any real lead</h2>
+  <p class="sec-sub">Same standard whether the subject is a prospect or, today, ourselves.</p>
+  <div class="grid g2">
+    <div class="card">
+      <h3>We look before we recommend</h3>
+      <p>Every finding above traces to a live page or a public source, linked so it can be checked.
+      Nothing is estimated to fill space.</p>
+    </div>
+    <div class="card">
+      <h3>We say when we do not know something</h3>
+      <p>If a claim needs data we have not pulled yet, it stays out rather than getting guessed at.
+      That discipline does not change based on who the audience is.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="f">
+  <span>Prepared for Chris Bross &middot; internal format test &middot; 10 August 2026</span>
+  <span>EverEffect</span>
+</footer>
+</div>
+
+<script>
+var tabs=document.querySelectorAll('#tabs button'),panels=document.querySelectorAll('.panel');
+tabs.forEach(function(b){b.addEventListener('click',function(){
+  tabs.forEach(function(x){x.classList.remove('on')});
+  panels.forEach(function(p){p.classList.remove('on')});
+  b.classList.add('on');
+  document.getElementById('p-'+b.dataset.p).classList.add('on');
+  b.scrollIntoView({block:'nearest',inline:'nearest'});
+  window.scrollTo({top:0,behavior:'smooth'});
+})});
+</script>
+</body>
+</html>

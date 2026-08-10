@@ -5,14 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <title>evereffect.com · A Look Before We Talk · EverEffect</title>
-<meta name="description" content="The agenda for our 30 minutes, and how we work together before and after the call.">
+<meta name="description" content="The agenda for our 30 minutes.">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --forest:#1B4712; --forest-deep:#0A1C08; --ink:#14210F;
   --ee:#2F8C19; --lime:#8EC63F;
   --paper:#F7F9F5; --line:rgba(27,71,18,.14); --mist:#5F6E58;
-  --good:#2e8b57; --warn:#c9762d; --bad:#c0392b;
   --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
 }
 *,*:before,*:after{margin:0;padding:0;box-sizing:border-box}
@@ -30,25 +29,9 @@ h1.big em{font-style:italic;color:var(--lime)}
 .hero-stats{display:flex;gap:2.4rem;flex-wrap:wrap;margin-top:2.1rem}
 .hstat b{display:block;font-family:var(--serif);font-weight:900;font-size:1.7rem;color:var(--lime)}
 .hstat span{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55)}
-nav.tabbar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);
-  display:flex;gap:.25rem;overflow-x:auto;padding:.6rem clamp(1rem,4vw,2.5rem)}
-nav.tabbar button{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
-  background:none;border:1px solid transparent;border-radius:99px;padding:.55rem 1.05rem;cursor:pointer;
-  color:var(--mist);white-space:nowrap;transition:all .25s}
-nav.tabbar button:hover{color:var(--forest)}
-nav.tabbar button.on{background:var(--forest);color:#fff}
-nav.tabbar button:focus-visible{outline:2px solid var(--ee);outline-offset:2px}
-section.panel{display:none;padding:2.8rem 0 3.4rem}
-section.panel.on{display:block}
+main.panel{padding:2.8rem 0 3.4rem}
 h2.sec{font-family:var(--serif);font-weight:900;font-size:clamp(1.4rem,2.6vw,2.1rem);color:var(--forest);margin-bottom:.5rem}
 .sec-sub{color:var(--mist);font-size:.88rem;margin-bottom:2rem;max-width:640px;line-height:1.65}
-h3.sub{font-family:var(--serif);font-weight:900;font-size:1.15rem;color:var(--forest);margin:2.4rem 0 1rem}
-.grid{display:grid;gap:1rem}
-.g2{grid-template-columns:repeat(auto-fit,minmax(20rem,1fr))}
-.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.5rem}
-.card h3{font-family:var(--serif);font-weight:600;font-size:1.06rem;color:var(--forest);margin-bottom:.55rem}
-.card p{font-size:.86rem;color:#3f4d3a;line-height:1.65}
-.card p + p{margin-top:.65rem}
 .steps{display:grid;gap:.6rem;counter-reset:s;margin-top:1.4rem}
 .step{display:grid;grid-template-columns:2rem 1fr auto;gap:.85rem;align-items:start;font-size:.86rem;
   color:#3f4d3a;line-height:1.6;background:#fff;border:1px solid var(--line);border-radius:11px;padding:1.05rem 1.15rem}
@@ -85,22 +68,16 @@ footer.f{padding:2.2rem 0 3rem;border-top:1px solid var(--line);margin-top:1rem;
     <div class="hero-stats">
       <div class="hstat"><b>30</b><span>Minutes, start to finish</span></div>
       <div class="hstat"><b>0</b><span>Prep required on your end</span></div>
-      <div class="hstat"><b>1</b><span>Written findings doc, right after</span></div>
+      <div class="hstat"><b>1</b><span>Discussion, not a document</span></div>
     </div>
   </div>
 </header>
 
-<nav class="tabbar" id="tabs">
-  <button data-p="agenda" class="on">Our 30 Minutes</button>
-  <button data-p="how">How We Work</button>
-</nav>
-
 <div class="wrap">
-
-<section class="panel on" id="p-agenda">
+<main class="panel">
   <h2 class="sec">The agenda for our thirty minutes</h2>
   <p class="sec-sub">This run is testing the format itself: booking confirmation, this brief, and a
-  fuller findings write-up after. Feel free to react to all three, not just the content.</p>
+  reminder. Feel free to react to all three, not just the content.</p>
   <div class="steps">
     <div class="step"><i></i>
       <div><b>What we found looking at the site beforehand</b>
@@ -111,25 +88,15 @@ footer.f{padding:2.2rem 0 3rem;border-top:1px solid var(--line);margin-top:1rem;
     </div>
     <div class="step"><i></i>
       <div><b>The format itself</b>
-      Tabs, tone, length, the sourcing convention, and now, holding findings for the call instead of
-      writing them up beforehand. What would you change before this goes to a real lead?</div>
+      Tone, length, the sourcing convention, and holding findings for the call instead of writing
+      them up beforehand. What would you change before this goes to a real lead?</div>
       <span class="who">10 min</span>
     </div>
     <div class="step"><i></i>
       <div><b>The pipeline mechanics</b>
-      Booking confirm, pre-call brief, post-call findings, all as real sends this time. Did anything
-      feel off in the sequence or the timing?</div>
+      Booking confirm, pre-call brief, reminder, all as real sends this time. Did anything feel off
+      in the sequence or the timing?</div>
       <span class="who">10 min</span>
-    </div>
-  </div>
-
-  <h3 class="sub">What happens after this call</h3>
-  <div class="steps">
-    <div class="step"><i></i>
-      <div><b>You get the findings document</b>
-      Everything we looked into before the call, written up and sourced, so it can be checked.
-      <b>Yours to keep either way.</b></div>
-      <span class="who">Yours to keep</span>
     </div>
   </div>
 
@@ -137,35 +104,7 @@ footer.f{padding:2.2rem 0 3rem;border-top:1px solid var(--line);margin-top:1rem;
     <b>A no is a good answer.</b> This meeting is to work out honestly whether the format holds up.
     If it does not, we would both rather know now than after it has gone to a real lead.
   </div>
-</section>
-
-<section class="panel" id="p-how">
-  <h2 class="sec">How we approach this, for any real lead</h2>
-  <p class="sec-sub">Same standard whether the subject is a prospect or, today, ourselves.</p>
-  <div class="grid g2">
-    <div class="card">
-      <h3>We look before we recommend</h3>
-      <p>Whatever we bring to the call traces to a live page or a public source, sourced and
-      checkable. Nothing is estimated to fill space.</p>
-    </div>
-    <div class="card">
-      <h3>We say when we do not know something</h3>
-      <p>If a claim needs data we have not pulled yet, it stays out rather than getting guessed at.
-      That discipline does not change based on who the audience is.</p>
-    </div>
-    <div class="card">
-      <h3>We do the homework before the call, not the pitch</h3>
-      <p>We looked into evereffect.com before this call. We are holding what we found for the
-      conversation itself, on purpose, so it can be a discussion rather than something read and
-      reacted to alone. You will get the full write-up right after, either way.</p>
-    </div>
-    <div class="card">
-      <h3>A no is a good answer</h3>
-      <p>This meeting is to work out honestly whether there is a fit. If there is not, we would both
-      rather know in thirty minutes than in three months, and you keep the research either way.</p>
-    </div>
-  </div>
-</section>
+</main>
 
 <footer class="f">
   <span>Prepared for Chris Bross &middot; internal format test &middot; 10 August 2026</span>
@@ -173,16 +112,5 @@ footer.f{padding:2.2rem 0 3rem;border-top:1px solid var(--line);margin-top:1rem;
 </footer>
 </div>
 
-<script>
-var tabs=document.querySelectorAll('#tabs button'),panels=document.querySelectorAll('.panel');
-tabs.forEach(function(b){b.addEventListener('click',function(){
-  tabs.forEach(function(x){x.classList.remove('on')});
-  panels.forEach(function(p){p.classList.remove('on')});
-  b.classList.add('on');
-  document.getElementById('p-'+b.dataset.p).classList.add('on');
-  b.scrollIntoView({block:'nearest',inline:'nearest'});
-  window.scrollTo({top:0,behavior:'smooth'});
-})});
-</script>
 </body>
 </html>

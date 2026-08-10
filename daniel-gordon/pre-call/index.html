@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>30 Minutes With Evans · Before We Talk · EverEffect</title>
+<meta name="description" content="Agenda for our call, and an open offer to audit your YouTube channel or site at no cost.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#1B4712; --forest-deep:#0A1C08; --ink:#14210F;
+  --ee:#2F8C19; --lime:#8EC63F;
+  --paper:#F7F9F5; --line:rgba(27,71,18,.14); --mist:#5F6E58;
+  --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+*,*:before,*:after{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+header.hero{background:linear-gradient(160deg,var(--forest-deep),var(--forest));color:#fff;padding:3.4rem 0 2.8rem}
+.hero-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:2.2rem}
+.brand{font-family:var(--serif);font-weight:900;font-size:1.15rem;color:var(--lime)}
+.brand small{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.25em;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:.2rem}
+.stamp{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:rgba(255,255,255,.5);text-transform:uppercase;text-align:right;line-height:1.8}
+h1.big{font-family:var(--serif);font-weight:900;font-size:clamp(1.9rem,4.4vw,3.2rem);line-height:1.06;letter-spacing:-.02em}
+h1.big em{font-style:italic;color:var(--lime)}
+.hero-sub{margin-top:1.1rem;color:rgba(255,255,255,.75);max-width:640px;line-height:1.7;font-size:.97rem}
+nav.tabbar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);
+  display:flex;gap:.25rem;overflow-x:auto;padding:.6rem clamp(1rem,4vw,2.5rem)}
+nav.tabbar button{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  background:none;border:1px solid transparent;border-radius:99px;padding:.55rem 1.05rem;cursor:pointer;
+  color:var(--mist);white-space:nowrap;transition:all .25s}
+nav.tabbar button:hover{color:var(--forest)}
+nav.tabbar button.on{background:var(--forest);color:#fff}
+nav.tabbar button:focus-visible{outline:2px solid var(--ee);outline-offset:2px}
+section.panel{display:none;padding:2.8rem 0 3.4rem}
+section.panel.on{display:block}
+h2.sec{font-family:var(--serif);font-weight:900;font-size:clamp(1.4rem,2.6vw,2.1rem);color:var(--forest);margin-bottom:.5rem}
+.sec-sub{color:var(--mist);font-size:.88rem;margin-bottom:2rem;max-width:640px;line-height:1.65}
+h3.sub{font-family:var(--serif);font-weight:900;font-size:1.15rem;color:var(--forest);margin:2.4rem 0 1rem}
+.grid{display:grid;gap:1rem}
+.g2{grid-template-columns:repeat(auto-fit,minmax(20rem,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.5rem}
+.card h3{font-family:var(--serif);font-weight:600;font-size:1.06rem;color:var(--forest);margin-bottom:.55rem}
+.card p{font-size:.86rem;color:#3f4d3a;line-height:1.65}
+.card p + p{margin-top:.65rem}
+.card a{color:var(--ee);text-decoration:none;border-bottom:1px solid rgba(47,140,25,.32)}
+.card a:hover{border-bottom-color:var(--ee)}
+.steps{display:grid;gap:.6rem;counter-reset:s;margin-top:1.4rem}
+.step{display:grid;grid-template-columns:2rem 1fr auto;gap:.85rem;align-items:start;font-size:.86rem;
+  color:#3f4d3a;line-height:1.6;background:#fff;border:1px solid var(--line);border-radius:11px;padding:1.05rem 1.15rem}
+.step i{counter-increment:s;font-style:normal;font-family:var(--serif);font-weight:900;color:var(--ee);
+  background:rgba(47,140,25,.1);border:1px solid rgba(47,140,25,.35);border-radius:99px;width:1.8rem;height:1.8rem;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex:none}
+.step i:before{content:counter(s)}
+.step b{display:block;font-weight:650;color:var(--forest);font-size:.94rem;margin-bottom:.2rem}
+.step .who{font-family:var(--mono);font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);
+  border:1px solid var(--line);border-radius:6px;padding:.25rem .6rem;white-space:nowrap;align-self:center}
+.note{background:rgba(142,198,63,.13);border:1px solid rgba(47,140,25,.35);border-radius:12px;
+  padding:1.15rem 1.35rem;font-size:.86rem;line-height:1.7;color:#2b3d25;margin-top:1.6rem}
+.note b{color:var(--forest)}
+.note a{color:var(--ee)}
+footer.f{padding:2.2rem 0 3rem;border-top:1px solid var(--line);margin-top:1rem;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
+@media(max-width:620px){.step{grid-template-columns:2rem 1fr}.step .who{grid-column:2;justify-self:start}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="brand">EverEffect<small>Before We Talk</small></div>
+      <div class="stamp">Prepared for Daniel Gordon<br>2026-08-10</div>
+    </div>
+    <h1 class="big">Thanks for making time<br><em>here is what our 30 minutes look like.</em></h1>
+    <p class="hero-sub">Daniel, appreciate you booking time with us. This is short on purpose: an
+    agenda for tomorrow, and an open offer if you would like us to look at anything specific before
+    or during the call.</p>
+  </div>
+</header>
+
+<nav class="tabbar" id="tabs">
+  <button data-p="agenda" class="on">Our 30 Minutes</button>
+  <button data-p="audit">The Free Audit Offer</button>
+  <button data-p="how">How We Work</button>
+</nav>
+
+<div class="wrap">
+
+<section class="panel on" id="p-agenda">
+  <h2 class="sec">The agenda for our call</h2>
+  <p class="sec-sub">Nothing to prepare. This is a conversation to understand where things stand and
+  whether EverEffect is genuinely the right fit, not a pitch.</p>
+  <div class="steps">
+    <div class="step"><i></i>
+      <div><b>Where things stand today</b>
+      What you are currently doing on YouTube and paid channels, and what is and is not working.</div>
+      <span class="who">8 min</span>
+    </div>
+    <div class="step"><i></i>
+      <div><b>What "worth it" looks like for you</b>
+      In your terms, whether that is views, leads, or revenue tied back to the channel.</div>
+      <span class="who">7 min</span>
+    </div>
+    <div class="step"><i></i>
+      <div><b>Where we think the gaps usually are</b>
+      The patterns we see most often on mid-market channels, and whether they apply here.</div>
+      <span class="who">8 min</span>
+    </div>
+    <div class="step"><i></i>
+      <div><b>What happens next</b>
+      If there is a fit, what a real audit and a scoped plan would look like. No pressure to decide
+      anything on the call.</div>
+      <span class="who">7 min</span>
+    </div>
+  </div>
+  <div class="note">
+    <b>A no is a good answer.</b> This meeting is to work out honestly whether there is a fit. If
+    there is not, we would both rather know in thirty minutes than in three months.
+  </div>
+</section>
+
+<section class="panel" id="p-audit">
+  <h2 class="sec">Send us a channel or a site, we will look at it for free</h2>
+  <p class="sec-sub">This is the same offer from our original message, and it stands whether or not
+  you decide to work with us.</p>
+  <div class="grid g2">
+    <div class="card">
+      <h3>What we will look at</h3>
+      <p>Send your YouTube channel, your website, or both, any time before or during the call. We
+      will look for the same things we look for on every channel: whether titles and descriptions
+      are structured for search, whether the channel architecture signals authority to YouTube's
+      algorithm, and whether the site itself is set up to convert whoever the channel sends it.</p>
+    </div>
+    <div class="card">
+      <h3>Why we are offering it before you commit to anything</h3>
+      <p>We can usually spot the biggest gaps within twenty minutes of looking at an account. You
+      should not have to take our word for what we would find, you should be able to see it.</p>
+      <p>Nothing here requires you to sign anything first. If it turns out there is nothing worth
+      fixing, we will tell you that too.</p>
+    </div>
+  </div>
+  <div class="note">
+    <b>How to send it.</b> Reply to the calendar invite with a link, or just have it ready to share
+    on the call. Either works.
+  </div>
+</section>
+
+<section class="panel" id="p-how">
+  <h2 class="sec">How we approach this</h2>
+  <p class="sec-sub">Short version, so nothing on the call is a surprise.</p>
+  <div class="grid g2">
+    <div class="card">
+      <h3>We look before we recommend</h3>
+      <p>We do not size an engagement off a template. Whatever we suggest after this call comes out
+      of what we actually see on your channel or site, not a generic package.</p>
+    </div>
+    <div class="card">
+      <h3>We say when we do not know something</h3>
+      <p>If a question needs research we have not done yet, we will tell you that directly and come
+      back with the real answer rather than guess on the call.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="f">
+  <span>Prepared for Daniel Gordon &middot; 2026-08-10</span>
+  <span>EverEffect</span>
+</footer>
+</div>
+
+<script>
+var tabs=document.querySelectorAll('#tabs button'),panels=document.querySelectorAll('.panel');
+tabs.forEach(function(b){b.addEventListener('click',function(){
+  tabs.forEach(function(x){x.classList.remove('on')});
+  panels.forEach(function(p){p.classList.remove('on')});
+  b.classList.add('on');
+  document.getElementById('p-'+b.dataset.p).classList.add('on');
+  b.scrollIntoView({block:'nearest',inline:'nearest'});
+  window.scrollTo({top:0,behavior:'smooth'});
+})});
+</script>
+</body>
+</html>

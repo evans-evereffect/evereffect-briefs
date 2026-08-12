@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <title>evereffect.com · A Look Before We Talk · EverEffect</title>
-<meta name="description" content="The agenda for our 30 minutes.">
+<meta name="description" content="The agenda for our 30 minutes, and a little about who we are.">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -22,33 +22,44 @@ header.hero{background:linear-gradient(160deg,var(--forest-deep),var(--forest));
 .hero-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:2.2rem}
 .brand{font-family:var(--serif);font-weight:900;font-size:1.15rem;color:var(--lime)}
 .brand small{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.25em;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:.2rem}
-.stamp{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:rgba(255,255,255,.5);text-transform:uppercase;text-align:right;line-height:1.8}
 h1.big{font-family:var(--serif);font-weight:900;font-size:clamp(1.9rem,4.4vw,3.2rem);line-height:1.06;letter-spacing:-.02em}
 h1.big em{font-style:italic;color:var(--lime)}
-.hero-sub{margin-top:1.1rem;color:rgba(255,255,255,.75);max-width:640px;line-height:1.7;font-size:.97rem}
-.hero-stats{display:flex;gap:2.4rem;flex-wrap:wrap;margin-top:2.1rem}
-.hstat b{display:block;font-family:var(--serif);font-weight:900;font-size:1.7rem;color:var(--lime)}
-.hstat span{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55)}
-main.panel{padding:2.8rem 0 3.4rem}
+.hero-sub{margin-top:1.1rem;color:rgba(255,255,255,.75);max-width:600px;line-height:1.7;font-size:.97rem}
+nav.tabbar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);
+  display:flex;gap:.25rem;overflow-x:auto;padding:.6rem clamp(1rem,4vw,2.5rem)}
+nav.tabbar button{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  background:none;border:1px solid transparent;border-radius:99px;padding:.55rem 1.05rem;cursor:pointer;
+  color:var(--mist);white-space:nowrap;transition:all .25s}
+nav.tabbar button:hover{color:var(--forest)}
+nav.tabbar button.on{background:var(--forest);color:#fff}
+nav.tabbar button:focus-visible{outline:2px solid var(--ee);outline-offset:2px}
+section.panel{display:none;padding:2.8rem 0 3.4rem}
+section.panel.on{display:block}
 h2.sec{font-family:var(--serif);font-weight:900;font-size:clamp(1.4rem,2.6vw,2.1rem);color:var(--forest);margin-bottom:.5rem}
-.sec-sub{color:var(--mist);font-size:.88rem;margin-bottom:2rem;max-width:640px;line-height:1.65}
+.sec-sub{color:var(--mist);font-size:.88rem;margin-bottom:2rem;max-width:600px;line-height:1.65}
 .steps{display:grid;gap:.6rem;counter-reset:s;margin-top:1.4rem}
-.step{display:grid;grid-template-columns:2rem 1fr auto;gap:.85rem;align-items:start;font-size:.86rem;
+.step{display:grid;grid-template-columns:2.4rem 1fr auto;gap:.85rem;align-items:start;font-size:.86rem;
   color:#3f4d3a;line-height:1.6;background:#fff;border:1px solid var(--line);border-radius:11px;padding:1.05rem 1.15rem}
 .step i{counter-increment:s;font-style:normal;font-family:var(--serif);font-weight:900;color:var(--ee);
-  background:rgba(47,140,25,.1);border:1px solid rgba(47,140,25,.35);border-radius:99px;width:1.8rem;height:1.8rem;
-  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex:none}
+  background:rgba(47,140,25,.1);border:1px solid rgba(47,140,25,.35);border-radius:99px;width:1.9rem;height:1.9rem;
+  display:flex;align-items:center;justify-content:center;font-size:.85rem;flex:none}
 .step i:before{content:counter(s)}
 .step b{display:block;font-weight:650;color:var(--forest);font-size:.94rem;margin-bottom:.2rem}
 .step .who{font-family:var(--mono);font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);
   border:1px solid var(--line);border-radius:6px;padding:.25rem .6rem;white-space:nowrap;align-self:center}
-.note{background:rgba(142,198,63,.13);border:1px solid rgba(47,140,25,.35);border-radius:12px;
-  padding:1.15rem 1.35rem;font-size:.86rem;line-height:1.7;color:#2b3d25;margin-top:1.6rem}
-.note b{color:var(--forest)}
+.who-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.8rem;max-width:640px}
+.who-card p{font-size:.92rem;color:#3f4d3a;line-height:1.75}
+.who-card p + p{margin-top:.9rem}
+.pitch-slot{margin-top:1.6rem;border:1px dashed rgba(47,140,25,.4);border-radius:10px;padding:1.2rem 1.35rem;
+  background:rgba(142,198,63,.08);display:flex;align-items:center;gap:.9rem}
+.pitch-slot .icn{width:2.4rem;height:2.4rem;border-radius:99px;background:rgba(47,140,25,.12);
+  border:1px solid rgba(47,140,25,.35);display:flex;align-items:center;justify-content:center;flex:none;font-size:1rem}
+.pitch-slot .txt{font-size:.82rem;color:var(--mist);line-height:1.5}
+.pitch-slot .txt b{color:var(--forest);display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.2rem}
 footer.f{padding:2.2rem 0 3rem;border-top:1px solid var(--line);margin-top:1rem;
   font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
-@media(max-width:620px){.step{grid-template-columns:2rem 1fr}.step .who{grid-column:2;justify-self:start}.hero-stats{gap:1.4rem}}
+@media(max-width:620px){.step{grid-template-columns:2.4rem 1fr}.step .who{grid-column:2;justify-self:start}}
 </style>
 </head>
 <body>
@@ -57,53 +68,60 @@ footer.f{padding:2.2rem 0 3rem;border-top:1px solid var(--line);margin-top:1rem;
   <div class="wrap">
     <div class="hero-top">
       <div class="brand">EverEffect<small>Before We Talk</small></div>
-      <div class="stamp">Prepared for Chris Bross<br>2026-08-10 &middot; 2:30pm EDT</div>
     </div>
     <h1 class="big">Here is exactly how we<br>will spend our <em>2:30 today.</em></h1>
     <p class="hero-sub">Chris, glad this is on the calendar. Thirty minutes is short, so we would
-    rather spend it hearing how things actually look from your side than reading through a report at
-    each other. This is a test run of the pre-call format using evereffect.com as the subject. Below
-    is exactly what to expect.</p>
-    <div class="hero-stats">
-      <div class="hstat"><b>30</b><span>Minutes, start to finish</span></div>
-      <div class="hstat"><b>0</b><span>Prep required on your end</span></div>
-      <div class="hstat"><b>1</b><span>Discussion, not a document</span></div>
-    </div>
+    rather spend it hearing how things actually look from your side than reading through a report
+    at each other.</p>
   </div>
 </header>
 
+<nav class="tabbar" id="tabs">
+  <button data-p="agenda" class="on">Agenda</button>
+  <button data-p="who">Who We Are</button>
+</nav>
+
 <div class="wrap">
-<main class="panel">
+
+<section class="panel on" id="p-agenda">
   <h2 class="sec">The agenda for our thirty minutes</h2>
-  <p class="sec-sub">This run is testing the format itself: booking confirmation, this brief, and a
-  reminder. Feel free to react to all three, not just the content.</p>
+  <p class="sec-sub">Nothing to prepare. Here is how it breaks down.</p>
+
   <div class="steps">
     <div class="step"><i></i>
-      <div><b>What we found looking at the site beforehand</b>
-      We will walk through it live rather than in writing, and talk about whether it reads as
-      genuinely useful or as generic audit filler. Real test of the "we look before we recommend"
-      promise.</div>
-      <span class="who">10 min</span>
+      <div><b>Quick hello</b>
+      A couple minutes to introduce ourselves and EverEffect.</div>
+      <span class="who">5 min</span>
     </div>
     <div class="step"><i></i>
-      <div><b>The format itself</b>
-      Tone, length, the sourcing convention, and holding findings for the call instead of writing
-      them up beforehand. What would you change before this goes to a real lead?</div>
-      <span class="who">10 min</span>
+      <div><b>Your business</b>
+      The rest of the time is yours. We want to hear what is on your mind.</div>
+      <span class="who">20 min</span>
     </div>
     <div class="step"><i></i>
-      <div><b>The pipeline mechanics</b>
-      Booking confirm, pre-call brief, reminder, all as real sends this time. Did anything feel off
-      in the sequence or the timing?</div>
-      <span class="who">10 min</span>
+      <div><b>What is next</b>
+      No pressure to decide anything on the call.</div>
+      <span class="who">5 min</span>
     </div>
   </div>
+</section>
 
-  <div class="note">
-    <b>A no is a good answer.</b> This meeting is to work out honestly whether the format holds up.
-    If it does not, we would both rather know now than after it has gone to a real lead.
+<section class="panel" id="p-who">
+  <h2 class="sec">Who we are</h2>
+  <p class="sec-sub">Kept short on purpose. Ask us anything else live.</p>
+
+  <div class="who-card">
+    <p>EverEffect is a digital marketing agency helping businesses search, analyze, and convert
+    customers online. We build and run the campaigns ourselves, from search to paid to the
+    website that has to close once the traffic arrives.</p>
+    <p>That is the short version. The rest is easier to show than to write down, which is most of
+    why we would rather spend our thirty minutes on your business than on ours.</p>
+    <div class="pitch-slot">
+      <div class="icn">&#9654;</div>
+      <div class="txt"><b>Coming soon</b>A 59-second video introduction lands here once it is ready.</div>
+    </div>
   </div>
-</main>
+</section>
 
 <footer class="f">
   <span>Prepared for Chris Bross &middot; internal format test &middot; 10 August 2026</span>
@@ -111,5 +129,16 @@ footer.f{padding:2.2rem 0 3rem;border-top:1px solid var(--line);margin-top:1rem;
 </footer>
 </div>
 
+<script>
+var tabs=document.querySelectorAll('#tabs button'),panels=document.querySelectorAll('.panel');
+tabs.forEach(function(b){b.addEventListener('click',function(){
+  tabs.forEach(function(x){x.classList.remove('on')});
+  panels.forEach(function(p){p.classList.remove('on')});
+  b.classList.add('on');
+  document.getElementById('p-'+b.dataset.p).classList.add('on');
+  b.scrollIntoView({block:'nearest',inline:'nearest'});
+  window.scrollTo({top:0,behavior:'smooth'});
+})});
+</script>
 </body>
 </html>

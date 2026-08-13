@@ -1,0 +1,89 @@
+<meta name="robots" content="noindex,nofollow">
+<title>EverEffect — LinkedIn banner (ROI, no gorilla)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1e2126;font-family:Inter,system-ui,sans-serif;padding:30px;display:flex;
+     flex-direction:column;align-items:flex-start;gap:16px}
+.lbl{color:#fff;font:500 12px/1 'JetBrains Mono',monospace;letter-spacing:.2em;text-transform:uppercase}
+.cap{color:#8a938e;font-size:13px;line-height:1.6;max-width:70ch}
+
+/* LinkedIn company cover = 1584 x 396 exactly. */
+#banner{width:1584px;height:396px;position:relative;overflow:hidden;border-radius:0;
+        background:#F4F6F2;color:#12160F}
+.safe{position:absolute;top:0;bottom:0;left:372px;right:80px;
+      display:flex;flex-direction:column;justify-content:center}
+.burst{position:absolute;inset:0}
+.eyebrow{font:500 11.5px/1 'JetBrains Mono',monospace;letter-spacing:.26em;
+         text-transform:uppercase;color:#1F8C61;margin-bottom:15px}
+.head{font-family:Fraunces,Georgia,serif;font-weight:400;font-size:44px;line-height:1.1;
+      letter-spacing:-.02em;color:#12160F}
+.head em{font-style:italic;color:#1F8C61}
+.proof{display:flex;gap:34px;margin-top:25px;align-items:flex-start}
+.proof div b{display:block;font-family:Fraunces,serif;font-size:28px;line-height:1;color:#12160F}
+.proof div b.m{color:#1F8C61}
+.proof div span{display:block;font:500 9.5px/1.5 'JetBrains Mono',monospace;
+                letter-spacing:.12em;text-transform:uppercase;color:#5A625A;margin-top:7px}
+.rl{width:1px;align-self:stretch;background:rgba(0,0,0,.14)}
+
+.zone{position:absolute;left:0;bottom:0;width:268px;height:206px;
+  background:repeating-linear-gradient(45deg,rgba(255,0,80,.13) 0 8px,transparent 8px 16px);
+  border-right:1px dashed rgba(255,0,80,.45);border-top:1px dashed rgba(255,0,80,.45);display:none}
+body.zones .zone{display:block}
+.row{display:flex;gap:10px}
+.btn{background:#1F8C61;color:#fff;border:0;padding:10px 16px;border-radius:6px;
+     font:500 13px Inter;cursor:pointer}
+.btn.ghost{background:#2f3a34;color:#cfe9dc;border:1px solid #46564d}
+#status{color:#8a938e;font-size:12.5px;align-self:center}
+</style>
+
+<p class="lbl">ROI proof bar · light · no gorilla — LinkedIn banner, ready to export</p>
+<p class="cap">1584&times;396, LinkedIn's exact cover size. Click Download PNG below for a file
+sized to upload directly — no cropping needed on LinkedIn's end.</p>
+
+<div id="banner">
+  <svg class="burst" viewBox="0 0 1584 396" preserveAspectRatio="none">
+    <rect width="1584" height="396" fill="#F4F6F2"/>
+    <g fill="#4FE0A6" opacity=".18"><polygon points="1584,0 1300,396 1584,396"/></g>
+    <line x1="372" y1="330" x2="1504" y2="330" stroke="#1F8C61" stroke-opacity=".28"/>
+  </svg>
+  <div class="safe">
+    <div class="eyebrow">Indianapolis · Est. 2007</div>
+    <div class="head">ROI-driven digital marketing.
+      <em>Delivering profits, not promises.</em></div>
+    <div class="proof">
+      <div><b>18</b><span>Years<br>since 2007</span></div><i class="rl"></i>
+      <div><b class="m">Top 3%</b><span>2025 Premier<br>Google Partner</span></div><i class="rl"></i>
+      <div><b>15+</b><span>Yrs longest<br>client</span></div><i class="rl"></i>
+      <div><b>3</b><span>Offices · Indianapolis<br>Westfield IN · Freedom WI</span></div>
+    </div>
+  </div>
+  <div class="zone"></div>
+</div>
+
+<div class="row">
+  <button class="btn" id="dl">Download PNG (1584&times;396)</button>
+  <button class="btn ghost" onclick="document.body.classList.toggle('zones')">Toggle LinkedIn logo safe zone</button>
+  <span id="status"></span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+document.getElementById('dl').addEventListener('click', async () => {
+  const status = document.getElementById('status');
+  status.textContent = 'Rendering…';
+  try {
+    await document.fonts.ready;
+    const canvas = await html2canvas(document.getElementById('banner'), {
+      width: 1584, height: 396, scale: 1, backgroundColor: '#F4F6F2', useCORS: true
+    });
+    const a = document.createElement('a');
+    a.href = canvas.toDataURL('image/png');
+    a.download = 'evereffect-linkedin-banner-roi.png';
+    a.click();
+    status.textContent = 'Downloaded — check your Downloads folder.';
+  } catch (e) {
+    status.textContent = 'Export failed: ' + e.message + ' — right-click the banner and Save Image As instead.';
+  }
+});
+</script>

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <title>New Leaf Service Contracts · A Look Before We Talk · EverEffect</title>
-<meta name="description" content="The agenda for our 30 minutes, and a little about who we are.">
+<meta name="description" content="Thank you for booking, the agenda for our 30 minutes, and a little about who we are.">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -25,6 +25,12 @@ header.hero{background:linear-gradient(160deg,var(--forest-deep),var(--forest));
 h1.big{font-family:var(--serif);font-weight:900;font-size:clamp(1.9rem,4.4vw,3.2rem);line-height:1.06;letter-spacing:-.02em}
 h1.big em{font-style:italic;color:var(--lime)}
 .hero-sub{margin-top:1.1rem;color:rgba(255,255,255,.75);max-width:600px;line-height:1.7;font-size:.97rem}
+.hero-stats{display:flex;gap:2.2rem;flex-wrap:wrap;margin-top:1.8rem}
+.hstat b{display:block;font-family:var(--serif);font-weight:900;font-size:1.5rem;color:var(--lime)}
+.hstat span{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.hero-state{display:none}
+.hero-state.on{display:block}
+
 nav.tabbar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);
   display:flex;gap:.25rem;overflow-x:auto;padding:.6rem clamp(1rem,4vw,2.5rem)}
 nav.tabbar button{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
@@ -33,10 +39,12 @@ nav.tabbar button{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;t
 nav.tabbar button:hover{color:var(--forest)}
 nav.tabbar button.on{background:var(--forest);color:#fff}
 nav.tabbar button:focus-visible{outline:2px solid var(--ee);outline-offset:2px}
+
 section.panel{display:none;padding:2.8rem 0 3.4rem}
 section.panel.on{display:block}
 h2.sec{font-family:var(--serif);font-weight:900;font-size:clamp(1.4rem,2.6vw,2.1rem);color:var(--forest);margin-bottom:.5rem}
 .sec-sub{color:var(--mist);font-size:.88rem;margin-bottom:2rem;max-width:600px;line-height:1.65}
+
 .steps{display:grid;gap:.6rem;counter-reset:s;margin-top:1.4rem}
 .step{display:grid;grid-template-columns:2.4rem 1fr auto;gap:.85rem;align-items:start;font-size:.86rem;
   color:#3f4d3a;line-height:1.6;background:#fff;border:1px solid var(--line);border-radius:11px;padding:1.05rem 1.15rem}
@@ -47,6 +55,7 @@ h2.sec{font-family:var(--serif);font-weight:900;font-size:clamp(1.4rem,2.6vw,2.1
 .step b{display:block;font-weight:650;color:var(--forest);font-size:.94rem;margin-bottom:.2rem}
 .step .who{font-family:var(--mono);font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);
   border:1px solid var(--line);border-radius:6px;padding:.25rem .6rem;white-space:nowrap;align-self:center}
+
 .who-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.8rem;max-width:640px}
 .who-card p{font-size:.92rem;color:#3f4d3a;line-height:1.75}
 .who-card p + p{margin-top:.9rem}
@@ -56,10 +65,14 @@ h2.sec{font-family:var(--serif);font-weight:900;font-size:clamp(1.4rem,2.6vw,2.1
   border:1px solid rgba(47,140,25,.35);display:flex;align-items:center;justify-content:center;flex:none;font-size:1rem}
 .pitch-slot .txt{font-size:.82rem;color:var(--mist);line-height:1.5}
 .pitch-slot .txt b{color:var(--forest);display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.2rem}
+
+.confirm-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.8rem;max-width:640px}
+.confirm-card p{font-size:.92rem;color:#3f4d3a;line-height:1.75}
+
 footer.f{padding:2.2rem 0 3rem;border-top:1px solid var(--line);margin-top:1rem;
   font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
-@media(max-width:620px){.step{grid-template-columns:2.4rem 1fr}.step .who{grid-column:2;justify-self:start}}
+@media(max-width:620px){.step{grid-template-columns:2.4rem 1fr}.step .who{grid-column:2;justify-self:start}.hero-stats{gap:1.4rem}}
 </style>
 </head>
 <body>
@@ -69,21 +82,54 @@ footer.f{padding:2.2rem 0 3rem;border-top:1px solid var(--line);margin-top:1rem;
     <div class="hero-top">
       <div class="brand">EverEffect<small>Before We Talk</small></div>
     </div>
-    <h1 class="big">Here is exactly how we<br>will spend our <em>thirty minutes.</em></h1>
-    <p class="hero-sub">Sean, glad this is on the calendar. Thirty minutes is short, so we would
-    rather spend it hearing how things actually look from your side than reading through a report
-    at each other.</p>
+
+    <div class="hero-state on" id="h-thanks">
+      <h1 class="big">Thanks for booking<br>time with <em>Evans.</em></h1>
+      <p class="hero-sub">Sean, glad this is on the calendar. This confirms your thirty minutes.
+      Nothing to prepare on your end, click Agenda or Who We Are above if you're curious how it
+      breaks down.</p>
+      <div class="hero-stats">
+        <div class="hstat"><b>Wed</b><span>Aug 19, 2026</span></div>
+        <div class="hstat"><b>3pm</b><span>EDT, 30 min</span></div>
+        <div class="hstat"><b>0</b><span>Prep required</span></div>
+      </div>
+    </div>
+
+    <div class="hero-state" id="h-agenda">
+      <h1 class="big">Here is exactly how we<br>will spend our <em>thirty minutes.</em></h1>
+      <p class="hero-sub">Sean, glad this is on the calendar. Thirty minutes is short, so we would
+      rather spend it hearing how things actually look from your side than reading through a report
+      at each other.</p>
+    </div>
+
+    <div class="hero-state" id="h-who">
+      <h1 class="big">A short synopsis<br>of <em>who we are.</em></h1>
+      <p class="hero-sub">Kept brief on purpose. Ask us anything else live on the call.</p>
+    </div>
   </div>
 </header>
 
 <nav class="tabbar" id="tabs">
-  <button data-p="agenda" class="on">Agenda</button>
-  <button data-p="who">Who We Are</button>
+  <button data-p="thanks" data-h="h-thanks" class="on">Thank You</button>
+  <button data-p="agenda" data-h="h-agenda">Agenda</button>
+  <button data-p="who" data-h="h-who">Who We Are</button>
 </nav>
 
 <div class="wrap">
 
-<section class="panel on" id="p-agenda">
+<section class="panel on" id="p-thanks">
+  <h2 class="sec">Your appointment</h2>
+  <p class="sec-sub">Confirmed and on the calendar. Everything you need is right here.</p>
+  <div class="confirm-card">
+    <p><b style="color:var(--forest);">30 min with Evans Diaz</b><br>
+    Wednesday, August 19, 2026 &middot; 3:00pm &ndash; 3:30pm EDT</p>
+    <p>A calendar invite with the Google Meet link is already in your inbox. If anything changes
+    on your end, the cancel/reschedule link in that invite handles it directly, no need to reply
+    here.</p>
+  </div>
+</section>
+
+<section class="panel" id="p-agenda">
   <h2 class="sec">The agenda for our thirty minutes</h2>
   <p class="sec-sub">Nothing to prepare. Here is how it breaks down.</p>
 
@@ -136,12 +182,14 @@ footer.f{padding:2.2rem 0 3rem;border-top:1px solid var(--line);margin-top:1rem;
 </div>
 
 <script>
-var tabs=document.querySelectorAll('#tabs button'),panels=document.querySelectorAll('.panel');
+var tabs=document.querySelectorAll('#tabs button'),panels=document.querySelectorAll('.panel'),heroes=document.querySelectorAll('.hero-state');
 tabs.forEach(function(b){b.addEventListener('click',function(){
   tabs.forEach(function(x){x.classList.remove('on')});
   panels.forEach(function(p){p.classList.remove('on')});
+  heroes.forEach(function(h){h.classList.remove('on')});
   b.classList.add('on');
   document.getElementById('p-'+b.dataset.p).classList.add('on');
+  document.getElementById(b.dataset.h).classList.add('on');
   b.scrollIntoView({block:'nearest',inline:'nearest'});
   window.scrollTo({top:0,behavior:'smooth'});
 })});

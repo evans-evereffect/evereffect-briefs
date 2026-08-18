@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sean Hicks · EverEffect BDM Call Prep</title>
+<meta name="description" content="EverEffect BDM call prep for Sean Hicks, New Leaf Service Contracts: real LinkedIn profile, the actual pitch that hooked him, discovery script, proof points.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#1B4712; --forest-deep:#0A1C08; --ink:#14210F;
+  --ee:#2F8C19; --lime:#8EC63F;
+  --paper:#F7F9F5; --line:rgba(27,71,18,.14); --mist:#5F6E58;
+  --good:#2e8b57; --warn:#c9762d; --bad:#c0392b;
+  --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+*,*:before,*:after{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+
+header.topbar{background:var(--forest-deep);color:#fff;display:flex;justify-content:space-between;
+  align-items:center;gap:1rem;flex-wrap:wrap;padding:.85rem clamp(1rem,4vw,2.5rem);border-bottom:1px solid rgba(255,255,255,.09)}
+.topbar-left{display:flex;align-items:center;gap:.9rem}
+.ee-mark{width:2.6rem;height:2.6rem;border-radius:.7rem;background:linear-gradient(135deg,var(--ee),var(--lime));
+  display:inline-flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:900;
+  font-size:.85rem;color:#fff;flex:none}
+.topbar h1{font-size:.95rem;font-weight:700;letter-spacing:-.01em;margin-top:.15rem}
+.topbar-sub{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.topbar-right{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+.status-badge{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;
+  border-radius:99px;padding:.3rem .75rem;background:rgba(46,139,87,.16);color:var(--good);border:1px solid rgba(46,139,87,.4)}
+
+header.hero{background:linear-gradient(160deg,var(--forest-deep),var(--forest));color:#fff;padding:3rem 0 2.4rem}
+.hero-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:2rem}
+.brand{font-family:var(--serif);font-weight:900;font-size:1.15rem;color:var(--lime)}
+.brand small{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.25em;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:.2rem}
+.stamp{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:rgba(255,255,255,.5);text-transform:uppercase;text-align:right;line-height:1.8}
+h1.big{font-family:var(--serif);font-weight:900;font-size:clamp(1.7rem,3.8vw,2.7rem);line-height:1.08;letter-spacing:-.02em}
+h1.big em{font-style:italic;color:var(--lime)}
+.hero-sub{margin-top:1rem;color:rgba(255,255,255,.72);max-width:660px;line-height:1.65;font-size:.92rem}
+.hero-stats{display:flex;gap:2.2rem;flex-wrap:wrap;margin-top:1.8rem}
+.hstat b{display:block;font-family:var(--serif);font-weight:900;font-size:1.5rem;color:var(--lime)}
+.hstat span{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+
+nav.tabbar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);
+  display:flex;gap:.25rem;overflow-x:auto;padding:.6rem clamp(1rem,4vw,2.5rem)}
+nav.tabbar button{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  background:none;border:1px solid transparent;border-radius:99px;padding:.55rem 1.05rem;cursor:pointer;
+  color:var(--mist);white-space:nowrap;transition:all .25s}
+nav.tabbar button:hover{color:var(--forest)}
+nav.tabbar button.on{background:var(--forest);color:#fff}
+nav.tabbar button:focus-visible{outline:2px solid var(--ee);outline-offset:2px}
+
+section.panel{display:none;padding:2.4rem 0 3.4rem}
+section.panel.on{display:block}
+h2.sec{font-family:var(--serif);font-weight:900;font-size:clamp(1.3rem,2.4vw,1.9rem);color:var(--forest);margin-bottom:.5rem}
+.sec-sub{color:var(--mist);font-size:.86rem;margin-bottom:1.8rem;max-width:660px;line-height:1.6}
+h3.sub{font-family:var(--serif);font-weight:900;font-size:1.1rem;color:var(--forest);margin:2rem 0 .9rem}
+
+.grid{display:grid;gap:1rem}
+.g3{grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(20rem,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.4rem}
+.card h3{font-family:var(--serif);font-weight:600;font-size:1rem;color:var(--forest);margin-bottom:.5rem}
+.card p{font-size:.85rem;color:#3f4d3a;line-height:1.6}
+.card p + p{margin-top:.5rem}
+.badge{display:inline-block;font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;
+  text-transform:uppercase;border-radius:99px;padding:.28rem .7rem;margin-bottom:.7rem}
+.b-good{background:rgba(46,139,87,.1);color:var(--good);border:1px solid rgba(46,139,87,.3)}
+.b-warn{background:rgba(201,118,45,.1);color:var(--warn);border:1px solid rgba(201,118,45,.3)}
+
+.note{background:rgba(142,198,63,.13);border:1px solid rgba(47,140,25,.35);border-radius:12px;
+  padding:1.1rem 1.35rem;font-size:.86rem;line-height:1.65;color:#2b3d25;margin-top:1.2rem}
+.note b{color:var(--forest)}
+.note.warn{background:rgba(201,118,45,.1);border-color:rgba(201,118,45,.35);color:#5c3a1a}
+.note.warn b{color:var(--warn)}
+
+.thread{display:grid;gap:.5rem;margin-top:.6rem}
+.msg{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.7rem .95rem;font-size:.83rem;line-height:1.55}
+.msg .who{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);margin-bottom:.25rem}
+.msg.them{border-left:3px solid var(--ee)}
+
+.steps{display:grid;gap:.6rem;counter-reset:s;margin-top:1.2rem}
+.step{display:grid;grid-template-columns:2rem 1fr;gap:.85rem;align-items:start;font-size:.86rem;
+  color:#3f4d3a;line-height:1.6;background:#fff;border:1px solid var(--line);border-radius:11px;padding:1.05rem 1.15rem}
+.step i{counter-increment:s;font-style:normal;font-family:var(--serif);font-weight:900;color:var(--ee);
+  background:rgba(47,140,25,.1);border:1px solid rgba(47,140,25,.35);border-radius:99px;width:1.8rem;height:1.8rem;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex:none}
+.step i:before{content:counter(s)}
+.step b{display:block;font-weight:650;color:var(--forest);font-size:.94rem;margin-bottom:.2rem}
+
+.srcs{margin-top:1.6rem;padding:1.1rem 1.3rem;background:#fff;border:1px solid var(--line);border-radius:12px}
+.srcs .lab{font-family:var(--mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ee);margin-bottom:.65rem}
+.srcs ul{list-style:none;display:grid;gap:.4rem}
+.srcs li{font-size:.79rem;line-height:1.5;color:var(--mist)}
+.srcs li b{color:var(--forest);font-weight:600}
+.srcs a{color:var(--ee);text-decoration:none;border-bottom:1px solid rgba(47,140,25,.32)}
+
+.proof{display:flex;gap:1.6rem;flex-wrap:wrap;margin-top:.6rem}
+.proof .num{font-family:var(--serif);font-weight:900;font-size:1.6rem;color:var(--ee)}
+.proof .cap{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist)}
+
+footer.f{padding:2rem 0 2.6rem;border-top:1px solid var(--line);margin-top:.5rem;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
+
+@media(max-width:620px){.step{grid-template-columns:2rem 1fr}.hero-stats{gap:1.4rem}}
+
+@media print{
+  @page{ size:Letter; margin:13mm 12mm 14mm; }
+  body{background:#fff}
+  nav.tabbar{display:none !important}
+  header.topbar{display:none !important}
+  section.panel{display:block !important; padding:0 0 6mm; break-before:page; page-break-before:always}
+  section.panel:first-of-type{break-before:auto; page-break-before:auto}
+  header.hero{break-after:avoid; page-break-after:avoid; margin-bottom:6mm}
+  .card,.step,.msg,.note,.srcs{break-inside:avoid; page-break-inside:avoid}
+  h2.sec{break-after:avoid; page-break-after:avoid}
+  .grid{display:block}
+  .grid > *{margin-bottom:4mm}
+  .wrap{max-width:none;padding:0}
+  body{font-size:9.4pt}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <div class="ee-mark">EE</div>
+    <div>
+      <h1>Sean Hicks &middot; BDM Call Prep</h1>
+      <div class="topbar-sub">Internal BDM prep &middot; shared with Chris for feedback &middot; never sent to the lead</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="status-badge">Real profile confirmed &middot; Basecamp thread</span>
+  </div>
+</header>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="brand">EverEffect<small>BDM Lead Pack</small></div>
+      <div class="stamp">Call: Wed Aug 19, 2026<br>3:00&ndash;3:30pm EDT</div>
+    </div>
+    <h1 class="big">Sean Hicks &mdash; <em>New Leaf Service Contracts.</em></h1>
+    <p class="hero-sub">Co-founder and CEO of a 51&ndash;200-employee national warranty and service
+    contract administrator, headquartered in Irving, Texas. Replied to a YouTube-optimization
+    LinkedIn message with genuine interest. He already runs a real, well-produced YouTube channel
+    himself, which changes the pitch entirely from "you have no presence" to "you have real content
+    that isn't finding an audience."</p>
+    <div class="hero-stats">
+      <div class="hstat"><b>56</b><span>YouTube subscribers, 66 videos posted</span></div>
+      <div class="hstat"><b>1,450</b><span>LinkedIn company followers</span></div>
+      <div class="hstat"><b>51&ndash;200</b><span>Employees (LinkedIn)</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabbar" id="tabs">
+  <button data-p="glance" class="on">Who You're Meeting</button>
+  <button data-p="stand">Where They Stand</button>
+  <button data-p="thread">The Actual Thread</button>
+  <button data-p="disco">Discovery Script</button>
+  <button data-p="proof">Proof Points</button>
+</nav>
+
+<div class="wrap">
+
+<section class="panel on" id="p-glance">
+  <h2 class="sec">Sean Hicks &mdash; confirmed from LinkedIn / company site</h2>
+  <p class="sec-sub">Co-founder and CEO of New Leaf Service Contracts, Inc. Real, publicly documented
+  track record, verified across the company's own About page and third-party company data sources.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-good">Confirmed</span>
+      <h3>Company &amp; role</h3>
+      <p><b>New Leaf Service Contracts, Inc.</b> (also branded "NewLeaf"), Irving, Texas.
+      Co-founded the company with Richard Gavino in 2011. Employee-owned, independent third-party
+      administrator for extended service plans and OEM warranty support, 51&ndash;200 employees
+      per LinkedIn.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Confirmed</span>
+      <h3>LinkedIn headline</h3>
+      <p>"CEO &amp; Chairman at New Leaf Service Contracts Inc. | Warranty and Service Contract
+      Solutions | Sustainability | Servant Leader | Crimson Tide Fan." Personal, not purely
+      corporate &mdash; leans into an identity as a leader and mentor, not just an executive title.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Confirmed</span>
+      <h3>Track record before New Leaf</h3>
+      <p>Over 30 years in the service contract and repair industry. Career ran through Sears,
+      then Montgomery Ward, then Warrantech, where he grew the consumer products division from
+      $18M to $138M in revenue before launching New Leaf in 2011.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Confirmed</span>
+      <h3>Since founding New Leaf</h3>
+      <p>Grew the company to 800+ business clients and 2,500+ storefronts nationwide, with
+      A-rated insurance partners underwriting the programs. Pioneered a 30% employee stock
+      ownership structure in 2020. Two named long-term client testimonials on the company site
+      run 7 and 10 years respectively.</p>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>The angle that matters for this call.</b> This is not a founder who is skeptical of video
+    or content, he already hosts his own podcast and appears on camera regularly. The conversation
+    is not "should you do this," it is "why isn't this working as hard as it should be." That is a
+    fundamentally different, more technical and more credible conversation than a cold pitch to
+    someone with zero presence.
+  </div>
+</section>
+
+<section class="panel" id="p-stand">
+  <h2 class="sec">Where they actually stand, digitally</h2>
+  <p class="sec-sub">Confirmed directly on YouTube and the company site tonight. Every claim below
+  links to exactly where it came from.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-warn">Confirmed, the real finding</span>
+      <h3>A real channel, badly under-discovered</h3>
+      <p><a href="https://youtube.com/@NewLeafServiceContractsInc" target="_blank" rel="noopener">@NewLeafServiceContractsInc</a>
+      &mdash; 56 subscribers, 66 videos. The channel is built around "Covered by NewLeaf," a
+      podcast Sean hosts himself, interviewing retail and appliance-industry leaders. Episodes run
+      35&ndash;56 minutes, real production value, consistent posting (most recent 11 days ago at
+      time of writing, several per month going back at least 8 months).</p>
+    </div>
+    <div class="card"><span class="badge b-warn">Confirmed</span>
+      <h3>The gap is discoverability, not effort</h3>
+      <p>Recent episode view counts: 11, 7, 36, 35, 34, 15, 10 views. One older upload has 487
+      views, another 308 &mdash; both roughly 6&ndash;7 months old, meaning the channel has
+      actually gotten less discoverable over time, not more, despite continued investment in
+      producing episodes.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Confirmed</span>
+      <h3>The company site</h3>
+      <p><a href="https://www.trynewleaf.com/" target="_blank" rel="noopener">trynewleaf.com</a>
+      &mdash; full marketing site with an insights/blog section, solutions pages by industry
+      (appliances, electronics, furniture, jewelry, eyewear), and named client testimonials.
+      Self-reported: 800+ businesses served, 2,500+ storefronts nationwide.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Confirmed</span>
+      <h3>Company facts</h3>
+      <p>LinkedIn company page: <a href="https://www.linkedin.com/company/new-leaf-service-contracts" target="_blank" rel="noopener">1,450
+      followers</a>, 51&ndash;200 employees, HQ listed at 909 Lake Carolyn Parkway, Suite 900,
+      Irving, Texas. Industry classification: Consumer Services.</p>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>What this means for the pitch.</b> Thomas's original message asked about YouTube
+    optimization in general terms. Now we know specifically what to optimize: an active,
+    well-produced, CEO-hosted show that is under-titled, under-tagged, and almost certainly not
+    structured for YouTube's algorithm to recommend it, since view counts are falling even as
+    episode count rises. This is a technical-setup conversation, not a content-strategy or
+    production conversation &mdash; exactly the kind of fix that does not require new video
+    production, which was the original pitch premise.
+  </div>
+
+  <div class="srcs">
+    <div class="lab">Every source above, checked live 18 August 2026</div>
+    <ul>
+      <li><b>YouTube:</b> <a href="https://youtube.com/@NewLeafServiceContractsInc" target="_blank" rel="noopener">youtube.com/@NewLeafServiceContractsInc</a> (56 subscribers, 66 videos, confirmed via direct page load)</li>
+      <li><b>Company site:</b> <a href="https://www.trynewleaf.com/" target="_blank" rel="noopener">trynewleaf.com</a>, <a href="https://trynewleaf.com/about/" target="_blank" rel="noopener">trynewleaf.com/about</a></li>
+      <li><b>LinkedIn company page:</b> <a href="https://www.linkedin.com/company/new-leaf-service-contracts" target="_blank" rel="noopener">linkedin.com/company/new-leaf-service-contracts</a> (1,450 followers)</li>
+      <li><b>LinkedIn (Sean):</b> <a href="https://www.linkedin.com/in/seanhicks" target="_blank" rel="noopener">linkedin.com/in/seanhicks</a></li>
+      <li><b>Method:</b> live web search + direct page loads, YouTube channel confirmed by rendering the actual channel page rather than relying on search snippets alone.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="p-thread">
+  <h2 class="sec">The actual conversation, verbatim</h2>
+  <p class="sec-sub">Pulled directly from the Basecamp "Sales Leads" thread. This is exactly what he
+  already saw and said, not a guessed template.</p>
+
+  <div class="thread">
+    <div class="msg"><div class="who">Thomas Heed &middot; LinkedIn, on/around Aug 5</div>
+      Quick look at New Leaf Service Contracts's YouTube channel<br><br>
+      Hey Sean,<br><br>
+      Wasn't sure if my connection request came through, so reaching out here.
+      I'm a partner at EverEffect, a Google Ads Partner agency based in Indianapolis. Part of what
+      we do is YouTube channel optimization, helping mid-market brands get organic traffic and
+      leads from a channel they already have but aren't fully leveraging.<br><br>
+      Here's what we see most often: brands that have been posting to YouTube for years but whose
+      videos get minimal views, not because the content isn't valuable, but because the technical
+      setup is working against them. Titles not structured for search. Descriptions without
+      relevant keywords. Thumbnails that don't drive clicks. Channel architecture that doesn't
+      signal authority to YouTube's algorithm.<br><br>
+      YouTube's algorithm determines 70% of what users watch. If your content isn't structured to
+      get recommended, it won't be, no matter how good it is.<br><br>
+      If you're curious what a quick audit of New Leaf Service Contracts's channel would surface,
+      I'm happy to take a look at no cost. I can usually identify the biggest gaps within 20
+      minutes.<br><br>
+      Worth 15 minutes?
+    </div>
+    <div class="msg them"><div class="who">Sean M. Hicks &middot; Aug 6</div>
+      Accepted your InMail<br><br>
+      Hi Thomas, Thanks for reaching out. I'd like to learn more.
+    </div>
+  </div>
+
+  <div class="note">
+    <b>What this tells you.</b> Thomas's message described the exact problem this channel actually
+    has, without having seen it yet, videos with real substance underperforming because of
+    technical setup, not content quality. That is why Sean said yes: the message named his real
+    situation precisely. Confirming that read live on the call, and being able to point at specific
+    episodes and view counts, will land as far more credible than restating the general pitch.
+  </div>
+
+  <div class="srcs">
+    <div class="lab">Source</div>
+    <ul>
+      <li><b>Basecamp</b>, "Potential LinkedIn Leads - YouTube" thread, EverEffect - Sales &amp;
+      Management project. Forwarded by Thomas Heed, checked live 18 August 2026.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="p-disco">
+  <h2 class="sec">Discovery script &mdash; tuned to what we now know</h2>
+  <div class="steps">
+    <div class="step"><i></i><div><b>Lead with the specific finding, not the general pitch</b>
+      "I watched a couple episodes of Covered by NewLeaf before this call. Real substance, and
+      you're clearly not new to being on camera. What I noticed is the view counts have actually
+      been trending down over the last several months even as you've kept posting, which usually
+      means it's a discoverability problem, not a content problem."</div></div>
+    <div class="step"><i></i><div><b>Confirm who actually owns the channel day to day</b>
+      Does Sean run uploads and titles himself, or does someone on his team handle publishing? The
+      fix here is mostly metadata and structure, not new production, so whoever touches the
+      channel today needs to be part of the conversation about who implements changes.</div></div>
+    <div class="step"><i></i><div><b>Ask what he actually wants out of it</b>
+      Is the goal client-facing (retailers and manufacturers finding New Leaf through the show), or
+      is it more personal brand and industry visibility for Sean? The current guest list (appliance
+      and retail leaders) suggests both, worth having him say which matters more.</div></div>
+    <div class="step"><i></i><div><b>Use the specific numbers as proof you looked</b>
+      487 views on a 7-month-old episode versus 11 views on one from 11 days ago is a real, visible
+      decline. Naming it accurately, not vaguely, is what separates this from a generic cold pitch.</div></div>
+    <div class="step"><i></i><div><b>Offer the free audit, scoped to what is already public</b>
+      "If it's useful, I can go deeper on specific episodes, titles, and descriptions and come back
+      with what I'd fix first. No new video required to start."</div></div>
+  </div>
+</section>
+
+<section class="panel" id="p-proof">
+  <h2 class="sec">Proof points, honestly scoped</h2>
+  <p class="sec-sub">One real caveat: the case study below is paid YouTube ads for a law firm,
+  lead-gen focused, not organic channel optimization. It is the strongest number EverEffect has
+  from recent campaign work, but it is not a direct match for Sean's situation. Use it only if the
+  conversation turns to paid amplification of the existing content, not as a stand-in for organic
+  optimization results.</p>
+
+  <div class="card">
+    <h3>Midwest personal injury law firm &mdash; YouTube campaign rebuild</h3>
+    <div class="proof">
+      <div><div class="num">71%</div><div class="cap">Spend reduction</div></div>
+      <div><div class="num">103%</div><div class="cap">Conversion increase</div></div>
+      <div><div class="num">1%</div><div class="cap">CPL vs. search, after fix</div></div>
+    </div>
+    <p style="margin-top:.8rem;">9 structural errors fixed: no content suitability exclusions, no
+    conversion goals, ads running across 17,000+ irrelevant YouTube channels. Cost per conversion
+    was 463% higher than their search campaigns before the rebuild.</p>
+  </div>
+
+  <div class="note warn">
+    <b>No organic-channel-optimization case study exists yet.</b> If Sean asks for a comparable
+    before/after on organic discoverability specifically, be upfront that this would be the first
+    documented one for EverEffect, frame it as "the same technical discipline we apply to paid
+    campaigns, applied to organic channel structure," not as a proven playbook with a matching
+    case study.
+  </div>
+</section>
+
+<footer class="f">
+  <span>Internal BDM prep &middot; shared with Chris for feedback &middot; never sent to the lead &middot; 2026-08-18</span>
+  <span>EverEffect</span>
+</footer>
+</div>
+
+<script>
+var tabs=document.querySelectorAll('#tabs button'),panels=document.querySelectorAll('.panel');
+tabs.forEach(function(b){b.addEventListener('click',function(){
+  tabs.forEach(function(x){x.classList.remove('on')});
+  panels.forEach(function(p){p.classList.remove('on')});
+  b.classList.add('on');
+  document.getElementById('p-'+b.dataset.p).classList.add('on');
+  b.scrollIntoView({block:'nearest',inline:'nearest'});
+  window.scrollTo({top:0,behavior:'smooth'});
+})});
+</script>
+</body>
+</html>

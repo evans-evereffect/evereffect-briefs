@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  EverEffect BDM Dossier — starter shell, v2 (proposed 2026-08-20)
+  =================================================================
+  Copy this file to build a new lead's prep. Fill in every TODO, delete none
+  of the 9 panels below without stating why in All Sources — same rule as v1.
+
+  WHAT'S NEW IN V2, AND WHY (see the v1 lesson this fixes in parens):
+  - p-comp   (Competitive Landscape): promoted from a buried card to its own
+             tab, now a side-by-side table instead of a name list.
+  - p-deal   (Deal Qualification): budget signal, decision authority, red
+             flags, recommended package. Every v1 prep had zero of this.
+  - p-seo    gained two audit rows: Core Web Vitals/PageSpeed and Interior
+             Pages — both were "not yet checked" in literally every prep
+             built so far because no tool was ever wired up for them.
+  - p-glance gained a "Timing" block for recent triggers (news, funding,
+             leadership change) — done ad hoc for other leads, never a
+             standard step.
+  - p-thread gained an Engagement Signals strip (opens/clicks/reply latency)
+             above the verbatim thread, so "low-commitment reply" is a
+             measured read, not a guess.
+  - p-sources gained a Checked-date column and a changelog list — Sean
+             Hicks's prep was rebuilt across three separate days with no
+             way to see what changed between opens.
+  - p-disco  restructured into a real call flow — open, then a Qualifying
+             Questions table where every question is tied to a specific
+             finding elsewhere in the dossier (budget → paid-ads/SEO
+             findings, authority → stakeholders, need → the metadata gap
+             found, timing → the Timing block, competitive → the Competitive
+             Landscape tab), then objections, then the v2 close step. Acts
+             on the research instead of just presenting it.
+  - Branding: swapped the placeholder "EE" mark for the real EverEffect
+             logo (pulled live from evereffect.com), inlined as a data URI
+             in the topbar, hero, and footer — no more improvised wordmark.
+  - Build checklist below now checks links resolve and the dossier isn't
+             stale, not just that the 9 tabs exist (v1 only checked tab IDs
+             and empty hrefs — that's how a claim could go unverified into
+             a draft to Chris and still pass).
+
+  MANDATORY BEFORE ANY PUSH OR CHRIS-FACING DRAFT — run all three:
+
+  F=<path to the built prep index.html>
+
+  # 1. All 9 tabs present, or a stated reason for the ones missing
+  for tab in glance stand seo comp thread disco deal proof sources; do
+    grep -q "id=\"p-$tab\"" "$F" && echo "OK      p-$tab" \
+      || echo "MISSING p-$tab (state the reason in All Sources, or build it)"
+  done
+
+  # 2. Every link actually resolves — a broken source is worse than none
+  grep -oE 'href="https?://[^"]+"' "$F" | sed -E 's/href="([^"]+)"//;s/^"//;s/"$//' \
+    | grep -oE 'https?://[^"]+' | sort -u | while read -r url; do
+    code=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 10 "$url")
+    [ "$code" -lt 400 ] && echo "OK      $code  $url" || echo "BROKEN  $code  $url"
+  done
+  grep -c 'href=""' "$F"   # must print 0
+
+  # 3. Staleness — the hero .stamp "Dossier current as of" date must be
+  #    within 2 days of the call date, or re-verify before sending.
+
+  All three clean (or the gaps named in All Sources) before this ships.
+  Reference: evereffect_bdm_dossier_layout.md.
+-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>TODO Name · EverEffect BDM Call Prep</title>
+<meta name="description" content="TODO one-line description.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#1B4712; --forest-deep:#0A1C08; --ink:#14210F;
+  --ee:#2F8C19; --lime:#8EC63F;
+  --paper:#F7F9F5; --line:rgba(27,71,18,.14); --mist:#5F6E58;
+  --good:#2e8b57; --warn:#c9762d; --bad:#c0392b;
+  --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+*,*:before,*:after{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+
+header.topbar{background:var(--forest-deep);color:#fff;display:flex;justify-content:space-between;
+  align-items:center;gap:1rem;flex-wrap:wrap;padding:.85rem clamp(1rem,4vw,2.5rem);border-bottom:1px solid rgba(255,255,255,.09)}
+.topbar-left{display:flex;align-items:center;gap:.9rem}
+.brand-logo{height:1.9rem;width:auto;display:block;flex:none}
+.brand-logo-hero{height:2.15rem;width:auto;display:block}
+.brand-logo-foot{height:1.3rem;width:auto;display:block;opacity:.92}
+.topbar h1{font-size:.95rem;font-weight:700;letter-spacing:-.01em;margin-top:.15rem}
+.topbar-sub{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.topbar-right{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+.status-badge{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;
+  border-radius:99px;padding:.3rem .75rem;background:rgba(46,139,87,.16);color:var(--good);border:1px solid rgba(46,139,87,.4)}
+
+header.hero{background:linear-gradient(160deg,var(--forest-deep),var(--forest));color:#fff;padding:3rem 0 2.4rem}
+.hero-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:2rem}
+.brand{font-family:var(--serif);font-weight:900;font-size:1.15rem;color:var(--lime)}
+.brand small{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.25em;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:.2rem}
+.stamp{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:rgba(255,255,255,.5);text-transform:uppercase;text-align:right;line-height:1.8}
+h1.big{font-family:var(--serif);font-weight:900;font-size:clamp(1.7rem,3.8vw,2.7rem);line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+h1.big em{font-style:italic;color:var(--lime)}
+.hero-sub{margin-top:1rem;color:rgba(255,255,255,.72);max-width:660px;line-height:1.65;font-size:.92rem}
+.hero-stats{display:flex;gap:2.2rem;flex-wrap:wrap;margin-top:1.8rem}
+.hstat b{display:block;font-family:var(--serif);font-weight:900;font-size:1.5rem;color:var(--lime);font-variant-numeric:tabular-nums}
+.hstat span{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+
+nav.tabbar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);
+  display:flex;gap:.25rem;overflow-x:auto;padding:.6rem clamp(1rem,4vw,2.5rem)}
+nav.tabbar button{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  background:none;border:1px solid transparent;border-radius:99px;padding:.55rem 1.05rem;cursor:pointer;
+  color:var(--mist);white-space:nowrap;transition:all .25s}
+nav.tabbar button:hover{color:var(--forest)}
+nav.tabbar button.on{background:var(--forest);color:#fff}
+nav.tabbar button:focus-visible{outline:2px solid var(--ee);outline-offset:2px}
+
+section.panel{display:none;padding:2.4rem 0 3.4rem}
+section.panel.on{display:block}
+h2.sec{font-family:var(--serif);font-weight:900;font-size:clamp(1.3rem,2.4vw,1.9rem);color:var(--forest);margin-bottom:.5rem;text-wrap:balance}
+.sec-sub{color:var(--mist);font-size:.86rem;margin-bottom:1.8rem;max-width:660px;line-height:1.6}
+h3.sub{font-family:var(--serif);font-weight:900;font-size:1.1rem;color:var(--forest);margin:2rem 0 .9rem}
+
+.grid{display:grid;gap:1rem}
+.g2{grid-template-columns:repeat(auto-fit,minmax(20rem,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.4rem}
+.card h3{font-family:var(--serif);font-weight:600;font-size:1rem;color:var(--forest);margin-bottom:.5rem}
+.card p{font-size:.85rem;color:#3f4d3a;line-height:1.6}
+.card p + p{margin-top:.5rem}
+.badge{display:inline-block;font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;
+  text-transform:uppercase;border-radius:99px;padding:.28rem .7rem;margin-bottom:.7rem}
+.b-good{background:rgba(46,139,87,.1);color:var(--good);border:1px solid rgba(46,139,87,.3)}
+.b-warn{background:rgba(201,118,45,.1);color:var(--warn);border:1px solid rgba(201,118,45,.3)}
+.b-bad{background:rgba(192,57,43,.1);color:var(--bad);border:1px solid rgba(192,57,43,.3)}
+.b-todo{background:rgba(95,110,88,.14);color:var(--mist);border:1px dashed var(--mist)}
+
+.note{background:rgba(142,198,63,.13);border:1px solid rgba(47,140,25,.35);border-radius:12px;
+  padding:1.1rem 1.35rem;font-size:.86rem;line-height:1.65;color:#2b3d25;margin-top:1.2rem}
+.note b{color:var(--forest)}
+.note.warn{background:rgba(201,118,45,.1);border-color:rgba(201,118,45,.35);color:#5c3a1a}
+.note.warn b{color:var(--warn)}
+.note.bad{background:rgba(192,57,43,.08);border-color:rgba(192,57,43,.35);color:#5c231a}
+.note.bad b{color:var(--bad)}
+
+.thread{display:grid;gap:.5rem;margin-top:.6rem}
+.msg{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.7rem .95rem;font-size:.83rem;line-height:1.55}
+.msg .who{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);margin-bottom:.25rem}
+.msg.them{border-left:3px solid var(--ee)}
+
+.steps{display:grid;gap:.6rem;counter-reset:s;margin-top:1.2rem}
+.step{display:grid;grid-template-columns:2rem 1fr;gap:.85rem;align-items:start;font-size:.86rem;
+  color:#3f4d3a;line-height:1.6;background:#fff;border:1px solid var(--line);border-radius:11px;padding:1.05rem 1.15rem}
+.step i{counter-increment:s;font-style:normal;font-family:var(--serif);font-weight:900;color:var(--ee);
+  background:rgba(47,140,25,.1);border:1px solid rgba(47,140,25,.35);border-radius:99px;width:1.8rem;height:1.8rem;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex:none}
+.step i:before{content:counter(s)}
+.step b{display:block;font-weight:650;color:var(--forest);font-size:.94rem;margin-bottom:.2rem}
+
+.objs{display:grid;gap:.6rem;margin-top:1rem}
+.obj{background:#fff;border:1px solid var(--line);border-radius:11px;padding:1rem 1.15rem;font-size:.85rem;line-height:1.6}
+.obj .q{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--warn);display:block;margin-bottom:.4rem}
+.obj .a{color:#3f4d3a}
+
+.proof{display:flex;gap:1.6rem;flex-wrap:wrap;margin-top:.6rem}
+.proof .num{font-family:var(--serif);font-weight:900;font-size:1.6rem;color:var(--ee);font-variant-numeric:tabular-nums}
+.proof .cap{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist)}
+
+table.audit{width:100%;border-collapse:collapse;margin-top:.8rem;font-size:.83rem}
+table.audit th{text-align:left;font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mist);padding:.5rem .6rem;border-bottom:2px solid var(--line)}
+table.audit td{padding:.6rem .6rem;border-bottom:1px solid var(--line);color:#3f4d3a;vertical-align:top}
+table.audit tr:last-child td{border-bottom:none}
+table.audit td b, table.audit th b{font-variant-numeric:tabular-nums}
+
+.srctable{width:100%;border-collapse:collapse;margin-top:.4rem;font-size:.8rem}
+.srctable th{text-align:left;font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mist);padding:.5rem .5rem;border-bottom:2px solid var(--line)}
+.srctable td{padding:.55rem .5rem;border-bottom:1px solid var(--line);color:#3f4d3a;vertical-align:top}
+.srctable a{color:var(--ee);text-decoration:none;border-bottom:1px solid rgba(47,140,25,.32);word-break:break-word}
+.srctable td.date{font-family:var(--mono);font-size:.74rem;color:var(--mist);white-space:nowrap}
+.conf{font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .5rem;border-radius:99px;white-space:nowrap;display:inline-block}
+.c-verified{background:rgba(46,139,87,.12);color:var(--good)}
+.c-single{background:rgba(201,118,45,.12);color:var(--warn)}
+
+.tablewrap{overflow-x:auto}
+
+.changelog{margin-top:.6rem;display:grid;gap:.55rem;list-style:none}
+.changelog li{display:flex;gap:.8rem;font-size:.82rem;line-height:1.55;color:#3f4d3a}
+.changelog time{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;color:var(--mist);white-space:nowrap;padding-top:.15rem;flex:none}
+
+footer.f{padding:2rem 0 2.6rem;border-top:1px solid var(--line);margin-top:.5rem;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem}
+
+@media(max-width:620px){
+  .step{grid-template-columns:2rem 1fr}
+  .hero-stats{gap:1.4rem}
+  table.audit,.srctable{display:block}
+}
+
+@media print{
+  @page{ size:Letter; margin:13mm 12mm 14mm; }
+  body{background:#fff}
+  nav.tabbar{display:none !important}
+  header.topbar{display:none !important}
+  section.panel{display:block !important; padding:0 0 6mm; break-before:page; page-break-before:always}
+  section.panel:first-of-type{break-before:auto; page-break-before:auto}
+  header.hero{break-after:avoid; page-break-after:avoid; margin-bottom:6mm}
+  .card,.step,.msg,.note,.obj,.changelog li{break-inside:avoid; page-break-inside:avoid}
+  h2.sec{break-after:avoid; page-break-after:avoid}
+  .grid{display:block}
+  .grid > *{margin-bottom:4mm}
+  .wrap{max-width:none;padding:0}
+  body{font-size:9.4pt}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <img class="brand-logo" src="../../../assets/ee-logo.png" alt="EverEffect">
+    <div>
+      <h1>Brett Hickey &middot; BDM Call Prep</h1>
+      <div class="topbar-sub">Internal BDM prep &middot; shared with Chris for feedback &middot; never sent to the lead</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="status-badge">Full dossier &middot; 17 sourced findings &middot; pre-booking</span>
+  </div>
+</header>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="brand"><img class="brand-logo-hero" src="../../../assets/ee-logo.png" alt="EverEffect"><small>BDM Lead Pack</small></div>
+      <div class="stamp">Call: not yet booked<br>Prepped ahead of the ask<br>Dossier current as of Aug 21, 2026</div>
+    </div>
+    <h1 class="big">Brett Hickey &mdash; <em>Star Mountain Capital.</em></h1>
+    <p class="hero-sub">Founder &amp; CEO of a ~$5B lower middle-market private credit and secondaries manager.
+    Real personal relationship already in motion: Evans emailed Brett directly on 8/14, and Brett's own reply
+    was &ldquo;email me ideas and I'll connect u with my team.&rdquo; This isn't a cold pitch anymore &mdash;
+    it's a warm, CEO-level door that's already open. The angle has to be concrete ideas, not a generic
+    capabilities deck, or it wastes the opening he gave us.</p>
+    <div class="hero-stats">
+      <div class="hstat"><b>$5B</b><span>Assets under management</span></div>
+      <div class="hstat"><b>2010</b><span>Firm founded</span></div>
+      <div class="hstat"><b>Founder &amp; CEO</b><span>The lead is the top decision-maker</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabbar" id="tabs">
+  <button data-p="glance" class="on">Who You're Meeting</button>
+  <button data-p="stand">Where They Stand</button>
+  <button data-p="seo">Site &amp; SEO Audit</button>
+  <button data-p="comp">Competitive Landscape</button>
+  <button data-p="thread">The Actual Thread</button>
+  <button data-p="disco">Discovery Script</button>
+  <button data-p="deal">Deal Qualification</button>
+  <button data-p="proof">Proof Points</button>
+  <button data-p="sources">All Sources</button>
+</nav>
+
+<div class="wrap">
+
+<section class="panel on" id="p-glance">
+  <h2 class="sec">Brett Hickey &mdash; confirmed from Star Mountain's own site, press, and LinkedIn</h2>
+  <p class="sec-sub">Founder/CEO identity, firm scale, and track record all cross-checked across the
+  firm's own site, press coverage, and LinkedIn &mdash; not a single-source guess.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-good">Verified, 2 independent sources</span>
+      <h3>Company &amp; role</h3>
+      <p>Founder &amp; CEO of Star Mountain Capital, founded 2010. Employee-owned lower middle-market asset
+      manager running two strategies: direct debt/equity investments in established lower middle-market
+      businesses, and secondary purchases of LP interests/fund stakes. ~$5B in committed capital (incl. debt
+      facilities) as of 7/31/2026 &mdash; note: an earlier internal figure of $1.2B was Fund IV alone, not
+      the firm total. Since 2010: 100+ direct platform investments, 50+ secondary/fund investments.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Verified, live on site</span>
+      <h3>Content operation already exists</h3>
+      <p>Runs a real Media Center: 20+ events/year, bi-monthly webinars, and a CEO Video Interview Series
+      (Brett sitting down with figures like the former CIO of the Employees Retirement System of Texas and
+      former Dallas Fed President Robert Kaplan), plus an Apple Podcasts show. This is a firm that already
+      produces owned content at real volume &mdash; the gap, per the SEO/Competitive tabs, is distribution
+      and technical foundation, not raw content supply.</p>
+    </div>
+  </div>
+
+  <h3 class="sub">Timing &mdash; recent triggers <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <div class="grid g2">
+    <div class="card"><span class="badge b-good">Checked, found &mdash; dated</span>
+      <h3>Star Mountain CFO I close, 8/3/2026</h3>
+      <p>Closed a new Collateralized Fund Obligation ("Star Mountain CFO I") giving rated access to U.S.
+      lower middle-market private credit &mdash; covered by BusinessWire and picked up by regional/finance
+      outlets same week. A real, current, dated hook to open the call with.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Checked, found &mdash; dated</span>
+      <h3>Two named-firm awards, 2025&ndash;2026</h3>
+      <p>"Lower Mid-Market Lender of the Year" &mdash; Alternative Credit Investor Awards North America
+      (4/17/2026), and GrowthCap's Top Private Credit Firms of 2025. Both are real, verifiable recognitions,
+      not vague industry chatter &mdash; worth naming specifically rather than a generic "congrats on the
+      growth."</p>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>The angle that matters for this call.</b> Brett didn't ask for a pitch deck &mdash; he asked for
+    ideas, and offered to loop in his own team. The strongest opening isn't "here's what EverEffect does,"
+    it's naming the specific, dated news (the CFO I close, the two awards) and the specific technical/SEO
+    gaps found below, then asking who on his team should be in the follow-up he already offered.
+  </div>
+</section>
+
+<section class="panel" id="p-stand">
+  <h2 class="sec">Where they actually stand, digitally</h2>
+  <p class="sec-sub">Sourced digital-footprint findings. Explicit "checked, not found/not applicable"
+  callouts for anything searched and confirmed absent.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-good">Verified, live</span>
+      <h3>LinkedIn company page</h3>
+      <p>Active company page (linkedin.com/company/star-mountain-capital-llc). Not independently follower-
+      counted this pass &mdash; log as a gap to pull live in-browser before the call if follower count
+      becomes a talking point.</p>
+    </div>
+    <div class="card"><span class="badge b-todo">Checked live, not applicable</span>
+      <h3>Google Business Profile <span style="font-family:var(--mono);font-size:.58rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+      <p>Checked: no consumer-facing Maps/GBP listing signal found, and none would be expected &mdash; this
+      is a B2B institutional asset manager with no walk-in location or local-search intent behind it. Not a
+      gap, a genuinely inapplicable check for this business type. Don't pitch local-SEO/GBP work here.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Verified, live</span>
+      <h3>YouTube presence</h3>
+      <p>Channel exists (youtube.com/c/StarMountainCapital) carrying the CEO Video Interview Series content.
+      Subscriber count and upload cadence not retrievable via search this pass &mdash; log as "checked,
+      channel confirmed live, engagement metrics not yet pulled," don't guess a number.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Verified, live</span>
+      <h3>Press &amp; media placements</h3>
+      <p>Regular BusinessWire/Morningstar pickup on fund closes and awards; Founder featured on IHS Markit's
+      Private Debt Educational Series and Business Rockstars. Strong third-party credibility signal already
+      in place &mdash; useful as social proof EverEffect can point back to, not something to manufacture.</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="p-seo">
+  <h2 class="sec">Site &amp; SEO audit &mdash; starmountaincapital.com</h2>
+  <p class="sec-sub">Live technical pass, checked 2026-08-21 directly against the homepage and the
+  /media-center/ interior page.</p>
+
+  <table class="audit">
+    <tr><th>Check</th><th>Finding</th><th>Status</th></tr>
+    <tr><td>Title tag</td><td>Present and descriptive: "Star Mountain Capital - Lower Middle-Market Focused Asset Management"</td><td><span class="badge b-good">OK</span></td></tr>
+    <tr><td>Meta description</td><td>Present, names the founder and the exact niche</td><td><span class="badge b-good">OK</span></td></tr>
+    <tr><td>Open Graph tags</td><td>og:description is solid, but og:title is a generic literal "Home Page" instead of the real page title &mdash; every social share of the homepage shows the wrong headline</td><td><span class="badge b-warn">GAP</span></td></tr>
+    <tr><td>Structured data / schema</td><td>Yoast WebPage schema graph present on homepage</td><td><span class="badge b-good">OK</span></td></tr>
+    <tr><td>Canonical tag</td><td>Present, correctly self-referencing</td><td><span class="badge b-good">OK</span></td></tr>
+    <tr><td>H1 structure</td><td>No &lt;h1&gt; element found anywhere on the homepage HTML &mdash; the hero is image/heading-styled text with no real H1 tag behind it</td><td><span class="badge b-bad">GAP</span></td></tr>
+    <tr><td>robots.txt</td><td>Present. Explicitly disallows GPTBot, ClaudeBot, Google-Extended, Amazonbot, Bytespider, CCBot, meta-externalagent (AI-training crawlers) while allowing search indexing &mdash; a deliberate, current choice (Content-Signal: ai-train=no), not a misconfiguration</td><td><span class="badge b-good">OK, deliberate</span></td></tr>
+    <tr><td>Sitemap</td><td>/sitemap.xml redirects (301) to /sitemap_index.xml, which resolves</td><td><span class="badge b-good">OK</span></td></tr>
+    <tr><td>Image alt text</td><td>Inconsistent &mdash; the logo has real alt text, but press-badge images (WSJ, Barron's-style placements) carry empty alt="" with only a title attribute</td><td><span class="badge b-warn">GAP</span></td></tr>
+    <tr><td>Core Web Vitals / PageSpeed <span style="font-family:var(--mono);font-size:.58rem;color:var(--mist);">(new in v2)</span></td><td>Attempted via the public PageSpeed Insights API &mdash; blocked: "Quota exceeded for quota metric 'Queries' and limit 'Queries per day'" (HTTP 429). Genuinely attempted, not skipped; re-run when the daily quota resets.</td><td><span class="badge b-todo">BLOCKED</span></td></tr>
+    <tr><td>Interior pages <span style="font-family:var(--mono);font-size:.58rem;color:var(--mist);">(new in v2)</span></td><td>Checked homepage plus /media-center/ (the page most tied to this pitch) &mdash; media-center has its own accurate, specific title and meta description, no red flags there.</td><td><span class="badge b-good">OK</span></td></tr>
+  </table>
+
+  <div class="note warn">
+    <b>Two real, fixable gaps.</b> No true H1 on the homepage, and a generic og:title undermining every
+    social share. Both are small, concrete, credible-sounding fixes for an opening pitch &mdash; neither is
+    invented or exaggerated.
+  </div>
+</section>
+
+<section class="panel" id="p-comp">
+  <h2 class="sec">Competitive landscape <span style="font-family:var(--mono);font-size:.62rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">&mdash; new tab in v2</span></h2>
+  <p class="sec-sub">Not just who the named competitors are &mdash; what they're actually doing on the same
+  channel this pitch is about.</p>
+
+  <div class="tablewrap">
+  <table class="audit">
+    <tr><th>Firm</th><th>Content / thought-leadership presence</th><th>Paid ads (Google/Meta)</th><th>How Star Mountain compares</th></tr>
+    <tr><td>Star Mountain Capital (reference)</td><td>CEO video interview series, bi-monthly webinars, Apple Podcasts show, active Media Center &mdash; real volume</td><td>Not checked this pass</td><td>&mdash;</td></tr>
+    <tr><td>Monroe Capital</td><td>Established thought-leadership program, direct-lending focus, non-sponsored origination story</td><td>Not checked</td><td>Comparable content ambition; Star Mountain's founder-led interview format is more personal/distinctive</td></tr>
+    <tr><td>Golub Capital</td><td>~$85B AUM, sponsor-backed direct lending, institutional-grade content operation</td><td>Not checked</td><td>Far larger scale; Star Mountain competes on the dual direct+secondaries strategy and founder visibility, not on size</td></tr>
+    <tr><td>Antares Capital</td><td>~$95B under management/administration, large sponsor-relationship network, big-budget content/PR</td><td>Not checked</td><td>Same &mdash; Star Mountain's edge is a differentiated strategy story (direct + secondaries) and an unusually accessible, camera-forward CEO, not budget parity</td></tr>
+  </table>
+  </div>
+
+  <div class="note">
+    <b>How to use this on the call.</b> Star Mountain already out-produces most of this list on genuine,
+    founder-led content &mdash; the honest gap isn't content supply, it's technical SEO (no H1, generic
+    og:title) and distribution reach behind that content. Lead with that contrast, not a generic "you need
+    more content" pitch.
+  </div>
+</section>
+
+<section class="panel" id="p-thread">
+  <h2 class="sec">The actual conversation, verbatim</h2>
+  <p class="sec-sub">Pulled from the Basecamp/HubSpot-logged Outbound System reply plus Evans's direct
+  follow-up email.</p>
+
+  <h3 class="sub">Engagement signals <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <p class="sec-sub" style="margin-bottom:.8rem;">Not tracked via Apollo/Outbound System metrics for the most
+  recent touch &mdash; the 8/14 follow-up was a direct personal email from Evans, not a sequence send, so
+  opens/clicks aren't instrumented. Logged honestly rather than guessed.</p>
+  <div class="proof">
+    <div><div class="num">N/A</div><div class="cap">Opens (personal email, untracked)</div></div>
+    <div><div class="num">N/A</div><div class="cap">Link clicks (none sent)</div></div>
+    <div><div class="num">Same day</div><div class="cap">Reply latency on original outreach</div></div>
+  </div>
+
+  <div class="thread" style="margin-top:1.4rem;">
+    <div class="msg them"><div class="who">Brett Hickey &middot; Star Mountain Capital</div>&ldquo;email me ideas ans I'll connect u with my team&rdquo;</div>
+    <div class="msg"><div class="who">Evans Diaz &middot; 2026-08-14</div>Direct personal follow-up email sent to Brett, per HubSpot activity log (contact 239852108714). Full email body not reproduced here &mdash; pull from HubSpot before the call if the exact wording matters.</div>
+  </div>
+
+  <div class="note warn">
+    <b>Open internal question, not yet resolved.</b> An earlier HubSpot task on this lead asked "should
+    outreach come from Thomas, CC Evans?" and was never answered. Evans has since emailed Brett directly, so
+    the practical answer may already be "Evans, not Thomas" &mdash; but that hasn't been explicitly confirmed
+    with Chris/Thomas. Flag before sending anything further under a different name than the one Brett already
+    replied to. Separately: an Apollo sequence exists for this lead but is built to send as a brand-new cold
+    thread &mdash; it needs to be rebuilt as a reply-continuation (or paused entirely) before it's ever
+    activated, or it will contradict the email Brett already received.
+  </div>
+</section>
+
+<section class="panel" id="p-disco">
+  <h2 class="sec">Discovery script &mdash; tuned to what we now know</h2>
+  <p class="sec-sub">Brett already invited concrete ideas and offered his team &mdash; this call should open
+  with exactly that, not a rediscovery of who he is.</p>
+
+  <h3 class="sub">1. Open with the specific finding</h3>
+  <div class="steps">
+    <div class="step"><i></i><div><b>Lead with the news, not the pitch</b>"Congrats on closing CFO I, and
+    on Lower Mid-Market Lender of the Year &mdash; that's two real markers of momentum in the last few
+    months." Then: "You mentioned wanting ideas rather than a deck, so here are two concrete ones we found
+    looking at the site."</div></div>
+  </div>
+
+  <h3 class="sub">2. Qualifying questions &mdash; tied to what we found <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <div class="tablewrap">
+  <table class="audit">
+    <tr><th>Ask</th><th>Why we're asking it</th><th>Listen for</th></tr>
+    <tr>
+      <td>"Is there budget already earmarked for content distribution or SEO, or would this be a new line item for the firm?"</td>
+      <td>Tied to the Budget Signal card in Deal Qualification &mdash; a $5B AUM firm implies real capacity, but that's a signal, not a confirmed number.</td>
+      <td>An existing marketing/IR budget line (real authority) vs. this being genuinely new spend (longer approval cycle).</td>
+    </tr>
+    <tr>
+      <td>"You mentioned looping in your team &mdash; who specifically handles content and site decisions day to day?"</td>
+      <td>Tied to Decision Authority in Deal Qualification &mdash; Brett is Founder/CEO, but he explicitly pointed to a team, not himself, for execution.</td>
+      <td>A named marketing/IR lead (routes the next step correctly) vs. Brett staying the sole point of contact (faster but easily deprioritized against his day job).</td>
+    </tr>
+    <tr>
+      <td>"When someone finds one of your CEO interviews or the CFO I news and shares it, do you know what they actually see &mdash; the real headline, or something generic?"</td>
+      <td>Tied to the og:title and missing-H1 gaps found in Site &amp; SEO Audit.</td>
+      <td>No awareness of the gap at all (easy, credible-sounding fix to open with) vs. "we know, it's on the list" (still useful, shows real ownership).</td>
+    </tr>
+    <tr>
+      <td>"Is there a reason this is coming up now &mdash; the CFO I close, the award, or something else on your side?"</td>
+      <td>Tied to the Timing/recent-triggers block on Who You're Meeting.</td>
+      <td>A real, dated trigger (raises urgency) vs. general interest with no specific driver (slower cycle, still real).</td>
+    </tr>
+    <tr>
+      <td>"Are you already talking to anyone else about content, SEO, or distribution work?"</td>
+      <td>Tied to the Competitive Landscape tab &mdash; Star Mountain's peers run large, well-funded content operations.</td>
+      <td>An active competing conversation (real urgency, real comparison point) vs. no active search (an education-first conversation).</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3 class="sub">3. Anticipated objections</h3>
+  <div class="objs">
+    <div class="obj"><span class="q">"We already have a content series and a podcast &mdash; why do we need outside help?"</span><span class="a">Agreed, and that's rare at this stage &mdash; most of your peer set doesn't have a founder this willing to go on camera. The gap isn't content supply, it's technical SEO (no H1 on the homepage, a generic social-share title) and distribution reach behind content you're already making. That's a narrower, cheaper ask than "build us a content program."</span></div>
+    <div class="obj"><span class="q">"This is a heavily regulated, relationship-driven business &mdash; how much does SEO/content marketing actually move the needle?"</span><span class="a">It's not replacing relationship-driven origination, it's compounding the credibility you're already building through press and the CEO series so more of the right institutional and intermediary audience finds it organically instead of only through direct outreach.</span></div>
+  </div>
+
+  <h3 class="sub">4. Close: recommended package &amp; next step <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <div class="steps">
+    <div class="step"><i></i><div><b>Ask for a scoped technical + distribution audit</b>Propose a scoped
+    technical SEO fix (H1, og:title, alt text) plus a distribution/amplification plan for the existing CEO
+    interview series and CFO I/award coverage, with a follow-up meeting that includes whoever Brett names as
+    his content/marketing lead. Don't leave the call on "send me ideas" again &mdash; get a named next
+    meeting or a scoped deliverable with a date.</div></div>
+  </div>
+</section>
+
+<section class="panel" id="p-deal">
+  <h2 class="sec">Deal qualification <span style="font-family:var(--mono);font-size:.62rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">&mdash; new tab in v2</span></h2>
+  <p class="sec-sub">Four honest questions, answered from what's actually known.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-good">Signal, not confirmed</span>
+      <h3>Budget signal</h3>
+      <p>~$5B AUM institutional asset manager with an active PR/press operation and a running content
+      program &mdash; implies real marketing budget capacity. No specific number confirmed; this is inferred
+      from firm scale, not from a stated figure.</p>
+    </div>
+    <div class="card"><span class="badge b-warn">Partially known</span>
+      <h3>Decision authority &amp; other stakeholders</h3>
+      <p>Brett is Founder &amp; CEO &mdash; the highest possible authority. But his own reply pointed to "my
+      team" for execution, and no specific marketing/IR contact is named yet. Ask for that name directly on
+      the call (see Discovery Script, question 2).</p>
+    </div>
+    <div class="card"><span class="badge b-good">None found</span>
+      <h3>Red flags / walk-away signals</h3>
+      <p>None found. This is a real, warm, CEO-level relationship with a positive reply and a direct personal
+      email exchange already in motion &mdash; the only operational risk is internal (the unresolved
+      Thomas/Evans routing question and the stale Apollo sequence), not anything about the lead himself.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Recommend</span>
+      <h3>Recommended EverEffect package &amp; likely deal size</h3>
+      <p>A scoped technical SEO + content-distribution engagement (fix the H1/og:title/alt-text gaps, then
+      amplify the existing CEO interview series and recent press) rather than a from-scratch content-creation
+      package &mdash; the content already exists. Given the firm's scale, this likely sits at a mid-to-upper
+      SLA tier; no specific number should be quoted until the named marketing contact confirms budget.</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="p-proof">
+  <h2 class="sec">Proof points, honestly scoped</h2>
+  <p class="sec-sub">The closest verified EverEffect case study is a different vertical (legal/insurance, not
+  financial services) &mdash; the mechanism transfers (owned content already being produced, technical/
+  distribution fixes unlock reach), the numbers themselves don't.</p>
+  <div class="card">
+    <h3>Rhoads &amp; Rhoads &mdash; "Accident News" geo-blogging</h3>
+    <p style="margin-bottom:.8rem;">Not a financial-services comparable &mdash; use as a mechanism proof, not
+    a direct benchmark, and say so on the call.</p>
+    <div class="proof">
+      <div><div class="num">881&rarr;30,004</div><div class="cap">Organic visits/yr, 2022&rarr;2024</div></div>
+      <div><div class="num">2/wk</div><div class="cap">Posting cadence, $1,000/mo</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="p-sources">
+  <h2 class="sec">All sources</h2>
+  <p class="sec-sub">Every link/claim used anywhere in this dossier, consolidated.</p>
+
+  <div class="tablewrap">
+  <table class="srctable">
+    <tr><th>Claim</th><th>Source</th><th>Confidence</th><th>Checked</th></tr>
+    <tr><td>~$5B AUM (incl. debt facilities, as of 7/31/2026); corrects the earlier $1.2B figure (Fund IV only)</td><td><a href="https://www.businesswire.com/news/home/20260803877107/en/Star-Mountain-Capital-Closes-Star-Mountain-CFO-I-a-Collateralized-Fund-Obligation-Providing-Rated-Access-to-U.S.-Lower-Middle-Market-Private-Credit" target="_blank" rel="noopener">BusinessWire, CFO I close release</a></td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Founded 2010, 100+ direct + 50+ secondary/fund investments</td><td><a href="https://starmountaincapital.com/" target="_blank" rel="noopener">starmountaincapital.com</a></td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>"Lower Mid-Market Lender of the Year," Alternative Credit Investor Awards, 4/17/2026</td><td><a href="https://www.businesswire.com/news/home/20260417031532/en/Star-Mountain-Capital-Named-Lower-Mid-Market-Lender-of-the-Year-by-Alternative-Credit-Investor" target="_blank" rel="noopener">BusinessWire</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>GrowthCap Top Private Credit Firms of 2025</td><td><a href="https://www.morningstar.com/news/business-wire/20260106290375/star-mountain-capital-recognized-by-growthcap-as-one-of-the-top-private-credit-firms-of-2025" target="_blank" rel="noopener">Morningstar/BusinessWire</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Media Center: 20+ events/yr, bi-monthly webinars, CEO Video Interview Series</td><td><a href="https://starmountaincapital.com/media-center/" target="_blank" rel="noopener">starmountaincapital.com/media-center</a></td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Apple Podcasts show live</td><td><a href="https://podcasts.apple.com/us/podcast/star-mountain-capital/id1333649757" target="_blank" rel="noopener">Apple Podcasts</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>YouTube channel exists (subscriber count not retrieved)</td><td><a href="https://www.youtube.com/c/StarMountainCapital" target="_blank" rel="noopener">YouTube</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Title tag, meta description, canonical, structured data all present and correct</td><td><a href="https://starmountaincapital.com/" target="_blank" rel="noopener">Live page source, curl</a></td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>og:title is generic "Home Page," not the real title</td><td><a href="https://starmountaincapital.com/" target="_blank" rel="noopener">Live page source, curl</a></td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>No H1 element on homepage</td><td><a href="https://starmountaincapital.com/" target="_blank" rel="noopener">Live page source, curl</a></td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>robots.txt blocks AI-training crawlers, allows search</td><td><a href="https://starmountaincapital.com/robots.txt" target="_blank" rel="noopener">starmountaincapital.com/robots.txt</a></td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Press-badge images carry empty alt text</td><td><a href="https://starmountaincapital.com/" target="_blank" rel="noopener">Live page source, curl</a></td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>PageSpeed Insights check blocked, daily API quota exceeded</td><td>pagespeedonline.googleapis.com (HTTP 429)</td><td><span class="conf c-verified">Verified (blocked, not skipped)</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Competitor scale: Golub ~$85B, Antares ~$95B AUM/AUA; Monroe non-sponsored positioning</td><td><a href="https://www.antares.com/our-platform/private-credit/" target="_blank" rel="noopener">Antares</a>, industry coverage</td><td><span class="conf c-single">Single-source</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Brett's reply: "email me ideas ans I'll connect u with my team"</td><td>Basecamp to-do 10163525663 / drift-check-log</td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Evans's direct email to Brett, 2026-08-14</td><td>HubSpot contact 239852108714 activity log</td><td><span class="conf c-single">Single-source</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Apollo sequence exists but sends as a fresh cold thread, not a reply</td><td>lead-ledger.json</td><td><span class="conf c-single">Single-source</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Rhoads &amp; Rhoads: 881&rarr;30,004 organic visits/yr via geo-blogging</td><td>evereffect_sla_library.md (internal, verified case)</td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+  </table>
+  </div>
+
+  <h3 class="sub">Changelog <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <p class="sec-sub" style="margin-bottom:.4rem;">Newest first.</p>
+  <ul class="changelog">
+    <li><time>2026-08-21</time><span>First build of this dossier, on the v2 template, prepped ahead of any booked call &mdash; Brett showed real interest (personal reply + Evans's direct follow-up) but no call is on the calendar yet.</span></li>
+  </ul>
+
+  <div class="note">
+    <b>Not yet checked.</b> LinkedIn company-page follower count, YouTube subscriber count/upload cadence,
+    and Core Web Vitals/PageSpeed (blocked by API quota this pass, not by choice). Re-run PageSpeed once the
+    daily quota resets, and pull the two social counts live in-browser before the call if either becomes a
+    talking point.
+  </div>
+</section>
+
+<footer class="f">
+  <span>Internal BDM prep &middot; shared with Chris for feedback &middot; never sent to the lead &middot; 2026-08-21</span>
+  <span><img class="brand-logo-foot" src="../../../assets/ee-logo.png" alt="EverEffect"></span>
+</footer>
+</div>
+
+<script>
+var tabs=document.querySelectorAll('#tabs button'),panels=document.querySelectorAll('.panel');
+tabs.forEach(function(b){b.addEventListener('click',function(){
+  tabs.forEach(function(x){x.classList.remove('on')});
+  panels.forEach(function(p){p.classList.remove('on')});
+  b.classList.add('on');
+  document.getElementById('p-'+b.dataset.p).classList.add('on');
+  b.scrollIntoView({block:'nearest',inline:'nearest'});
+  window.scrollTo({top:0,behavior:'smooth'});
+})});
+</script>
+</body>
+</html>

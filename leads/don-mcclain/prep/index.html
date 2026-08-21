@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Don McClain · EverEffect BDM Call Prep</title>
+<meta name="description" content="Internal BDM call prep for Don McClain, Founder & Principal of Fast Commercial Capital.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#1B4712; --forest-deep:#0A1C08; --ink:#14210F;
+  --ee:#2F8C19; --lime:#8EC63F;
+  --paper:#F7F9F5; --line:rgba(27,71,18,.14); --mist:#5F6E58;
+  --good:#2e8b57; --warn:#c9762d; --bad:#c0392b;
+  --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+*,*:before,*:after{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+
+header.topbar{background:var(--forest-deep);color:#fff;display:flex;justify-content:space-between;
+  align-items:center;gap:1rem;flex-wrap:wrap;padding:.85rem clamp(1rem,4vw,2.5rem);border-bottom:1px solid rgba(255,255,255,.09)}
+.topbar-left{display:flex;align-items:center;gap:.9rem}
+.brand-logo{height:1.9rem;width:auto;display:block;flex:none}
+.brand-logo-hero{height:2.15rem;width:auto;display:block}
+.brand-logo-foot{height:1.3rem;width:auto;display:block;opacity:.92}
+.topbar h1{font-size:.95rem;font-weight:700;letter-spacing:-.01em;margin-top:.15rem}
+.topbar-sub{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.topbar-right{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+.status-badge{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;
+  border-radius:99px;padding:.3rem .75rem;background:rgba(46,139,87,.16);color:var(--good);border:1px solid rgba(46,139,87,.4)}
+
+header.hero{background:linear-gradient(160deg,var(--forest-deep),var(--forest));color:#fff;padding:3rem 0 2.4rem}
+.hero-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:2rem}
+.brand{font-family:var(--serif);font-weight:900;font-size:1.15rem;color:var(--lime)}
+.brand small{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.25em;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:.2rem}
+.stamp{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:rgba(255,255,255,.5);text-transform:uppercase;text-align:right;line-height:1.8}
+h1.big{font-family:var(--serif);font-weight:900;font-size:clamp(1.7rem,3.8vw,2.7rem);line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+h1.big em{font-style:italic;color:var(--lime)}
+.hero-sub{margin-top:1rem;color:rgba(255,255,255,.72);max-width:660px;line-height:1.65;font-size:.92rem}
+.hero-stats{display:flex;gap:2.2rem;flex-wrap:wrap;margin-top:1.8rem}
+.hstat b{display:block;font-family:var(--serif);font-weight:900;font-size:1.5rem;color:var(--lime);font-variant-numeric:tabular-nums}
+.hstat span{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+
+nav.tabbar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);
+  display:flex;gap:.25rem;overflow-x:auto;padding:.6rem clamp(1rem,4vw,2.5rem)}
+nav.tabbar button{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  background:none;border:1px solid transparent;border-radius:99px;padding:.55rem 1.05rem;cursor:pointer;
+  color:var(--mist);white-space:nowrap;transition:all .25s}
+nav.tabbar button:hover{color:var(--forest)}
+nav.tabbar button.on{background:var(--forest);color:#fff}
+nav.tabbar button:focus-visible{outline:2px solid var(--ee);outline-offset:2px}
+
+section.panel{display:none;padding:2.4rem 0 3.4rem}
+section.panel.on{display:block}
+h2.sec{font-family:var(--serif);font-weight:900;font-size:clamp(1.3rem,2.4vw,1.9rem);color:var(--forest);margin-bottom:.5rem;text-wrap:balance}
+.sec-sub{color:var(--mist);font-size:.86rem;margin-bottom:1.8rem;max-width:660px;line-height:1.6}
+h3.sub{font-family:var(--serif);font-weight:900;font-size:1.1rem;color:var(--forest);margin:2rem 0 .9rem}
+
+.grid{display:grid;gap:1rem}
+.g2{grid-template-columns:repeat(auto-fit,minmax(20rem,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.4rem}
+.card h3{font-family:var(--serif);font-weight:600;font-size:1rem;color:var(--forest);margin-bottom:.5rem}
+.card p{font-size:.85rem;color:#3f4d3a;line-height:1.6}
+.card p + p{margin-top:.5rem}
+.badge{display:inline-block;font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;
+  text-transform:uppercase;border-radius:99px;padding:.28rem .7rem;margin-bottom:.7rem}
+.b-good{background:rgba(46,139,87,.1);color:var(--good);border:1px solid rgba(46,139,87,.3)}
+.b-warn{background:rgba(201,118,45,.1);color:var(--warn);border:1px solid rgba(201,118,45,.3)}
+.b-bad{background:rgba(192,57,43,.1);color:var(--bad);border:1px solid rgba(192,57,43,.3)}
+.b-todo{background:rgba(95,110,88,.14);color:var(--mist);border:1px dashed var(--mist)}
+
+.note{background:rgba(142,198,63,.13);border:1px solid rgba(47,140,25,.35);border-radius:12px;
+  padding:1.1rem 1.35rem;font-size:.86rem;line-height:1.65;color:#2b3d25;margin-top:1.2rem}
+.note b{color:var(--forest)}
+.note.warn{background:rgba(201,118,45,.1);border-color:rgba(201,118,45,.35);color:#5c3a1a}
+.note.warn b{color:var(--warn)}
+.note.bad{background:rgba(192,57,43,.08);border-color:rgba(192,57,43,.35);color:#5c231a}
+.note.bad b{color:var(--bad)}
+
+.thread{display:grid;gap:.5rem;margin-top:.6rem}
+.msg{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.7rem .95rem;font-size:.83rem;line-height:1.55}
+.msg .who{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);margin-bottom:.25rem}
+.msg.them{border-left:3px solid var(--ee)}
+
+.steps{display:grid;gap:.6rem;counter-reset:s;margin-top:1.2rem}
+.step{display:grid;grid-template-columns:2rem 1fr;gap:.85rem;align-items:start;font-size:.86rem;
+  color:#3f4d3a;line-height:1.6;background:#fff;border:1px solid var(--line);border-radius:11px;padding:1.05rem 1.15rem}
+.step i{counter-increment:s;font-style:normal;font-family:var(--serif);font-weight:900;color:var(--ee);
+  background:rgba(47,140,25,.1);border:1px solid rgba(47,140,25,.35);border-radius:99px;width:1.8rem;height:1.8rem;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex:none}
+.step i:before{content:counter(s)}
+.step b{display:block;font-weight:650;color:var(--forest);font-size:.94rem;margin-bottom:.2rem}
+
+.objs{display:grid;gap:.6rem;margin-top:1rem}
+.obj{background:#fff;border:1px solid var(--line);border-radius:11px;padding:1rem 1.15rem;font-size:.85rem;line-height:1.6}
+.obj .q{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--warn);display:block;margin-bottom:.4rem}
+.obj .a{color:#3f4d3a}
+
+.proof{display:flex;gap:1.6rem;flex-wrap:wrap;margin-top:.6rem}
+.proof .num{font-family:var(--serif);font-weight:900;font-size:1.6rem;color:var(--ee);font-variant-numeric:tabular-nums}
+.proof .cap{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist)}
+
+table.audit{width:100%;border-collapse:collapse;margin-top:.8rem;font-size:.83rem}
+table.audit th{text-align:left;font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mist);padding:.5rem .6rem;border-bottom:2px solid var(--line)}
+table.audit td{padding:.6rem .6rem;border-bottom:1px solid var(--line);color:#3f4d3a;vertical-align:top}
+table.audit tr:last-child td{border-bottom:none}
+table.audit td b, table.audit th b{font-variant-numeric:tabular-nums}
+
+.srctable{width:100%;border-collapse:collapse;margin-top:.4rem;font-size:.8rem}
+.srctable th{text-align:left;font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mist);padding:.5rem .5rem;border-bottom:2px solid var(--line)}
+.srctable td{padding:.55rem .5rem;border-bottom:1px solid var(--line);color:#3f4d3a;vertical-align:top}
+.srctable a{color:var(--ee);text-decoration:none;border-bottom:1px solid rgba(47,140,25,.32);word-break:break-word}
+.srctable td.date{font-family:var(--mono);font-size:.74rem;color:var(--mist);white-space:nowrap}
+.conf{font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .5rem;border-radius:99px;white-space:nowrap;display:inline-block}
+.c-verified{background:rgba(46,139,87,.12);color:var(--good)}
+.c-single{background:rgba(201,118,45,.12);color:var(--warn)}
+
+.tablewrap{overflow-x:auto}
+
+.changelog{margin-top:.6rem;display:grid;gap:.55rem;list-style:none}
+.changelog li{display:flex;gap:.8rem;font-size:.82rem;line-height:1.55;color:#3f4d3a}
+.changelog time{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;color:var(--mist);white-space:nowrap;padding-top:.15rem;flex:none}
+
+footer.f{padding:2rem 0 2.6rem;border-top:1px solid var(--line);margin-top:.5rem;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem}
+
+@media(max-width:620px){
+  .step{grid-template-columns:2rem 1fr}
+  .hero-stats{gap:1.4rem}
+  table.audit,.srctable{display:block}
+}
+
+@media print{
+  @page{ size:Letter; margin:13mm 12mm 14mm; }
+  body{background:#fff}
+  nav.tabbar{display:none !important}
+  header.topbar{display:none !important}
+  section.panel{display:block !important; padding:0 0 6mm; break-before:page; page-break-before:always}
+  section.panel:first-of-type{break-before:auto; page-break-before:auto}
+  header.hero{break-after:avoid; page-break-after:avoid; margin-bottom:6mm}
+  .card,.step,.msg,.note,.obj,.changelog li{break-inside:avoid; page-break-inside:avoid}
+  h2.sec{break-after:avoid; page-break-after:avoid}
+  .grid{display:block}
+  .grid > *{margin-bottom:4mm}
+  .wrap{max-width:none;padding:0}
+  body{font-size:9.4pt}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <img class="brand-logo" src="../../../assets/ee-logo.png" alt="EverEffect">
+    <div>
+      <h1>Don McClain &middot; BDM Call Prep</h1>
+      <div class="topbar-sub">Internal BDM prep &middot; shared with Chris for feedback &middot; never sent to the lead</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="status-badge">Pre-booking prep &middot; built ahead of a scheduled call &middot; 14 sourced findings</span>
+  </div>
+</header>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="brand"><img class="brand-logo-hero" src="../../../assets/ee-logo.png" alt="EverEffect"><small>BDM Lead Pack</small></div>
+      <div class="stamp">Call: not yet booked<br>Replied 2026-08-20, LinkedIn<br>Dossier current as of 2026-08-21</div>
+    </div>
+    <h1 class="big">Don McClain &mdash; <em>Fast Commercial Capital.</em></h1>
+    <p class="hero-sub">Founder &amp; Principal of a Miami-HQ&rsquo;d, three-office (Miami, Austin, San Diego)
+    commercial capital advisory shop &mdash; bridge, SBA, construction/multifamily, and business
+    acquisition financing, nationwide. Replied &ldquo;interested to learn more&rdquo; on 2026-08-20 to a
+    LinkedIn opener built around AI-search visibility. That's the real angle: he already has a real
+    website with real content and a YouTube channel &mdash; the gap isn't presence, it's whether he shows
+    up correctly when someone (or an AI answer engine) actually looks.</p>
+    <div class="hero-stats">
+      <div class="hstat"><b>30+ yrs</b><span>in finance, since his first flip in 1989</span></div>
+      <div class="hstat"><b>$60M+</b><span>in real estate transactions facilitated</span></div>
+      <div class="hstat"><b>3 offices</b><span>Miami (HQ), Austin, San Diego</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabbar" id="tabs">
+  <button data-p="glance" class="on">Who You're Meeting</button>
+  <button data-p="stand">Where They Stand</button>
+  <button data-p="seo">Site &amp; SEO Audit</button>
+  <button data-p="comp">Competitive Landscape</button>
+  <button data-p="thread">The Actual Thread</button>
+  <button data-p="disco">Discovery Script</button>
+  <button data-p="deal">Deal Qualification</button>
+  <button data-p="proof">Proof Points</button>
+  <button data-p="sources">All Sources</button>
+</nav>
+
+<div class="wrap">
+
+<section class="panel on" id="p-glance">
+  <h2 class="sec">Don McClain &mdash; confirmed from his own site, LinkedIn, and a January 2026 press feature</h2>
+  <p class="sec-sub">Identity and track record are well-documented and cross-checked, not guessed &mdash;
+  the company's own site, his personal LinkedIn, and a third-party interview all agree.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-good">Verified, cross-checked</span>
+      <h3>Company &amp; role</h3>
+      <p>Founder &amp; Principal, Fast Commercial Capital &mdash; a U.S. institutional capital advisory
+      firm handling commercial real estate loans up to $100M, bridge/hard-money financing, SBA loans,
+      invoice/AR financing, ground-up construction and multifamily, plus business acquisitions and
+      recapitalizations. HQ Miami (3350 Virginia Street, Suite 200), with Austin and San Diego offices,
+      clients nationwide. Runs an affiliated ecosystem: Fasty Funding (business funding), Loyalty Business
+      Brokers (M&amp;A advisory), Medro Advisors (capital structuring).</p>
+    </div>
+    <div class="card"><span class="badge b-good">Verified, cross-checked</span>
+      <h3>Track record</h3>
+      <p>Bought his first &ldquo;flip&rdquo; investment property in 1989; 30+ years in finance; has
+      facilitated over $60,000,000 in real estate transactions. Phone lines: 305.396.3900 /
+      833.828.FAST.</p>
+    </div>
+  </div>
+
+  <h3 class="sub">Timing &mdash; recent triggers <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <div class="grid g2">
+    <div class="card"><span class="badge b-good">Checked, found</span>
+      <h3>Authority Magazine feature, January 2026</h3>
+      <p>Profiled in Medium/Authority Magazine's &ldquo;Five Things You Need To Create A Highly
+      Successful Career In The Finance Industry&rdquo; series &mdash; a real, dated press hit inside the
+      last several weeks. He's actively doing visibility-building already; this call is a continuation
+      of something already in motion, not an introduction to the idea.</p>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>The angle that matters for this call.</b> He didn't reply to a generic marketing pitch &mdash; he
+    replied specifically to an AI-search-visibility hook. He already publishes real content (a
+    &ldquo;Capital Insights&rdquo; article series) and already has a YouTube channel under his own name.
+    The pitch isn't &ldquo;you need a web presence,&rdquo; it's &ldquo;here's exactly where your existing
+    presence has real, fixable gaps that affect whether AI answer engines and search surface you
+    correctly.&rdquo;
+  </div>
+</section>
+
+<section class="panel" id="p-stand">
+  <h2 class="sec">Where he actually stands, digitally</h2>
+  <p class="sec-sub">Sourced digital-footprint findings, checked live 2026-08-21. Explicit &ldquo;checked,
+  not confirmable&rdquo; callouts below for anything that hit a real access limit &mdash; not silently
+  omitted.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-good">Checked, found</span>
+      <h3>Own content: "Capital Insights"</h3>
+      <p>Real editorial section on his site with named articles (e.g. &ldquo;Commercial Loan Maturity
+      Wall,&rdquo; &ldquo;Why Sophisticated Sponsors Retain Capital Advisors Before They Need
+      Capital&rdquo;) &mdash; genuine thought-leadership content already exists, not a blank blog.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Checked, found</span>
+      <h3>Facebook</h3>
+      <p>Fast Commercial Capital's Facebook page shows a 94% recommend rating on 11 reviews. Real, if
+      thin, social proof.</p>
+    </div>
+    <div class="card"><span class="badge b-todo">Checked, blocked &mdash; not confirmed this pass</span>
+      <h3>Google Business Profile <span style="font-family:var(--mono);font-size:.58rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+      <p>Attempted a live check for the Miami listing (claimed status, review count/rating, photo and
+      Q&amp;A completeness) &mdash; a scripted search-results fetch returned no usable listing data this
+      pass (Google's results page for this query is JS-rendered and didn't yield structured data to a
+      plain fetch). Genuinely unconfirmed, not assumed absent &mdash; worth a 2-minute live Maps check
+      in-browser before the call.</p>
+    </div>
+    <div class="card"><span class="badge b-todo">Checked, partially confirmed</span>
+      <h3>YouTube channel</h3>
+      <p>A channel under his name ("Don McClain Fast Commercial Capital") is real and findable. Exact
+      subscriber count, video count, and upload cadence could not be confirmed this pass &mdash; YouTube's
+      channel page is JS-rendered and a scripted fetch returned only site-chrome, not channel data.
+      Confirmed to exist; activity level needs a live look before the call.</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="p-seo">
+  <h2 class="sec">Site &amp; SEO audit &mdash; fastcommercialcapital.com</h2>
+  <p class="sec-sub">Live technical pass, checked 2026-08-21 against the homepage and the
+  <code>/about/</code> interior page. Real gaps only, each sourced to the exact page checked.</p>
+
+  <table class="audit">
+    <tr><th>Check</th><th>Finding</th><th>Status</th></tr>
+    <tr><td>Title tag</td><td>&ldquo;Fast Commercial Capital | Structured Capital &amp; Transaction Advisory&rdquo; &mdash; specific, keyword-relevant.</td><td><span class="badge b-good">Good</span></td></tr>
+    <tr><td>Meta description</td><td>Present and well-written: institutional-grade capital advisory positioning, names the actual services.</td><td><span class="badge b-good">Good</span></td></tr>
+    <tr><td>Open Graph tags</td><td>None found on the homepage &mdash; zero <code>og:</code> tags. Shared links to this site will render as a bare URL with no preview image or description on LinkedIn/Facebook/etc.</td><td><span class="badge b-warn">Gap</span></td></tr>
+    <tr><td>Structured data / schema</td><td>None found &mdash; no <code>application/ld+json</code> anywhere on the homepage. No LocalBusiness/Organization/FinancialService schema despite being a real multi-location business. This is a direct, well-matched fix for the AI-search-visibility hook he replied to.</td><td><span class="badge b-warn">Gap</span></td></tr>
+    <tr><td>Canonical tag</td><td>Present, correctly self-referencing.</td><td><span class="badge b-good">Good</span></td></tr>
+    <tr><td>H1 structure</td><td>3 separate &lt;h1&gt; tags found on the homepage (main headline plus two carousel slide headlines). Should be one H1 per page.</td><td><span class="badge b-warn">Gap</span></td></tr>
+    <tr><td>robots.txt</td><td>Clean and correctly configured: allows crawling, disallows only <code>/wmc/</code>, references the sitemap directly.</td><td><span class="badge b-good">Good</span></td></tr>
+    <tr><td>Sitemap</td><td>Present at <code>/sitemap.xml</code>, returns HTTP 200.</td><td><span class="badge b-good">Good</span></td></tr>
+    <tr><td>Image alt text</td><td>8 of 39 homepage images missing <code>alt</code> text &mdash; all decorative service icons (e.g. a computer icon, a dollar-sign icon), not primary content images.</td><td><span class="badge b-warn">Minor gap</span></td></tr>
+    <tr><td>Core Web Vitals / PageSpeed <span style="font-family:var(--mono);font-size:.58rem;color:var(--mist);">(new in v2)</span></td><td>Genuinely attempted via the public PageSpeed Insights API &mdash; returned HTTP 429, &ldquo;Quota exceeded for quota metric 'Queries' and limit 'Queries per day'.&rdquo; This is a known recurring quota limit on our side, not a finding about the site. Not yet confirmed.</td><td><span class="badge b-todo">Blocked (our quota)</span></td></tr>
+    <tr><td>Interior pages <span style="font-family:var(--mono);font-size:.58rem;color:var(--mist);">(new in v2)</span></td><td>Checked the homepage and <code>/about/</code> (200 OK, no bot-protection encountered). No deeper crawl was run beyond these two pages this pass.</td><td><span class="badge b-good">Checked (2 pages)</span></td></tr>
+  </table>
+
+  <div class="note warn">
+    <b>The two gaps that actually matter for the AI-search-visibility angle.</b> No structured data and
+    no Open Graph tags are the two most directly fixable, most on-topic findings here &mdash; they're
+    exactly the kind of thing that affects whether an AI answer engine (or a plain search result share)
+    represents this business correctly. Everything else (H1s, alt text) is real but secondary.
+  </div>
+</section>
+
+<section class="panel" id="p-comp">
+  <h2 class="sec">Competitive landscape <span style="font-family:var(--mono);font-size:.62rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">&mdash; new tab in v2</span></h2>
+  <p class="sec-sub">Checked against two real, comparable bridge/commercial-capital lenders &mdash; not
+  just a name list, what they're actually doing on the same channel this pitch is about.</p>
+
+  <div class="tablewrap">
+  <table class="audit">
+    <tr><th>Firm</th><th>YouTube / content presence</th><th>Paid ads (Google/Meta)</th><th>How Don compares</th></tr>
+    <tr><td>Fast Commercial Capital (Don, for reference)</td><td>Named channel confirmed to exist; cadence/subscriber count unconfirmed this pass. Real "Capital Insights" article series on-site.</td><td>Not checked this pass &mdash; no ad-library search run.</td><td>&mdash;</td></tr>
+    <tr><td>AVANA Capital &mdash; national commercial/business bridge lender</td><td>Checked: no dedicated company YouTube channel found in search &mdash; only unrelated same-name channels turned up.</td><td>Not checked this pass.</td><td><b>Don is ahead</b> &mdash; he has a real channel under his own name, they don't appear to.</td></tr>
+    <tr><td>Stormfield Capital &mdash; institutional bridge lender, $1.25B+ in originations, Northeast-focused</td><td>Checked: no dedicated YouTube channel found. Third-party coverage describes an "active social media presence across multiple platforms" (unspecified) and a confirmed LinkedIn company page.</td><td>Not checked this pass.</td><td><b>Don is ahead</b> on channel existence, likely behind on scale/origination volume (they've publicized $1.25B+ funded; his site doesn't headline a comparable number).</td></tr>
+  </table>
+  </div>
+
+  <div class="note">
+    <b>How to use this on the call.</b> Lead with: &ldquo;Two of the bigger, better-funded names in your
+    space &mdash; AVANA and Stormfield &mdash; don't appear to have a YouTube channel at all. You already
+    do. The gap isn't that you're behind on having a presence, it's that the technical layer underneath it
+    (schema, Open Graph, cadence) isn't set up to get full credit for it.&rdquo; That's a stronger, more
+    specific opener than a generic competitor name-drop.
+  </div>
+</section>
+
+<section class="panel" id="p-thread">
+  <h2 class="sec">The actual conversation, verbatim</h2>
+  <p class="sec-sub"><b>Not yet pulled into this dossier.</b> The lead ledger records that Don replied
+  &ldquo;interested to learn more&rdquo; on 2026-08-20 to a LinkedIn opener built around AI-search
+  visibility, sent from Evans Diaz, and that the Outbound System's own auto-tag ("Interested") is judged
+  plausible on this one &mdash; but the exact verbatim message and reply text were not re-pulled from the
+  Outbound System/Unibox for this build. Pull the verbatim thread before the call; don't present the
+  paraphrase below as the exact wording.</p>
+
+  <h3 class="sub">Engagement signals <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <p class="sec-sub" style="margin-bottom:.8rem;">Not yet pulled from Outbound System / Unibox / Apollo
+  for this lead &mdash; no HubSpot or Basecamp record exists for him yet either, so there's no analytics
+  source to check against.</p>
+  <div class="proof">
+    <div><div class="num">&mdash;</div><div class="cap">Opens (not yet pulled)</div></div>
+    <div><div class="num">&mdash;</div><div class="cap">Link clicks (not yet pulled)</div></div>
+    <div><div class="num">&mdash;</div><div class="cap">Reply latency (not yet pulled)</div></div>
+  </div>
+
+  <div class="thread" style="margin-top:1.4rem;">
+    <div class="msg"><div class="who">Evans Diaz &middot; 2026-08-20 (exact time not re-pulled)</div>LinkedIn opener built around AI-search visibility (exact copy not re-pulled into this dossier &mdash; see the standing outreach templates for the general shape of this hook).</div>
+    <div class="msg them"><div class="who">Don McClain &middot; 2026-08-20</div>Replied indicating interest and wanting to learn more (paraphrased from the lead ledger, not verbatim).</div>
+  </div>
+</section>
+
+<section class="panel" id="p-disco">
+  <h2 class="sec">Discovery script &mdash; tuned to what we now know</h2>
+  <p class="sec-sub">Real call flow: open with the specific finding, qualify with questions tied to what
+  we found, handle the objections we can already see coming, then close on a named ask.</p>
+
+  <h3 class="sub">1. Open with the specific finding</h3>
+  <div class="steps">
+    <div class="step"><i></i><div><b>Lead with the competitive gap, not a generic pitch</b>&ldquo;You
+    already have a YouTube channel and a real content section on your site &mdash; that already puts you
+    ahead of at least two bigger, better-funded names in your space that we checked, AVANA Capital and
+    Stormfield Capital, neither of which appears to have one. What we found is that the technical layer
+    underneath your site &mdash; no structured data, no social-share metadata &mdash; means AI answer
+    engines and shared links aren't giving you full credit for what you've already built.&rdquo;</div></div>
+  </div>
+
+  <h3 class="sub">2. Qualifying questions &mdash; tied to what we found <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <p class="sec-sub">Every question below is tied to a specific finding elsewhere in this dossier. Ask
+  them, then write the answer straight into Deal Qualification &mdash; an unanswered question is itself a
+  finding, log it as "not yet asked."</p>
+
+  <div class="tablewrap">
+  <table class="audit">
+    <tr><th>Ask</th><th>Why we're asking it</th><th>Listen for</th></tr>
+    <tr>
+      <td>&ldquo;Is there budget already set aside for marketing or visibility work across Fast, Fasty
+      Funding, and the other affiliated brands, or would this be a new line item?&rdquo;</td>
+      <td>No paid-ads presence was found for his firm this pass (unconfirmed, not run as a dedicated ad-library check) &mdash; this asks directly rather than guessing from an absence of evidence.</td>
+      <td>An existing spend line somewhere in the ecosystem (real budget authority) vs. genuinely
+      no history (a greenfield sell, longer cycle).</td>
+    </tr>
+    <tr>
+      <td>&ldquo;With three offices &mdash; Miami, Austin, San Diego &mdash; is this something you'd
+      decide on your own, or does anyone on the Austin or San Diego side weigh in on marketing
+      decisions?&rdquo;</td>
+      <td>He's the named Founder &amp; Principal, but the other two offices' leadership wasn't
+      identified by name in research &mdash; don't assume sole authority.</td>
+      <td>A named co-decision-maker at another office (routes the next step there too) vs. a
+      confirmed sole owner.</td>
+    </tr>
+    <tr>
+      <td>&ldquo;How are you currently finding out whether people are discovering you through AI tools
+      like ChatGPT or Gemini, versus a plain Google search?&rdquo;</td>
+      <td>Tied directly to the missing schema/structured-data finding &mdash; there's currently no
+      mechanism that would even surface this to him.</td>
+      <td>No tracking at all (bigger, more urgent need, matches the missing-schema finding exactly)
+      vs. some existing process we'd be improving rather than introducing.</td>
+    </tr>
+    <tr>
+      <td>&ldquo;Is there a reason this is coming up for you right now?&rdquo;</td>
+      <td>Tied to the January 2026 Authority Magazine feature &mdash; he's already mid-visibility-push,
+      worth naming that directly rather than treating this as a cold topic.</td>
+      <td>Confirmation that the press feature/other visibility work is part of a deliberate push (real
+      urgency) vs. this being an isolated, reactive reply.</td>
+    </tr>
+    <tr>
+      <td>&ldquo;Are you looking at anyone else for this kind of work right now?&rdquo;</td>
+      <td>Tied to the Competitive Landscape tab &mdash; useful to know if he's shopping this specifically
+      or just curious.</td>
+      <td>Active evaluation elsewhere (real urgency and a real deadline to work against) vs. no active
+      search (more of an education-first conversation).</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3 class="sub">3. Anticipated objections</h3>
+  <div class="objs">
+    <div class="obj"><span class="q">&ldquo;We already have a website and a YouTube channel &mdash; not
+    sure what's missing.&rdquo;</span><span class="a">Point to the two concrete, checked gaps: zero Open
+    Graph tags (shared links show no preview) and zero structured data (nothing tells Google or an AI
+    engine what kind of business this actually is, across three cities and several affiliated brands).
+    Specific and checkable, not a generic "you need more content" line.</span></div>
+    <div class="obj"><span class="q">&ldquo;We're a small, three-office shop &mdash; not sure AI-search
+    stuff is worth the investment for us.&rdquo;</span><span class="a">He already tried this himself
+    (the YouTube channel, the Capital Insights articles) &mdash; the objection isn't really appetite,
+    it's proof the fix is worth it. Reframe: the gap is technical execution on something he already
+    started, not a new category of spend.</span></div>
+  </div>
+
+  <h3 class="sub">4. Close: recommended package &amp; next step <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <div class="steps">
+    <div class="step"><i></i><div><b>Ask for a scoped technical + content audit</b>Given the concrete,
+    already-identified gaps (schema, Open Graph, H1 cleanup, a real look at YouTube cadence and GBP
+    completeness), the natural next step is a scoped AI-search-visibility audit and fix proposal covering
+    fastcommercialcapital.com and the affiliated brand sites &mdash; not an open-ended "let's talk
+    marketing" close. Ask for a follow-up meeting with a firm date, or send the scoped proposal directly
+    if he wants it in writing first.</div></div>
+  </div>
+</section>
+
+<section class="panel" id="p-deal">
+  <h2 class="sec">Deal qualification <span style="font-family:var(--mono);font-size:.62rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">&mdash; new tab in v2</span></h2>
+  <p class="sec-sub">Four honest questions, answered from what's actually known. Guessing less, flagging
+  the gap more.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-todo">Signal, not certainty</span>
+      <h3>Budget signal</h3>
+      <p>A 30+ year, $60M+-facilitated, three-office national advisory firm with a real content
+      operation already in place implies genuine budget capacity. No direct evidence of existing
+      paid-ad spend was found this pass, but a dedicated ad-library search wasn't run either &mdash; this
+      is a signal from company scale, not a confirmed number. Ask directly on the call (see qualifying
+      questions).</p>
+    </div>
+    <div class="card"><span class="badge b-todo">Unconfirmed &mdash; ask on the call</span>
+      <h3>Decision authority &amp; other stakeholders</h3>
+      <p>Don is the named Founder &amp; Principal, which strongly suggests he's the real decision-maker
+      for his own visibility/marketing spend. The Austin and San Diego office leads were not identified
+      by name in this research pass &mdash; unconfirmed whether either weighs in. Name them on the call
+      if they come up.</p>
+    </div>
+    <div class="card"><span class="badge b-good">None found</span>
+      <h3>Red flags / walk-away signals</h3>
+      <p>None found. Real, verifiable business (30+ years, named press coverage, functioning multi-office
+      operation, real content already in place). No reputation-risk signals, no obvious non-decision-maker
+      pattern, no mismatch between his scale and the kind of engagement being pitched.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Signal-based estimate</span>
+      <h3>Recommended EverEffect package &amp; likely deal size</h3>
+      <p>A scoped technical SEO + AI-search-visibility audit and fix (structured data, Open Graph, H1
+      cleanup, GBP completeness check, YouTube cadence review) is the direct match for the hook he
+      replied to and the gaps this dossier already found. Given his multi-brand, multi-office footprint
+      (Fast Commercial Capital plus Fasty Funding, Loyalty Business Brokers, Medro Advisors), there's a
+      real case for scoping this across more than one site rather than a single-site engagement &mdash;
+      worth raising as an expansion path on the call, not assumed upfront.</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="p-proof">
+  <h2 class="sec">Proof points, honestly scoped</h2>
+  <p class="sec-sub">No directly matching EverEffect case study was available to pull into this dossier
+  during this build pass. Stating that plainly rather than reaching for a loosely-related number or
+  inventing one &mdash; Chris or Thomas should supply the closest matching vertical result (financial
+  services, B2B advisory, or a comparable local-multi-location business) before this goes into the call.</p>
+  <div class="card">
+    <h3>Not yet matched</h3>
+    <div class="note warn" style="margin-top:0;">
+      <b>Open item.</b> Pull EverEffect's closest comparable case study (financial services / B2B
+      advisory / multi-location local business) before the call. Don't present a mismatched case study as
+      if it were a direct match.
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="p-sources">
+  <h2 class="sec">All sources</h2>
+  <p class="sec-sub">Every link used anywhere in this dossier, consolidated. Checked date is per-claim.</p>
+
+  <div class="tablewrap">
+  <table class="srctable">
+    <tr><td>Company overview, services, offices, contact</td><td><a href="https://www.fastcommercialcapital.com/" target="_blank" rel="noopener">fastcommercialcapital.com</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Don McClain background &amp; track record</td><td><a href="https://www.fastcommercialcapital.com/about-don-mcclain---business-and-real-estate-financing-expert/" target="_blank" rel="noopener">fastcommercialcapital.com/about-don-mcclain</a></td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>January 2026 press feature</td><td><a href="https://medium.com/authority-magazine/don-mcclain-of-fast-commercial-capital-five-things-you-need-to-create-a-highly-successful-career-faf11fd0808f" target="_blank" rel="noopener">Authority Magazine / Medium</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Career/track-record corroboration</td><td><a href="https://www.noomii.com/articles/15463-don-mcclain-leads-lending-revolution-with-fast-approval-and-flexible-loan-terms" target="_blank" rel="noopener">Noomii</a></td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Facebook rating (94% recommend, 11 reviews)</td><td><a href="https://www.facebook.com/FastCommercialCapitalfundsyoufast/" target="_blank" rel="noopener">Facebook</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>YouTube channel existence</td><td><a href="https://www.youtube.com/@donmcclainfastcommercialca1807" target="_blank" rel="noopener">YouTube</a></td><td><span class="conf c-single">Single-source (subscriber/video counts unconfirmed)</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Title tag, meta description, canonical, OG tags, schema, H1 count, alt text &mdash; live homepage HTML check</td><td><a href="https://www.fastcommercialcapital.com/" target="_blank" rel="noopener">fastcommercialcapital.com (source view)</a></td><td><span class="conf c-verified">Verified (direct fetch)</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>robots.txt configuration</td><td><a href="https://www.fastcommercialcapital.com/robots.txt" target="_blank" rel="noopener">fastcommercialcapital.com/robots.txt</a></td><td><span class="conf c-verified">Verified (direct fetch)</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Sitemap returns HTTP 200</td><td><a href="https://www.fastcommercialcapital.com/sitemap.xml" target="_blank" rel="noopener">fastcommercialcapital.com/sitemap.xml</a></td><td><span class="conf c-verified">Verified (direct fetch)</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>/about/ interior page loads clean, no bot protection</td><td><a href="https://www.fastcommercialcapital.com/about/" target="_blank" rel="noopener">fastcommercialcapital.com/about/</a></td><td><span class="conf c-verified">Verified (direct fetch)</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>PageSpeed Insights API attempted, returned HTTP 429 quota exceeded</td><td><a href="https://developers.google.com/speed/docs/insights/v5/get-started" target="_blank" rel="noopener">PageSpeed Insights API</a></td><td><span class="conf c-single">Attempted, blocked</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>AVANA Capital &mdash; no dedicated YouTube channel found</td><td><a href="https://avanacapital.com/" target="_blank" rel="noopener">avanacapital.com</a> + web search</td><td><span class="conf c-single">Single-source (absence, not proven)</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Stormfield Capital &mdash; $1.25B+ originations, no dedicated YouTube channel found</td><td><a href="https://stormfieldcapital.com/" target="_blank" rel="noopener">stormfieldcapital.com</a> + <a href="https://www.businesswire.com/news/home/20240501359242/en/Stormfield-Capital-Reaches-$1.25-Billion-in-Loan-Originations" target="_blank" rel="noopener">Businesswire</a></td><td><span class="conf c-single">Single-source (absence, not proven)</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Lead status, reply summary, no Basecamp/HubSpot record yet</td><td>internal &mdash; <code>lead-ledger.json</code></td><td><span class="conf c-verified">Verified (internal record)</span></td><td class="date">2026-08-20</td></tr>
+  </table>
+  </div>
+
+  <h3 class="sub">Changelog <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <ul class="changelog">
+    <li><time>2026-08-21</time><span>Initial build. Created ahead of any booked call, per Evans's direction to get dossiers ready before newly-interested leads (surfaced via the Outbound System/lead ledger) reach a booked stage. First live use of the v2 template on a brand-new (not-yet-Basecamp/HubSpot) lead.</span></li>
+  </ul>
+
+  <div class="note">
+    <b>Not yet checked, named honestly.</b> Google Business Profile live listing detail (blocked by a
+    JS-rendered search results page). YouTube subscriber/video/cadence detail (blocked by JS rendering on
+    the channel page). Verbatim outreach thread text (not re-pulled from Outbound System/Unibox this
+    pass &mdash; only the lead ledger's paraphrase was available). Core Web Vitals/PageSpeed (blocked by
+    our own API quota, not a site finding). Paid-ads presence for Fast Commercial Capital or either named
+    competitor (no dedicated ad-library check run). A directly matching EverEffect case study (not
+    available to pull this pass).
+  </div>
+</section>
+
+<footer class="f">
+  <span>Internal BDM prep &middot; shared with Chris for feedback &middot; never sent to the lead &middot; 2026-08-21</span>
+  <span><img class="brand-logo-foot" src="../../../assets/ee-logo.png" alt="EverEffect"></span>
+</footer>
+</div>
+
+<script>
+var tabs=document.querySelectorAll('#tabs button'),panels=document.querySelectorAll('.panel');
+tabs.forEach(function(b){b.addEventListener('click',function(){
+  tabs.forEach(function(x){x.classList.remove('on')});
+  panels.forEach(function(p){p.classList.remove('on')});
+  b.classList.add('on');
+  document.getElementById('p-'+b.dataset.p).classList.add('on');
+  b.scrollIntoView({block:'nearest',inline:'nearest'});
+  window.scrollTo({top:0,behavior:'smooth'});
+})});
+</script>
+</body>
+</html>

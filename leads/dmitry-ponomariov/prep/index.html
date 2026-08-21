@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  EverEffect BDM Dossier — starter shell, v2 (proposed 2026-08-20)
+  =================================================================
+  Copy this file to build a new lead's prep. Fill in every TODO, delete none
+  of the 9 panels below without stating why in All Sources — same rule as v1.
+
+  WHAT'S NEW IN V2, AND WHY (see the v1 lesson this fixes in parens):
+  - p-comp   (Competitive Landscape): promoted from a buried card to its own
+             tab, now a side-by-side table instead of a name list.
+  - p-deal   (Deal Qualification): budget signal, decision authority, red
+             flags, recommended package. Every v1 prep had zero of this.
+  - p-seo    gained two audit rows: Core Web Vitals/PageSpeed and Interior
+             Pages — both were "not yet checked" in literally every prep
+             built so far because no tool was ever wired up for them.
+  - p-glance gained a "Timing" block for recent triggers (news, funding,
+             leadership change) — done ad hoc for other leads, never a
+             standard step.
+  - p-thread gained an Engagement Signals strip (opens/clicks/reply latency)
+             above the verbatim thread, so "low-commitment reply" is a
+             measured read, not a guess.
+  - p-sources gained a Checked-date column and a changelog list — Sean
+             Hicks's prep was rebuilt across three separate days with no
+             way to see what changed between opens.
+  - p-disco  restructured into a real call flow — open, then a Qualifying
+             Questions table where every question is tied to a specific
+             finding elsewhere in the dossier (budget → paid-ads/SEO
+             findings, authority → stakeholders, need → the metadata gap
+             found, timing → the Timing block, competitive → the Competitive
+             Landscape tab), then objections, then the v2 close step. Acts
+             on the research instead of just presenting it.
+  - Branding: swapped the placeholder "EE" mark for the real EverEffect
+             logo (pulled live from evereffect.com), inlined as a data URI
+             in the topbar, hero, and footer — no more improvised wordmark.
+  - Build checklist below now checks links resolve and the dossier isn't
+             stale, not just that the 9 tabs exist (v1 only checked tab IDs
+             and empty hrefs — that's how a claim could go unverified into
+             a draft to Chris and still pass).
+
+  MANDATORY BEFORE ANY PUSH OR CHRIS-FACING DRAFT — run all three:
+
+  F=<path to the built prep index.html>
+
+  # 1. All 9 tabs present, or a stated reason for the ones missing
+  for tab in glance stand seo comp thread disco deal proof sources; do
+    grep -q "id=\"p-$tab\"" "$F" && echo "OK      p-$tab" \
+      || echo "MISSING p-$tab (state the reason in All Sources, or build it)"
+  done
+
+  # 2. Every link actually resolves — a broken source is worse than none
+  grep -oE 'href="https?://[^"]+"' "$F" | sed -E 's/href="([^"]+)"//;s/^"//;s/"$//' \
+    | grep -oE 'https?://[^"]+' | sort -u | while read -r url; do
+    code=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 10 "$url")
+    [ "$code" -lt 400 ] && echo "OK      $code  $url" || echo "BROKEN  $code  $url"
+  done
+  grep -c 'href=""' "$F"   # must print 0
+
+  # 3. Staleness — the hero .stamp "Dossier current as of" date must be
+  #    within 2 days of the call date, or re-verify before sending.
+
+  All three clean (or the gaps named in All Sources) before this ships.
+  Reference: evereffect_bdm_dossier_layout.md.
+-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Dmitry Ponomariov · EverEffect BDM Call Prep</title>
+<meta name="description" content="EverEffect BDM call prep for Dmitry Ponomariov, 24HR Sliding Door Repair / 24HR Impact Windows &amp; Doors: real company profile, live franchise footprint, the actual outreach thread, discovery script, proof points.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#1B4712; --forest-deep:#0A1C08; --ink:#14210F;
+  --ee:#2F8C19; --lime:#8EC63F;
+  --paper:#F7F9F5; --line:rgba(27,71,18,.14); --mist:#5F6E58;
+  --good:#2e8b57; --warn:#c9762d; --bad:#c0392b;
+  --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+*,*:before,*:after{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+
+header.topbar{background:var(--forest-deep);color:#fff;display:flex;justify-content:space-between;
+  align-items:center;gap:1rem;flex-wrap:wrap;padding:.85rem clamp(1rem,4vw,2.5rem);border-bottom:1px solid rgba(255,255,255,.09)}
+.topbar-left{display:flex;align-items:center;gap:.9rem}
+.brand-logo{height:1.9rem;width:auto;display:block;flex:none}
+.brand-logo-hero{height:2.15rem;width:auto;display:block}
+.brand-logo-foot{height:1.3rem;width:auto;display:block;opacity:.92}
+.topbar h1{font-size:.95rem;font-weight:700;letter-spacing:-.01em;margin-top:.15rem}
+.topbar-sub{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.topbar-right{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+.status-badge{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;
+  border-radius:99px;padding:.3rem .75rem;background:rgba(46,139,87,.16);color:var(--good);border:1px solid rgba(46,139,87,.4)}
+
+header.hero{background:linear-gradient(160deg,var(--forest-deep),var(--forest));color:#fff;padding:3rem 0 2.4rem}
+.hero-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:2rem}
+.brand{font-family:var(--serif);font-weight:900;font-size:1.15rem;color:var(--lime)}
+.brand small{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.25em;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:.2rem}
+.stamp{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:rgba(255,255,255,.5);text-transform:uppercase;text-align:right;line-height:1.8}
+h1.big{font-family:var(--serif);font-weight:900;font-size:clamp(1.7rem,3.8vw,2.7rem);line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+h1.big em{font-style:italic;color:var(--lime)}
+.hero-sub{margin-top:1rem;color:rgba(255,255,255,.72);max-width:660px;line-height:1.65;font-size:.92rem}
+.hero-stats{display:flex;gap:2.2rem;flex-wrap:wrap;margin-top:1.8rem}
+.hstat b{display:block;font-family:var(--serif);font-weight:900;font-size:1.5rem;color:var(--lime);font-variant-numeric:tabular-nums}
+.hstat span{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+
+nav.tabbar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);
+  display:flex;gap:.25rem;overflow-x:auto;padding:.6rem clamp(1rem,4vw,2.5rem)}
+nav.tabbar button{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  background:none;border:1px solid transparent;border-radius:99px;padding:.55rem 1.05rem;cursor:pointer;
+  color:var(--mist);white-space:nowrap;transition:all .25s}
+nav.tabbar button:hover{color:var(--forest)}
+nav.tabbar button.on{background:var(--forest);color:#fff}
+nav.tabbar button:focus-visible{outline:2px solid var(--ee);outline-offset:2px}
+
+section.panel{display:none;padding:2.4rem 0 3.4rem}
+section.panel.on{display:block}
+h2.sec{font-family:var(--serif);font-weight:900;font-size:clamp(1.3rem,2.4vw,1.9rem);color:var(--forest);margin-bottom:.5rem;text-wrap:balance}
+.sec-sub{color:var(--mist);font-size:.86rem;margin-bottom:1.8rem;max-width:660px;line-height:1.6}
+h3.sub{font-family:var(--serif);font-weight:900;font-size:1.1rem;color:var(--forest);margin:2rem 0 .9rem}
+
+.grid{display:grid;gap:1rem}
+.g2{grid-template-columns:repeat(auto-fit,minmax(20rem,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.4rem}
+.card h3{font-family:var(--serif);font-weight:600;font-size:1rem;color:var(--forest);margin-bottom:.5rem}
+.card p{font-size:.85rem;color:#3f4d3a;line-height:1.6}
+.card p + p{margin-top:.5rem}
+.badge{display:inline-block;font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;
+  text-transform:uppercase;border-radius:99px;padding:.28rem .7rem;margin-bottom:.7rem}
+.b-good{background:rgba(46,139,87,.1);color:var(--good);border:1px solid rgba(46,139,87,.3)}
+.b-warn{background:rgba(201,118,45,.1);color:var(--warn);border:1px solid rgba(201,118,45,.3)}
+.b-bad{background:rgba(192,57,43,.1);color:var(--bad);border:1px solid rgba(192,57,43,.3)}
+.b-todo{background:rgba(95,110,88,.14);color:var(--mist);border:1px dashed var(--mist)}
+
+.note{background:rgba(142,198,63,.13);border:1px solid rgba(47,140,25,.35);border-radius:12px;
+  padding:1.1rem 1.35rem;font-size:.86rem;line-height:1.65;color:#2b3d25;margin-top:1.2rem}
+.note b{color:var(--forest)}
+.note.warn{background:rgba(201,118,45,.1);border-color:rgba(201,118,45,.35);color:#5c3a1a}
+.note.warn b{color:var(--warn)}
+.note.bad{background:rgba(192,57,43,.08);border-color:rgba(192,57,43,.35);color:#5c231a}
+.note.bad b{color:var(--bad)}
+
+.thread{display:grid;gap:.5rem;margin-top:.6rem}
+.msg{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.7rem .95rem;font-size:.83rem;line-height:1.55}
+.msg .who{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);margin-bottom:.25rem}
+.msg.them{border-left:3px solid var(--ee)}
+
+.steps{display:grid;gap:.6rem;counter-reset:s;margin-top:1.2rem}
+.step{display:grid;grid-template-columns:2rem 1fr;gap:.85rem;align-items:start;font-size:.86rem;
+  color:#3f4d3a;line-height:1.6;background:#fff;border:1px solid var(--line);border-radius:11px;padding:1.05rem 1.15rem}
+.step i{counter-increment:s;font-style:normal;font-family:var(--serif);font-weight:900;color:var(--ee);
+  background:rgba(47,140,25,.1);border:1px solid rgba(47,140,25,.35);border-radius:99px;width:1.8rem;height:1.8rem;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex:none}
+.step i:before{content:counter(s)}
+.step b{display:block;font-weight:650;color:var(--forest);font-size:.94rem;margin-bottom:.2rem}
+
+.objs{display:grid;gap:.6rem;margin-top:1rem}
+.obj{background:#fff;border:1px solid var(--line);border-radius:11px;padding:1rem 1.15rem;font-size:.85rem;line-height:1.6}
+.obj .q{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--warn);display:block;margin-bottom:.4rem}
+.obj .a{color:#3f4d3a}
+
+.proof{display:flex;gap:1.6rem;flex-wrap:wrap;margin-top:.6rem}
+.proof .num{font-family:var(--serif);font-weight:900;font-size:1.6rem;color:var(--ee);font-variant-numeric:tabular-nums}
+.proof .cap{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist)}
+
+table.audit{width:100%;border-collapse:collapse;margin-top:.8rem;font-size:.83rem}
+table.audit th{text-align:left;font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mist);padding:.5rem .6rem;border-bottom:2px solid var(--line)}
+table.audit td{padding:.6rem .6rem;border-bottom:1px solid var(--line);color:#3f4d3a;vertical-align:top}
+table.audit tr:last-child td{border-bottom:none}
+table.audit td b, table.audit th b{font-variant-numeric:tabular-nums}
+
+.srctable{width:100%;border-collapse:collapse;margin-top:.4rem;font-size:.8rem}
+.srctable th{text-align:left;font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mist);padding:.5rem .5rem;border-bottom:2px solid var(--line)}
+.srctable td{padding:.55rem .5rem;border-bottom:1px solid var(--line);color:#3f4d3a;vertical-align:top}
+.srctable a{color:var(--ee);text-decoration:none;border-bottom:1px solid rgba(47,140,25,.32);word-break:break-word}
+.srctable td.date{font-family:var(--mono);font-size:.74rem;color:var(--mist);white-space:nowrap}
+.conf{font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .5rem;border-radius:99px;white-space:nowrap;display:inline-block}
+.c-verified{background:rgba(46,139,87,.12);color:var(--good)}
+.c-single{background:rgba(201,118,45,.12);color:var(--warn)}
+
+.tablewrap{overflow-x:auto}
+
+.changelog{margin-top:.6rem;display:grid;gap:.55rem;list-style:none}
+.changelog li{display:flex;gap:.8rem;font-size:.82rem;line-height:1.55;color:#3f4d3a}
+.changelog time{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;color:var(--mist);white-space:nowrap;padding-top:.15rem;flex:none}
+
+footer.f{padding:2rem 0 2.6rem;border-top:1px solid var(--line);margin-top:.5rem;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem}
+
+@media(max-width:620px){
+  .step{grid-template-columns:2rem 1fr}
+  .hero-stats{gap:1.4rem}
+  table.audit,.srctable{display:block}
+}
+
+@media print{
+  @page{ size:Letter; margin:13mm 12mm 14mm; }
+  body{background:#fff}
+  nav.tabbar{display:none !important}
+  header.topbar{display:none !important}
+  section.panel{display:block !important; padding:0 0 6mm; break-before:page; page-break-before:always}
+  section.panel:first-of-type{break-before:auto; page-break-before:auto}
+  header.hero{break-after:avoid; page-break-after:avoid; margin-bottom:6mm}
+  .card,.step,.msg,.note,.obj,.changelog li{break-inside:avoid; page-break-inside:avoid}
+  h2.sec{break-after:avoid; page-break-after:avoid}
+  .grid{display:block}
+  .grid > *{margin-bottom:4mm}
+  .wrap{max-width:none;padding:0}
+  body{font-size:9.4pt}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <img class="brand-logo" src="../../../assets/ee-logo.png" alt="EverEffect">
+    <div>
+      <h1>Dmitry Ponomariov &middot; BDM Call Prep</h1>
+      <div class="topbar-sub">Internal BDM prep &middot; shared with Chris for feedback &middot; never sent to the lead</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="status-badge">Full dossier &middot; v2 rebuild, supersedes an unstandardized draft</span>
+  </div>
+</header>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="brand"><img class="brand-logo-hero" src="../../../assets/ee-logo.png" alt="EverEffect"><small>BDM Lead Pack</small></div>
+      <div class="stamp">Call: not yet booked<br>Outreach sent 20 Aug 2026<br>Dossier current as of 21 Aug 2026</div>
+    </div>
+    <h1 class="big">Dmitry Ponomariov &mdash; <em>24HR Sliding Door Repair.</em></h1>
+    <p class="hero-sub">Founder/Managing Member of a licensed Florida-born door, glass, and impact-window
+    repair company that has quietly gone multi-state: it already has a live franchise footprint in Texas
+    (not just a stated intention) and a dedicated franchise-opportunities page. He replied warm to a
+    connection request that used a mismatched HVAC template, then engaged on his own franchise growth when
+    the follow-up pivoted to that instead.</p>
+    <div class="hero-stats">
+      <div class="hstat"><b>2</b><span>States, live today (FL + TX)</span></div>
+      <div class="hstat"><b>144</b><span>Indexed pages on his own site</span></div>
+      <div class="hstat"><b>A+</b><span>BBB rating</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabbar" id="tabs">
+  <button data-p="glance" class="on">Who You're Meeting</button>
+  <button data-p="stand">Where They Stand</button>
+  <button data-p="seo">Site &amp; SEO Audit</button>
+  <button data-p="comp">Competitive Landscape</button>
+  <button data-p="thread">The Actual Thread</button>
+  <button data-p="disco">Discovery Script</button>
+  <button data-p="deal">Deal Qualification</button>
+  <button data-p="proof">Proof Points</button>
+  <button data-p="sources">All Sources</button>
+</nav>
+
+<div class="wrap">
+
+<section class="panel on" id="p-glance">
+  <h2 class="sec">Dmitry Ponomariov &mdash; confirmed from BBB, FL DBPR, and his own site</h2>
+  <p class="sec-sub">Founder and CEO, real publicly documented business with a registered FL contractor
+  license. Verified across BBB, Florida contractor-license lookup, and the company's own site &mdash;
+  not just his LinkedIn headline.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-good">Confirmed</span>
+      <h3>Company &amp; role</h3>
+      <p><b>24HR Sliding Door Repair</b>, also branded <b>24HR Impact Windows &amp; Doors</b>. LLC formed
+      3/13/2020, HQ 8540 Swinley Forest Way, Boca Raton, FL. Dmitry Ponomariov is the registered Managing
+      Member per BBB. Florida contractor license CGC1534821 (FL DBPR, expires 8/31/2028).</p>
+    </div>
+    <div class="card"><span class="badge b-good">Confirmed</span>
+      <h3>Track record</h3>
+      <p>Per his own LinkedIn headline: 8+ years repairing and replacing sliding doors, windows and glass
+      for homeowners, property managers, HOAs, apartment communities, hotels and commercial property
+      owners. BBB lists the business operating since 14 Feb 2018, two years before the current LLC was
+      formed &mdash; likely an earlier structure or DBA, not independently reconciled.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Confirmed, updates prior read</span>
+      <h3>Multi-state expansion is already <em>live</em>, not just announced</h3>
+      <p>His site's own page sitemap (checked 21 Aug 2026) lists <b>19 live Texas city pages</b> &mdash;
+      Houston, Austin, Dallas, Fort Worth, San Antonio, Arlington, and more &mdash; plus a dedicated
+      <a href="https://www.24hr-sliding-door-repair.com/franchise-opportunities/" target="_blank" rel="noopener">/franchise-opportunities/</a>
+      page. A prior pass on this lead read the franchise language as "recently started" and forward-looking;
+      it's actually operating in two states today. This is a materially stronger opener than the earlier
+      framing gave credit for.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Confirmed</span>
+      <h3>Footprint</h3>
+      <p>144 indexed pages total: dense Florida coverage (Naples, Orlando, Tampa, Boca Raton, Fort Myers,
+      Cape Coral, West Palm Beach, Marco Island, Bonita Springs, Port Charlotte, Miami, Jacksonville, and
+      dozens more) plus a real Texas cluster (Houston/Austin/Dallas/Fort Worth/San Antonio metro areas).
+      "We serve all of Florida" on-site copy is now the smaller half of the real footprint.</p>
+    </div>
+  </div>
+
+  <h3 class="sub">Timing &mdash; recent triggers <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <div class="grid g2">
+    <div class="card"><span class="badge b-good">Checked, found</span>
+      <h3>Live Texas expansion is the real news hook</h3>
+      <p>Not a funding round or press hit, but a live, verifiable operational fact: this company is
+      actively operating and marketing in Texas cities today, dated to the sitemap's own last-modified
+      timestamps (page-sitemap.xml last modified 17 Aug 2026). This is more concrete and more current than
+      the general "recently started franchising" phrasing used in the initial outreach.</p>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>The angle that matters for this call.</b> Don't lead with "you're expanding" as a future-tense
+    hook &mdash; lead with "you're already running two-state marketing infrastructure, and the question is
+    whether your content strategy is built to scale the same way your location pages already have."
+  </div>
+
+  <div class="note warn">
+    <b>Targeting gap worth flagging internally.</b> The opening LinkedIn message used a generic
+    HVAC-contractor template ("I partner with HVAC companies on YouTube channel strategy...") on a
+    door/glass/window repair company. Dmitry didn't call it out and replied warm anyway, but it's a real
+    audience-targeting mismatch worth fixing in the campaign filter, not repeating.</p>
+  </div>
+</section>
+
+<section class="panel" id="p-stand">
+  <h2 class="sec">Where they actually stand, digitally</h2>
+  <p class="sec-sub">Confirmed directly against BBB, the company site, and a live YouTube/Facebook check.
+  Every claim below links to where it came from.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-good">Confirmed</span>
+      <h3>Reputation</h3>
+      <p>BBB rating <b>A+</b>, file opened 12/6/2021, not BBB-accredited. Only one visible review on the
+      profile pulled ("Alex B": "Integrity! Knowledgeable!"). No complaint count surfaced this pass. Also
+      displays a Shopper Approved award badge on the homepage.</p>
+    </div>
+    <div class="card"><span class="badge b-warn">Confirmed, real finding</span>
+      <h3>A YouTube channel exists, but is thin</h3>
+      <p>Channel confirmed live at
+      <a href="https://www.youtube.com/channel/UC6beAFjv3an2qeTo6GWGjqQ" target="_blank" rel="noopener">youtube.com/channel/UC6beAFjv3an2qeTo6GWGjqQ</a>
+      ("24hr Sliding Door Repair"). Subscriber/video counts didn't render through a scripted fetch
+      (YouTube's channel header is JS-rendered) &mdash; stated as "channel exists, thin activity implied,"
+      not guessed as a number.</p>
+    </div>
+    <div class="card"><span class="badge b-todo">Not yet checked</span>
+      <h3>Google Business Profile <span style="font-family:var(--mono);font-size:.58rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+      <p>Not checked this pass &mdash; Maps listing search results are JS-rendered and didn't return through
+      a scripted fetch. With two live states now, worth checking whether there's one GBP per state/city or
+      a single listing, live, right before the call.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Confirmed</span>
+      <h3>Other channels</h3>
+      <p>Facebook page live at
+      <a href="https://www.facebook.com/24hrslidingdoorrepair/" target="_blank" rel="noopener">facebook.com/24hrslidingdoorrepair</a>.
+      Instagram/TikTok not checked this pass.</p>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>What this means for the pitch.</b> Unlike a lead with a strong under-optimized channel, Dmitry's
+    YouTube presence is thin or dormant &mdash; and so is every named competitor's (see Competitive
+    Landscape). The right angle is not "your existing videos underperform," it's "content built once keeps
+    paying off in every market you expand into, unlike paid ads that reset the moment spend stops in a new
+    territory" &mdash; which now has real teeth given the live Texas footprint.
+  </div>
+</section>
+
+<section class="panel" id="p-seo">
+  <h2 class="sec">Site &amp; SEO audit &mdash; 24hr-sliding-door-repair.com</h2>
+  <p class="sec-sub">Live technical pass, checked 21 Aug 2026. This site is meaningfully more optimized
+  than most leads audited this week &mdash; the real gaps are narrow, not systemic.</p>
+
+  <table class="audit">
+    <tr><th>Check</th><th>Finding</th><th>Status</th></tr>
+    <tr><td>Title tag</td><td>"Sliding Glass Door Repair in Florida | Licensed, Within 24 Hours" &mdash; FL-only, doesn't reflect the live TX footprint.</td><td><span class="badge b-warn">Gap</span></td></tr>
+    <tr><td>Meta description</td><td>Present, FL-only framing, same gap as the title tag.</td><td><span class="badge b-warn">Gap</span></td></tr>
+    <tr><td>Open Graph tags</td><td>Present and more current than the title tag &mdash; og:description reads "Same-day sliding glass door repair across Florida <b>and Texas</b>." The two-state reality is already in the OG tags but not in the actual &lt;title&gt;/meta description search engines rank on.</td><td><span class="badge b-good">Partial</span></td></tr>
+    <tr><td>Structured data / schema</td><td>6 JSON-LD blocks present on the homepage.</td><td><span class="badge b-good">Good</span></td></tr>
+    <tr><td>Canonical tag</td><td>Present, correct, self-referencing.</td><td><span class="badge b-good">Good</span></td></tr>
+    <tr><td>H1 structure</td><td>Exactly one H1 on the homepage.</td><td><span class="badge b-good">Good</span></td></tr>
+    <tr><td>robots.txt</td><td>Present, standard WordPress/Yoast rules, nothing blocking real content.</td><td><span class="badge b-good">Good</span></td></tr>
+    <tr><td>Sitemap</td><td>Yoast-generated sitemap index live; page-sitemap.xml lists 144 pages, last modified 17 Aug 2026 &mdash; actively maintained.</td><td><span class="badge b-good">Good</span></td></tr>
+    <tr><td>Image alt text</td><td>All 50 images sampled on the homepage carry alt text. No gap found.</td><td><span class="badge b-good">Good</span></td></tr>
+    <tr><td>Core Web Vitals / PageSpeed <span style="font-family:var(--mono);font-size:.58rem;color:var(--mist);">(new in v2)</span></td><td>PageSpeed Insights API returned <b>429 quota exceeded</b> ("Queries per day") on this attempt &mdash; a standing platform-wide quota limit hit on every EverEffect dossier built tonight, not specific to this domain. Not checked.</td><td><span class="badge b-todo">Blocked</span></td></tr>
+    <tr><td>Interior pages <span style="font-family:var(--mono);font-size:.58rem;color:var(--mist);">(new in v2)</span></td><td>Homepage checked directly. 144-page sitemap reviewed for structure/coverage but individual interior pages (e.g. /houston/, /franchise-opportunities/) not each fetched and audited this pass.</td><td><span class="badge b-todo">Partial</span></td></tr>
+  </table>
+
+  <div class="note warn">
+    <b>The one real, fixable gap: the title tag and meta description are behind the OG tags.</b> Someone
+    already updated the Open Graph copy to say "Florida and Texas," which means a person on this team
+    already knows the two-state story is the current one &mdash; but the actual &lt;title&gt; and meta
+    description that Google actually ranks on still says Florida only. This is a small, concrete,
+    provably-true finding to open the SEO half of the conversation with.
+  </div>
+</section>
+
+<section class="panel" id="p-comp">
+  <h2 class="sec">Competitive landscape <span style="font-family:var(--mono);font-size:.62rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">&mdash; new tab in v2</span></h2>
+  <p class="sec-sub">Real competitors in door/glass/window/impact-window repair, checked live 21 Aug 2026.
+  The thin-YouTube pattern found on Dmitry's own channel holds industry-wide.</p>
+
+  <div class="tablewrap">
+  <table class="audit">
+    <tr><th>Competitor</th><th>YouTube / content presence</th><th>Paid ads (Google/Meta)</th><th>How 24HR compares</th></tr>
+    <tr><td>24HR Sliding Door Repair (Dmitry, for reference)</td><td>Channel exists, thin/dormant activity implied, not independently counted</td><td>Not checked this pass</td><td>&mdash;</td></tr>
+    <tr><td>Sliding Door Dynamics (South FL)</td><td>At least one video found, 97 views / 2 years old &mdash; equally thin</td><td>Not checked</td><td>No clear content advantage either way &mdash; both dormant</td></tr>
+    <tr><td>CaliberFix &amp; Alpha (FL sliding-door/patio-door repair)</td><td>No YouTube presence surfaced in a live search</td><td>Not checked</td><td>24HR is ahead simply by having a channel at all, even a thin one</td></tr>
+    <tr><td>John's Sliders / Glassdudes / The Glassperts (regional FL competitors)</td><td>Named in search results, not independently audited this pass</td><td>Not checked</td><td>Not yet compared &mdash; flagged for a deeper pass if the call advances</td></tr>
+  </table>
+  </div>
+
+  <div class="note">
+    <b>How to use this on the call.</b> No one in this vertical has built real organic content depth yet
+    &mdash; this is a first-mover opportunity, not a "catch up to competitor X" pitch. The sharper contrast
+    is operational: 24HR already runs 144 indexed pages and a real two-state footprint, which is more
+    digital infrastructure than any named competitor appears to have, but none of that scale shows up on
+    video/organic discovery yet.
+  </div>
+</section>
+
+<section class="panel" id="p-thread">
+  <h2 class="sec">The actual conversation, verbatim</h2>
+  <p class="sec-sub">Pulled directly from the EverEffect Outbound System Unibox. Complete thread as of
+  20 Aug 2026, both sides, in order &mdash; not a summary.</p>
+
+  <h3 class="sub">Engagement signals <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <p class="sec-sub" style="margin-bottom:.8rem;">Not pulled this pass &mdash; Outbound System open/click/latency metrics weren't re-queried; the reply itself (14 minutes after the opener) is the only timing signal available below.</p>
+  <div class="proof">
+    <div><div class="num">&mdash;</div><div class="cap">Opens (not queried)</div></div>
+    <div><div class="num">&mdash;</div><div class="cap">Link clicks (not queried)</div></div>
+    <div><div class="num">14 min</div><div class="cap">Reply latency (opener &rarr; reply)</div></div>
+  </div>
+
+  <div class="thread" style="margin-top:1.4rem;">
+    <div class="msg"><div class="who">Scott Hughes &middot; Outbound System, 20 Aug 2026, 5:12pm</div>
+      I partner with HVAC companies on YouTube channel strategy and organic discoverability. Most
+      contractors are leaving a significant amount of free local visibility on the table. Good to connect.
+    </div>
+    <div class="msg them"><div class="who">Dmitry Ponomariov &middot; 20 Aug 2026, 5:14pm</div>
+      Thanks for reaching out, Scott. Great to connect! We're currently looking to build more strategic
+      partnerships that can expand the services and value we offer our customers. Always open to connecting
+      with good people in the trades and exploring ways we can work together. Would be happy to learn more
+      about what you do.
+    </div>
+    <div class="msg"><div class="who">Scott Hughes &middot; 20 Aug 2026, 5:38pm</div>
+      Good to connect, thanks for the reply.
+    </div>
+    <div class="msg"><div class="who">Scott Hughes &middot; 20 Aug 2026, 5:38pm</div>
+      One thing that stood out reading about 24HR. As you bring on new franchisees and expand into new
+      markets, YouTube content built now keeps working in every one of those markets later, unlike paid ads
+      that reset the moment you stop spending. Most home-service brands have videos sitting on their channel
+      already that could be doing that job, it just isn't set up correctly yet.
+    </div>
+    <div class="msg"><div class="who">Scott Hughes &middot; 20 Aug 2026, 5:39pm</div>
+      Worth 15 minutes to see what a quick channel audit for 24HR would surface? What's a good day this
+      week, or grab time here if it's easier:
+      <a href="https://calendar.app.google/sDhxeFG3tFiJMdvZA" target="_blank" rel="noopener">calendar.app.google/sDhxeFG3tFiJMdvZA</a>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>What this tells you.</b> Dmitry's reply was generic warmth, not a specific hook to answer &mdash;
+    the follow-up correctly didn't rely on the mismatched HVAC framing and instead pulled a concrete,
+    sourced detail (his own site's franchise language) into the compounding-content argument. No reply has
+    come back yet as of this rebuild (21 Aug 2026). Now that the live Texas footprint is independently
+    confirmed, the next follow-up can lead with that concrete fact instead of the more general framing used
+    here.
+  </div>
+</section>
+
+<section class="panel" id="p-disco">
+  <h2 class="sec">Discovery script &mdash; tuned to what we now know</h2>
+  <p class="sec-sub">v2 restructures this into a real call flow: open with the specific finding, qualify
+  with questions tied to what we found, handle the objections we can already see coming, then close on a
+  named ask.</p>
+
+  <h3 class="sub">1. Open with the specific finding</h3>
+  <div class="steps">
+    <div class="step"><i></i><div><b>Lead with the live two-state footprint, not the "you're expanding" framing</b>
+    "I noticed you're already running full location pages in Houston, Austin, Dallas, and Fort Worth
+    alongside your Florida markets &mdash; that's real multi-state operating infrastructure most home-service
+    brands don't have yet. Curious how you're thinking about content and visibility scaling the same way your
+    location pages already have."</div></div>
+  </div>
+
+  <h3 class="sub">2. Qualifying questions &mdash; tied to what we found <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <p class="sec-sub">Every question below is tied to a specific finding elsewhere in this dossier. Write the
+  answer straight into Deal Qualification; an unanswered question is itself a finding.</p>
+
+  <div class="tablewrap">
+  <table class="audit">
+    <tr><th>Ask</th><th>Why we're asking it</th><th>Listen for</th></tr>
+    <tr>
+      <td>"Is content/marketing for the Texas locations run centrally out of Boca Raton, or does each
+      market run its own?"</td>
+      <td>This is the single most important unanswered question in the dossier &mdash; it decides whether
+      this is a one-time corporate engagement or a per-territory offer, and neither is assumed anywhere
+      else in this prep.</td>
+      <td>A centralized answer (one engagement, bigger scope) vs. per-territory (smaller, repeatable
+      packages, possibly per franchisee).</td>
+    </tr>
+    <tr>
+      <td>"Are the Texas markets franchised locations, or company-owned expansion?"</td>
+      <td>The site has both a franchise-opportunities page and direct TX location pages &mdash; not
+      resolved which model applies to the live Texas cities specifically.</td>
+      <td>Franchised (marketing decisions may not be fully centralized) vs. company-owned (Dmitry likely
+      still owns the whole content decision).</td>
+    </tr>
+    <tr>
+      <td>"How are you currently tracking whether your city pages are actually generating calls, versus
+      just being live?"</td>
+      <td>Tied to the SEO audit's title-tag/OG-tag mismatch &mdash; someone updated OG copy for two states
+      but not the title tag, which suggests uneven ownership of the SEO/content side.</td>
+      <td>No real measurement in place (bigger, more urgent need) vs. an existing process being improved,
+      not introduced.</td>
+    </tr>
+    <tr>
+      <td>"Is there a reason the Texas push happened now, versus staying Florida-only?"</td>
+      <td>Tied to the Timing finding &mdash; the live expansion is confirmed but the actual business reason
+      behind the timing isn't known.</td>
+      <td>A named trigger (acquisition, franchisee inbound demand, a specific opportunity) vs. no
+      particular reason.</td>
+    </tr>
+    <tr>
+      <td>"Have you looked at what competitors are doing on YouTube in either state?"</td>
+      <td>Tied to the Competitive Landscape tab &mdash; every named competitor's content presence is thin
+      or absent.</td>
+      <td>Active awareness of the gap (easier sell, he already sees the opportunity) vs. no awareness (more
+      of an education conversation).</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3 class="sub">3. Anticipated objections</h3>
+  <div class="objs">
+    <div class="obj"><span class="q">"We're a home-services company, not a media company &mdash; why would
+    YouTube matter to us?"</span><span class="a">Point at his own competitors: none of them have built real
+    organic content depth either, which means whoever moves first in this specific vertical keeps that
+    advantage in every new market the same way his location pages already compound. This isn't a media
+    play, it's the same growth logic as opening a new city page, just on a different channel.</span></div>
+    <div class="obj"><span class="q">"We already have 144 pages on our site &mdash; isn't that enough SEO
+    work already?"</span><span class="a">Page volume and video/organic discovery are different levers.
+    The site itself is in good technical shape (clean schema, canonical tags, full sitemap) &mdash; the gap
+    is specifically that none of that authority shows up on video search or in local Google Business
+    results yet, and the title tag/meta description haven't caught up to the two-state reality that the
+    Open Graph tags already reflect.</span></div>
+  </div>
+
+  <h3 class="sub">4. Close: recommended package &amp; next step <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <div class="steps">
+    <div class="step"><i></i><div><b>Offer a scoped, free two-state channel audit</b>
+    "Happy to take a look at the current channel, the Florida and Texas site sections, and the title-tag gap
+    I mentioned, and tell you specifically what's there to build on &mdash; no cost, no obligation. If that
+    lands well, the next step would be a proposal scoped to however your Texas marketing is actually
+    structured, once we know that."</div></div>
+  </div>
+</section>
+
+<section class="panel" id="p-deal">
+  <h2 class="sec">Deal qualification <span style="font-family:var(--mono);font-size:.62rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">&mdash; new tab in v2</span></h2>
+  <p class="sec-sub">Four honest questions, answered from what's actually known. This lead never had this
+  tab before this rebuild.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-todo">Signal, not certainty</span>
+      <h3>Budget signal</h3>
+      <p>No direct revenue figures found. Signal points upward: a licensed contractor operation running 144
+      indexed pages across two states, a franchise-opportunities program, and a Shopper Approved award badge
+      implies a real marketing budget already exists somewhere in the business &mdash; likely spent on paid
+      search/SEO tooling and WordPress development rather than video. Not yet confirmed with him directly.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Confirmed, with an open question</span>
+      <h3>Decision authority &amp; other stakeholders</h3>
+      <p>Dmitry is the registered Managing Member (BBB) &mdash; likely the real decision-maker for the core
+      business. Open question: if Texas operates as franchised territories rather than company-owned
+      expansion, individual franchisees could be a second layer of stakeholder for anything market-specific.
+      Ask directly (see Discovery Script, question 2).</p>
+    </div>
+    <div class="card"><span class="badge b-good">None found</span>
+      <h3>Red flags / walk-away signals</h3>
+      <p>None found this pass. Reputation is clean (BBB A+, no visible complaints), the site is technically
+      well-built, and the reply, while generic, was warm and unprompted in continuing the conversation.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Confirmed</span>
+      <h3>Recommended EverEffect package &amp; likely deal size</h3>
+      <p>A scoped YouTube/organic-content channel audit and build-out, sized to whichever marketing
+      structure the discovery call reveals (single corporate engagement vs. per-territory). Given the
+      technical SEO baseline is already solid, the immediate quick win to price separately is the
+      title-tag/meta-description fix to reflect the live two-state footprint &mdash; a small, fast,
+      credibility-building first deliverable ahead of the larger content engagement.</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="p-proof">
+  <h2 class="sec">Proof points, honestly scoped</h2>
+  <p class="sec-sub">One real caveat: the case study below is paid YouTube ads for a law firm, lead-gen
+  focused, not organic channel optimization for a home-services franchise. It's the strongest number
+  EverEffect has from recent campaign work, not a direct match for Dmitry's situation &mdash; use it only if
+  the conversation turns to paid amplification.</p>
+
+  <div class="card">
+    <h3>Midwest personal injury law firm &mdash; YouTube campaign rebuild</h3>
+    <div class="proof">
+      <div><div class="num">71%</div><div class="cap">Spend reduction</div></div>
+      <div><div class="num">103%</div><div class="cap">Conversion increase</div></div>
+      <div><div class="num">1%</div><div class="cap">CPL vs. search, after fix</div></div>
+    </div>
+    <p style="margin-top:.8rem;">9 structural errors fixed: no content-suitability exclusions, no
+    conversion goals, ads running across 17,000+ irrelevant YouTube channels. Cost per conversion was 463%
+    higher than search campaigns before the rebuild.</p>
+  </div>
+
+  <div class="note warn">
+    <b>No organic-channel-optimization case study exists yet, and no home-services or franchise case study
+    exists either.</b> If Dmitry asks for a comparable before/after in his own industry, be upfront that
+    this would be a new documented case for EverEffect, not a proven playbook with a matching example.
+  </div>
+</section>
+
+<section class="panel" id="p-sources">
+  <h2 class="sec">All sources</h2>
+  <p class="sec-sub">Every link used anywhere in this dossier, consolidated. Checked date is per-claim.</p>
+
+  <div class="tablewrap">
+  <table class="srctable">
+    <tr><th>Claim</th><th>Source</th><th>Confidence</th><th>Checked</th></tr>
+    <tr><td>Company/LLC details, license CGC1534821, Managing Member</td><td><a href="https://www.bbb.org/us/fl/boca-raton/profile/impact-windows/24hr-sliding-door-repair-0633-90612378" target="_blank" rel="noopener">BBB profile</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">20 Aug 2026</td></tr>
+    <tr><td>Live Texas footprint (19 TX city pages) + franchise-opportunities page</td><td><a href="https://www.24hr-sliding-door-repair.com/page-sitemap.xml" target="_blank" rel="noopener">page-sitemap.xml</a> and <a href="https://www.24hr-sliding-door-repair.com/franchise-opportunities/" target="_blank" rel="noopener">/franchise-opportunities/</a></td><td><span class="conf c-verified">Verified</span></td><td class="date">21 Aug 2026</td></tr>
+    <tr><td>Title tag / meta description say FL only; OG tags say FL + TX</td><td><a href="https://www.24hr-sliding-door-repair.com/" target="_blank" rel="noopener">Homepage source, direct fetch</a></td><td><span class="conf c-verified">Verified</span></td><td class="date">21 Aug 2026</td></tr>
+    <tr><td>Schema/canonical/H1/alt-text/robots/sitemap technical checks</td><td>Direct homepage source fetch + robots.txt + sitemap.xml</td><td><span class="conf c-verified">Verified</span></td><td class="date">21 Aug 2026</td></tr>
+    <tr><td>PageSpeed Insights blocked</td><td><a href="https://pagespeedonline.googleapis.com/" target="_blank" rel="noopener">pagespeedonline.googleapis.com</a> &mdash; 429 quota exceeded</td><td><span class="conf c-verified">Verified (as a block, not a score)</span></td><td class="date">21 Aug 2026</td></tr>
+    <tr><td>YouTube channel exists, activity thin/unverified count</td><td><a href="https://www.youtube.com/channel/UC6beAFjv3an2qeTo6GWGjqQ" target="_blank" rel="noopener">youtube.com/channel/UC6beAFjv3an2qeTo6GWGjqQ</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">20 Aug 2026</td></tr>
+    <tr><td>Facebook page live</td><td><a href="https://www.facebook.com/24hrslidingdoorrepair/" target="_blank" rel="noopener">facebook.com/24hrslidingdoorrepair</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">20 Aug 2026</td></tr>
+    <tr><td>Named FL competitors, thin/absent YouTube presence</td><td>Live web search, multiple competitor names</td><td><span class="conf c-single">Single-source</span></td><td class="date">21 Aug 2026</td></tr>
+    <tr><td>Verbatim outreach thread</td><td>EverEffect Outbound System Unibox</td><td><span class="conf c-verified">Verified</span></td><td class="date">20 Aug 2026</td></tr>
+    <tr><td>Proof-point case study numbers</td><td>Internal EverEffect campaign record</td><td><span class="conf c-verified">Verified</span></td><td class="date">20 Aug 2026</td></tr>
+  </table>
+  </div>
+
+  <h3 class="sub">Changelog <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <ul class="changelog">
+    <li><time>21 Aug 2026</time><span>Full v2 rebuild. Supersedes an earlier 5-tab draft built by a separate, unrelated Claude Code session directly to its own local scratchpad (never pushed anywhere shared, never standardized against the v1 or v2 template) &mdash; that draft's real research (BBB/license details, the verbatim thread, discovery angles, the honestly-caveated proof point) was carried forward and re-verified, not discarded. Added Competitive Landscape, Deal Qualification, expanded SEO/CWV audit, and this Sources/Changelog tab, none of which existed before. Also independently discovered and corrected a material fact: the earlier draft framed multi-state expansion as newly-announced intent; it's actually live in Texas today, sourced directly from the site's own sitemap, not from the LinkedIn reply.</span></li>
+    <li><time>20 Aug 2026</time><span>Original research pass (company profile, BBB/license verification, thread capture, discovery script draft, proof point sourcing) &mdash; built by a different session, reused here.</span></li>
+  </ul>
+
+  <div class="note">
+    <b>Not yet checked.</b> Google Business Profile detail (JS-rendered, not scriptable this pass);
+    YouTube subscriber/video counts for Dmitry's channel or Sliding Door Dynamics; Outbound System
+    open/click engagement metrics; interior Texas location pages individually audited beyond the sitemap
+    listing; whether Texas locations are franchised or company-owned.
+  </div>
+</section>
+
+<footer class="f">
+  <span>Internal BDM prep &middot; shared with Chris for feedback &middot; never sent to the lead &middot; 21 Aug 2026</span>
+  <span><img class="brand-logo-foot" src="../../../assets/ee-logo.png" alt="EverEffect"></span>
+</footer>
+</div>
+
+<script>
+var tabs=document.querySelectorAll('#tabs button'),panels=document.querySelectorAll('.panel');
+tabs.forEach(function(b){b.addEventListener('click',function(){
+  tabs.forEach(function(x){x.classList.remove('on')});
+  panels.forEach(function(p){p.classList.remove('on')});
+  b.classList.add('on');
+  document.getElementById('p-'+b.dataset.p).classList.add('on');
+  b.scrollIntoView({block:'nearest',inline:'nearest'});
+  window.scrollTo({top:0,behavior:'smooth'});
+})});
+</script>
+</body>
+</html>

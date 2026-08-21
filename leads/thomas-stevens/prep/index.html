@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  EverEffect BDM Dossier — Thomas Stevens / SubHub Roofing Solutions, v2
+  Built 2026-08-21. Internal only, never sent to the lead.
+-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Thomas Stevens &middot; EverEffect BDM Call Prep</title>
+<meta name="description" content="Internal BDM call prep for Thomas Stevens, co-owner of SubHub Roofing Solutions (Goodyear, AZ).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#1B4712; --forest-deep:#0A1C08; --ink:#14210F;
+  --ee:#2F8C19; --lime:#8EC63F;
+  --paper:#F7F9F5; --line:rgba(27,71,18,.14); --mist:#5F6E58;
+  --good:#2e8b57; --warn:#c9762d; --bad:#c0392b;
+  --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+*,*:before,*:after{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+
+header.topbar{background:var(--forest-deep);color:#fff;display:flex;justify-content:space-between;
+  align-items:center;gap:1rem;flex-wrap:wrap;padding:.85rem clamp(1rem,4vw,2.5rem);border-bottom:1px solid rgba(255,255,255,.09)}
+.topbar-left{display:flex;align-items:center;gap:.9rem}
+.brand-logo{height:1.9rem;width:auto;display:block;flex:none}
+.brand-logo-hero{height:2.15rem;width:auto;display:block}
+.brand-logo-foot{height:1.3rem;width:auto;display:block;opacity:.92}
+.topbar h1{font-size:.95rem;font-weight:700;letter-spacing:-.01em;margin-top:.15rem}
+.topbar-sub{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.topbar-right{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+.status-badge{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;
+  border-radius:99px;padding:.3rem .75rem;background:rgba(46,139,87,.16);color:var(--good);border:1px solid rgba(46,139,87,.4)}
+
+header.hero{background:linear-gradient(160deg,var(--forest-deep),var(--forest));color:#fff;padding:3rem 0 2.4rem}
+.hero-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:2rem}
+.brand{font-family:var(--serif);font-weight:900;font-size:1.15rem;color:var(--lime)}
+.brand small{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.25em;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:.2rem}
+.stamp{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:rgba(255,255,255,.5);text-transform:uppercase;text-align:right;line-height:1.8}
+h1.big{font-family:var(--serif);font-weight:900;font-size:clamp(1.7rem,3.8vw,2.7rem);line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+h1.big em{font-style:italic;color:var(--lime)}
+.hero-sub{margin-top:1rem;color:rgba(255,255,255,.72);max-width:660px;line-height:1.65;font-size:.92rem}
+.hero-stats{display:flex;gap:2.2rem;flex-wrap:wrap;margin-top:1.8rem}
+.hstat b{display:block;font-family:var(--serif);font-weight:900;font-size:1.5rem;color:var(--lime);font-variant-numeric:tabular-nums}
+.hstat span{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+
+nav.tabbar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);
+  display:flex;gap:.25rem;overflow-x:auto;padding:.6rem clamp(1rem,4vw,2.5rem)}
+nav.tabbar button{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  background:none;border:1px solid transparent;border-radius:99px;padding:.55rem 1.05rem;cursor:pointer;
+  color:var(--mist);white-space:nowrap;transition:all .25s}
+nav.tabbar button:hover{color:var(--forest)}
+nav.tabbar button.on{background:var(--forest);color:#fff}
+nav.tabbar button:focus-visible{outline:2px solid var(--ee);outline-offset:2px}
+
+section.panel{display:none;padding:2.4rem 0 3.4rem}
+section.panel.on{display:block}
+h2.sec{font-family:var(--serif);font-weight:900;font-size:clamp(1.3rem,2.4vw,1.9rem);color:var(--forest);margin-bottom:.5rem;text-wrap:balance}
+.sec-sub{color:var(--mist);font-size:.86rem;margin-bottom:1.8rem;max-width:660px;line-height:1.6}
+h3.sub{font-family:var(--serif);font-weight:900;font-size:1.1rem;color:var(--forest);margin:2rem 0 .9rem}
+
+.grid{display:grid;gap:1rem}
+.g2{grid-template-columns:repeat(auto-fit,minmax(20rem,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.4rem}
+.card h3{font-family:var(--serif);font-weight:600;font-size:1rem;color:var(--forest);margin-bottom:.5rem}
+.card p{font-size:.85rem;color:#3f4d3a;line-height:1.6}
+.card p + p{margin-top:.5rem}
+.badge{display:inline-block;font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;
+  text-transform:uppercase;border-radius:99px;padding:.28rem .7rem;margin-bottom:.7rem}
+.b-good{background:rgba(46,139,87,.1);color:var(--good);border:1px solid rgba(46,139,87,.3)}
+.b-warn{background:rgba(201,118,45,.1);color:var(--warn);border:1px solid rgba(201,118,45,.3)}
+.b-bad{background:rgba(192,57,43,.1);color:var(--bad);border:1px solid rgba(192,57,43,.3)}
+.b-todo{background:rgba(95,110,88,.14);color:var(--mist);border:1px dashed var(--mist)}
+
+.note{background:rgba(142,198,63,.13);border:1px solid rgba(47,140,25,.35);border-radius:12px;
+  padding:1.1rem 1.35rem;font-size:.86rem;line-height:1.65;color:#2b3d25;margin-top:1.2rem}
+.note b{color:var(--forest)}
+.note.warn{background:rgba(201,118,45,.1);border-color:rgba(201,118,45,.35);color:#5c3a1a}
+.note.warn b{color:var(--warn)}
+.note.bad{background:rgba(192,57,43,.08);border-color:rgba(192,57,43,.35);color:#5c231a}
+.note.bad b{color:var(--bad)}
+
+.thread{display:grid;gap:.5rem;margin-top:.6rem}
+.msg{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.7rem .95rem;font-size:.83rem;line-height:1.55}
+.msg .who{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);margin-bottom:.25rem}
+.msg.them{border-left:3px solid var(--ee)}
+
+.steps{display:grid;gap:.6rem;counter-reset:s;margin-top:1.2rem}
+.step{display:grid;grid-template-columns:2rem 1fr;gap:.85rem;align-items:start;font-size:.86rem;
+  color:#3f4d3a;line-height:1.6;background:#fff;border:1px solid var(--line);border-radius:11px;padding:1.05rem 1.15rem}
+.step i{counter-increment:s;font-style:normal;font-family:var(--serif);font-weight:900;color:var(--ee);
+  background:rgba(47,140,25,.1);border:1px solid rgba(47,140,25,.35);border-radius:99px;width:1.8rem;height:1.8rem;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex:none}
+.step i:before{content:counter(s)}
+.step b{display:block;font-weight:650;color:var(--forest);font-size:.94rem;margin-bottom:.2rem}
+
+.objs{display:grid;gap:.6rem;margin-top:1rem}
+.obj{background:#fff;border:1px solid var(--line);border-radius:11px;padding:1rem 1.15rem;font-size:.85rem;line-height:1.6}
+.obj .q{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--warn);display:block;margin-bottom:.4rem}
+.obj .a{color:#3f4d3a}
+
+.proof{display:flex;gap:1.6rem;flex-wrap:wrap;margin-top:.6rem}
+.proof .num{font-family:var(--serif);font-weight:900;font-size:1.6rem;color:var(--ee);font-variant-numeric:tabular-nums}
+.proof .cap{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist)}
+
+table.audit{width:100%;border-collapse:collapse;margin-top:.8rem;font-size:.83rem}
+table.audit th{text-align:left;font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mist);padding:.5rem .6rem;border-bottom:2px solid var(--line)}
+table.audit td{padding:.6rem .6rem;border-bottom:1px solid var(--line);color:#3f4d3a;vertical-align:top}
+table.audit tr:last-child td{border-bottom:none}
+table.audit td b, table.audit th b{font-variant-numeric:tabular-nums}
+
+.srctable{width:100%;border-collapse:collapse;margin-top:.4rem;font-size:.8rem}
+.srctable th{text-align:left;font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mist);padding:.5rem .5rem;border-bottom:2px solid var(--line)}
+.srctable td{padding:.55rem .5rem;border-bottom:1px solid var(--line);color:#3f4d3a;vertical-align:top}
+.srctable a{color:var(--ee);text-decoration:none;border-bottom:1px solid rgba(47,140,25,.32);word-break:break-word}
+.srctable td.date{font-family:var(--mono);font-size:.74rem;color:var(--mist);white-space:nowrap}
+.conf{font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .5rem;border-radius:99px;white-space:nowrap;display:inline-block}
+.c-verified{background:rgba(46,139,87,.12);color:var(--good)}
+.c-single{background:rgba(201,118,45,.12);color:var(--warn)}
+
+.tablewrap{overflow-x:auto}
+
+.changelog{margin-top:.6rem;display:grid;gap:.55rem;list-style:none}
+.changelog li{display:flex;gap:.8rem;font-size:.82rem;line-height:1.55;color:#3f4d3a}
+.changelog time{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;color:var(--mist);white-space:nowrap;padding-top:.15rem;flex:none}
+
+footer.f{padding:2rem 0 2.6rem;border-top:1px solid var(--line);margin-top:.5rem;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem}
+
+@media(max-width:620px){
+  .step{grid-template-columns:2rem 1fr}
+  .hero-stats{gap:1.4rem}
+  table.audit,.srctable{display:block}
+}
+
+@media print{
+  @page{ size:Letter; margin:13mm 12mm 14mm; }
+  body{background:#fff}
+  nav.tabbar{display:none !important}
+  header.topbar{display:none !important}
+  section.panel{display:block !important; padding:0 0 6mm; break-before:page; page-break-before:always}
+  section.panel:first-of-type{break-before:auto; page-break-before:auto}
+  header.hero{break-after:avoid; page-break-after:avoid; margin-bottom:6mm}
+  .card,.step,.msg,.note,.obj,.changelog li{break-inside:avoid; page-break-inside:avoid}
+  h2.sec{break-after:avoid; page-break-after:avoid}
+  .grid{display:block}
+  .grid > *{margin-bottom:4mm}
+  .wrap{max-width:none;padding:0}
+  body{font-size:9.4pt}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <img class="brand-logo" src="../../../assets/ee-logo.png" alt="EverEffect">
+    <div>
+      <h1>Thomas Stevens &middot; BDM Call Prep</h1>
+      <div class="topbar-sub">Internal BDM prep &middot; shared with Chris for feedback &middot; never sent to the lead</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="status-badge">Not yet booked &middot; live thread, needs follow-up</span>
+  </div>
+</header>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="brand"><img class="brand-logo-hero" src="../../../assets/ee-logo.png" alt="EverEffect"><small>BDM Lead Pack</small></div>
+      <div class="stamp">Call: not yet booked<br>No time set<br>Dossier current as of Aug 21, 2026</div>
+    </div>
+    <h1 class="big">Thomas Stevens &mdash; <em>SubHub Roofing Solutions.</em></h1>
+    <p class="hero-sub">Co-owner (with Susan Stevens) of a licensed commercial roofing operation in Goodyear, AZ,
+    replying to outbound with a real, specific complication instead of a brush-off: one shared brand identity
+    covering two different business lines. That complication is real, verifiable on their own site right now,
+    and it's the whole opening for this call &mdash; not a generic SEO pitch.</p>
+    <div class="hero-stats">
+      <div class="hstat"><b>2</b><span>Business lines, 1 shared identity</span></div>
+      <div class="hstat"><b>4</b><span>States licensed (AZ / ID / TX / OK)</span></div>
+      <div class="hstat"><b>30+</b><span>Years, owner's stated experience</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabbar" id="tabs">
+  <button data-p="glance" class="on">Who You're Meeting</button>
+  <button data-p="stand">Where They Stand</button>
+  <button data-p="seo">Site &amp; SEO Audit</button>
+  <button data-p="comp">Competitive Landscape</button>
+  <button data-p="thread">The Actual Thread</button>
+  <button data-p="disco">Discovery Script</button>
+  <button data-p="deal">Deal Qualification</button>
+  <button data-p="proof">Proof Points</button>
+  <button data-p="sources">All Sources</button>
+</nav>
+
+<div class="wrap">
+
+<section class="panel on" id="p-glance">
+  <h2 class="sec">Thomas Stevens &mdash; confirmed from SubHub's own site, licensing records, and Nextdoor</h2>
+  <p class="sec-sub">Co-owner of SubHub Roofing Solutions LLC, Goodyear, AZ. Identity match is solid: SubHub's own
+  Nextdoor business page is titled &ldquo;Thomas and Susan, SubHub Roofing Solutions LLC,&rdquo; and the outreach
+  reply came from the same company's inbound channel.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-good">Verified &mdash; company site + AZ ROC licensing</span>
+      <h3>Company &amp; role</h3>
+      <p>SubHub Roofing Solutions LLC. Licensed AZ ROC #349730 and #350542, Idaho #2581907, Oklahoma #800008153.
+      Commercial roofing focus &mdash; turnkey installs, labor services, roof consultation, flat/shingle/metal/tile/Duro-Last
+      systems &mdash; for warehouses, hotels, schools, military installations, retail centers, and industrial facilities.
+      Site states the owner has 30+ years in the industry. Thomas is co-owner alongside Susan Stevens.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Verified &mdash; site + license records</span>
+      <h3>Footprint</h3>
+      <p>Licensed and actively marketed in Arizona, Idaho, Texas, and Oklahoma, plus a nationwide network of
+      contractor partnerships for installation support. Based in Goodyear, AZ (Phoenix-metro west valley).</p>
+    </div>
+  </div>
+
+  <h3 class="sub">Timing &mdash; recent triggers</h3>
+  <div class="grid g2">
+    <div class="card"><span class="badge b-todo">Checked, found a signal &mdash; not a hard trigger</span>
+      <h3>Site was refreshed recently</h3>
+      <p>The site's Wix-generated sitemap shows a <code>lastmod</code> of 2026-06-17, meaning something on the site
+      changed within the last ~2 months. Worth asking directly whether that update was meant to address the
+      two-business-line naming problem and didn't, or was unrelated (a services page edit, new photos, etc.) &mdash;
+      it's too soft a signal to build the open around, but it's a natural, low-friction question.</p>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>The angle that matters for this call.</b> Thomas didn't decline or brush off outreach &mdash; he volunteered a
+    real structural problem unprompted: SubHub's identity covers both the commercial roofing arm and a separate
+    handyman business, and that's making their Google Business Profile "tricky." Confirmed independently on their
+    own website (see Where They Stand): the site's own title tag and meta description already blend both lines
+    into one description, with no page anywhere that actually separates or explains them. Open with that finding,
+    not a generic roofing-industry pitch &mdash; it proves the outreach was read, not templated.</p>
+  </div>
+</section>
+
+<section class="panel" id="p-stand">
+  <h2 class="sec">Where they actually stand, digitally</h2>
+  <p class="sec-sub">Checked live 2026-08-21. The core finding: the two-business-line tangle Thomas described is not
+  just a Google Business Profile quirk &mdash; it's baked into the primary website's own metadata.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-bad">Verified live, checked 2026-08-21</span>
+      <h3>The identity tangle is on the website too, not just the GBP</h3>
+      <p>subhubroofingsolutions.com's own &lt;title&gt; and meta description read &ldquo;Sub Hub Roofing Solutions
+      and Handyman Services in Goodyear, AZ&rdquo; &mdash; yet nothing on the site's actual pages (About, Solutions,
+      Contact) explains, separates, or even mentions the handyman line. A visitor searching for commercial roofing
+      sees "and Handyman Services" bolted onto the brand with no context, and a visitor searching for handyman work
+      finds a site that's 100% commercial-roofing content. This is exactly the confusion Thomas flagged about their
+      Google Business Profile, independently confirmed on the site they fully control.</p>
+    </div>
+    <div class="card"><span class="badge b-warn">Checked live, not independently confirmable this pass</span>
+      <h3>Google Business Profile <span style="font-family:var(--mono);font-size:.58rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+      <p>No Maps/GBP scraping tool available this pass to pull the live listing directly (search snippet only) &mdash;
+      third-party aggregator text independently echoes the same "Roofing Solutions and Handyman Services" combined
+      framing, consistent with Thomas's own description of a shared/entangled profile. Recommend pulling the actual
+      GBP listing live on the call or just before it to see the category selection, review count, and whether
+      it's a single listing or two.</p>
+    </div>
+    <div class="card"><span class="badge b-warn">Checked live 2026-08-21</span>
+      <h3>Reviews are thin</h3>
+      <p>Facebook page ("SubHub Roofing Solutions LLC") shows 100% recommend on only 5 reviews. No verified Google
+      review count this pass (see GBP note above). Instagram presence exists (@subhubroofing) but reach/engagement
+      not checked.</p>
+    </div>
+    <div class="card"><span class="badge b-bad">Verified live 2026-08-21</span>
+      <h3>Image assets look untouched since upload</h3>
+      <p>Homepage image alt text is default camera/export filenames across every image sampled &mdash;
+      e.g. "DEEC7350-A613-4B8C-9261-2164ADD24EB4 2.PNG", "Untitled design (1) (1).png", and notably
+      "ChatGPT Image May 29, 2026, 11_43_32 AM.png" (an AI-generated image used without renaming or alt text).
+      Zero descriptive alt text found on any sampled image &mdash; a real accessibility and image-SEO gap, and a
+      tell that some visual content is AI-generated stock rather than real jobsite photography.</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="p-seo">
+  <h2 class="sec">Site &amp; SEO audit &mdash; subhubroofingsolutions.com</h2>
+  <p class="sec-sub">Live technical pass, checked 2026-08-21 (curl against the homepage plus /about, /services-4,
+  /contact). Site is built on Wix.</p>
+
+  <table class="audit">
+    <tr><th>Check</th><th>Finding</th><th>Status</th></tr>
+    <tr><td>Title tag (homepage)</td><td>"SubHub Roofing Solutions | roofing solutions | Goodyear, AZ, USA" &mdash; present, keyword-stuffed but functional</td><td><span class="badge b-warn">Weak</span></td></tr>
+    <tr><td>Title tag (interior pages)</td><td>Every interior page checked is truncated mid-word: "ABOUT | Sub Hub Roofing Solu", "SOLUTIONS | Sub Hub Roofing Solu", "CONTACT | Sub Hub Roofing Solu" &mdash; this is literally what shows in a Google result for any page but the homepage</td><td><span class="badge b-bad">Broken</span></td></tr>
+    <tr><td>Meta description</td><td>Present on the homepage only; none found on /about, /services-4, or /contact</td><td><span class="badge b-bad">Gap</span></td></tr>
+    <tr><td>Open Graph tags</td><td>Present on homepage (og:title, og:description, og:url, og:type), but og:site_name is the same truncated "Sub Hub Roofing Solu"</td><td><span class="badge b-warn">Weak</span></td></tr>
+    <tr><td>Structured data / schema</td><td>An application/ld+json block is present on the homepage; the schema type/completeness wasn't parsed this pass</td><td><span class="badge b-todo">Partial check</span></td></tr>
+    <tr><td>Canonical tag</td><td>Present and correct on the homepage (self-referencing)</td><td><span class="badge b-good">OK</span></td></tr>
+    <tr><td>H1 structure</td><td>Homepage renders at least 3 separate H1-tagged elements (Wix rich-text blocks) instead of one</td><td><span class="badge b-warn">Weak</span></td></tr>
+    <tr><td>robots.txt</td><td>Standard Wix defaults; allows general crawling, blocks PetalBot, sets a crawl-delay for AhrefsBot/dotbot. No issue.</td><td><span class="badge b-good">OK</span></td></tr>
+    <tr><td>Sitemap</td><td>Present (Wix-generated sitemap index), last modified 2026-06-17</td><td><span class="badge b-good">OK</span></td></tr>
+    <tr><td>Image alt text</td><td>Every sampled image on the homepage uses a default export/camera filename as its alt text (see Where They Stand) &mdash; no descriptive alt text found</td><td><span class="badge b-bad">Gap</span></td></tr>
+    <tr><td>Core Web Vitals / PageSpeed <span style="font-family:var(--mono);font-size:.58rem;color:var(--mist);">(new in v2)</span></td><td>Attempted via the public PageSpeed Insights API 2026-08-21 &mdash; blocked: "Quota exceeded for quota metric 'Queries' and limit 'Queries per day'." This is a standing platform-level quota limitation seen on other dossiers, not specific to this lead. Not yet re-attempted via an alternate tool.</td><td><span class="badge b-todo">Blocked, not this lead's fault</span></td></tr>
+    <tr><td>Interior pages <span style="font-family:var(--mono);font-size:.58rem;color:var(--mist);">(new in v2)</span></td><td>Checked /about, /services-4 (labeled "SOLUTIONS" in nav), and /contact &mdash; all three load (200) and all three carry the truncated title-tag defect.</td><td><span class="badge b-bad">Confirmed, site-wide</span></td></tr>
+  </table>
+
+  <div class="note warn">
+    <b>The single most fixable, highest-visibility finding here.</b> The truncated "Sub Hub Roofing Solu" title
+    tag isn't a one-off &mdash; it's on every page. That's what shows in a Google search result for this business
+    right now, on every query that lands anywhere but the homepage. It's a five-minute technical fix with an
+    immediate, visible payoff, and it's a clean, low-resistance way into a larger technical/SEO engagement.
+  </div>
+</section>
+
+<section class="panel" id="p-comp">
+  <h2 class="sec">Competitive landscape <span style="font-family:var(--mono);font-size:.62rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">&mdash; new tab in v2</span></h2>
+  <p class="sec-sub">Commercial roofing contractors serving the same Goodyear/West Valley Phoenix market. SubHub's
+  review volume is the standout gap against every name below.</p>
+
+  <div class="tablewrap">
+  <table class="audit">
+    <tr><th>Competitor</th><th>Review profile</th><th>Notes</th><th>How SubHub compares</th></tr>
+    <tr><td>SubHub Roofing Solutions (for reference)</td><td>~5 Facebook reviews, 100% recommend; Google review count not confirmed this pass</td><td>Licensed in 4 states + nationwide partner network; no YouTube presence found</td><td>&mdash;</td></tr>
+    <tr><td>Lyons Roofing</td><td>2,900+ reviews across Google, Yelp, and Angi</td><td>Residential + commercial, serves Goodyear/Phoenix/Tucson</td><td>Far behind on review volume and market presence</td></tr>
+    <tr><td>Roof Boyz</td><td>147 Google reviews, 4.9 average</td><td>Tile/shingle/foam, licensed and bonded</td><td>Behind on review volume; rating comparison not available for SubHub</td></tr>
+    <tr><td>Canyon State Roofing &amp; Consulting</td><td>5-star on Google and Yelp; A+ BBB rating</td><td>Owner-led (Jim McLain), emergency service positioning</td><td>Behind on visible trust signals (BBB, review counts)</td></tr>
+    <tr><td>Stapleton Roofing</td><td>Strong reputation, not review-count-led</td><td>40 years in Maricopa County</td><td>Behind on tenure-based brand trust; SubHub's 30-year owner experience is a real counter-asset that isn't showing up on their site</td></tr>
+  </table>
+  </div>
+
+  <div class="note">
+    <b>How to use this on the call.</b> The sharpest single contrast: SubHub's owner has 30+ years of real
+    industry experience and multi-state licensing, but a site and review profile that reads far thinner than
+    every named local competitor. That's not a credibility problem with the business &mdash; it's a
+    documentation-and-visibility problem, which is a much easier, more specific sell than "you need more
+    marketing."</p>
+  </div>
+</section>
+
+<section class="panel" id="p-thread">
+  <h2 class="sec">The actual conversation, verbatim</h2>
+  <p class="sec-sub">Pulled from the Outbound System reply thread. This exchange was briefly mischaracterized
+  elsewhere in EverEffect's own internal notes as "a real, thoughtful decline" &mdash; re-read live on 2026-08-20,
+  that does not hold. There is no rejection language in it at all.</p>
+
+  <h3 class="sub">Engagement signals <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <p class="sec-sub" style="margin-bottom:.8rem;">Not available from Outbound System/Unibox for this thread this pass &mdash; opens/clicks/reply-latency metrics were not pulled. Flagged as not yet checked rather than guessed.</p>
+  <div class="proof">
+    <div><div class="num">&mdash;</div><div class="cap">Opens (not pulled)</div></div>
+    <div><div class="num">&mdash;</div><div class="cap">Link clicks (not pulled)</div></div>
+    <div><div class="num">&mdash;</div><div class="cap">Reply latency (not pulled)</div></div>
+  </div>
+
+  <div class="thread" style="margin-top:1.4rem;">
+    <div class="msg them"><div class="who">Thomas Stevens &middot; SubHub Roofing Solutions</div>Our Google Business Profile is kind of tricky because we also have a handyman business that operates as SubHub. Our other arm is the commercial roofing. We don't really do much residential roofing apart from repairs.</div>
+  </div>
+
+  <div class="note">
+    <b>Read this correctly.</b> This is Thomas explaining a real, specific operational complication in direct
+    response to outreach &mdash; not a decline, not a brush-off. It's the single most useful piece of information
+    in this entire dossier: he's telling us exactly what's wrong before we've even asked.
+  </div>
+</section>
+
+<section class="panel" id="p-disco">
+  <h2 class="sec">Discovery script &mdash; tuned to what we now know</h2>
+  <p class="sec-sub">Built around the one thing Thomas already told us, not a generic roofing-industry script.</p>
+
+  <h3 class="sub">1. Open with the specific finding</h3>
+  <div class="steps">
+    <div class="step"><i></i><div><b>Name the tangle back to him, then show we checked it ourselves</b>"You mentioned
+    your Google profile gets tricky because SubHub covers both the roofing side and the handyman side &mdash; we
+    actually pulled up your site to look, and that same mix-up is right there in your own page titles. Every page
+    but your homepage literally shows as 'Sub Hub Roofing Solu' in Google right now, cut off mid-word. That's a
+    quick, concrete example of the bigger problem you're describing."</div></div>
+  </div>
+
+  <h3 class="sub">2. Qualifying questions &mdash; tied to what we found <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <p class="sec-sub">Every question below is tied to a specific finding elsewhere in this dossier. Log the answers
+  straight into Deal Qualification; an unanswered one is itself a finding.</p>
+
+  <div class="tablewrap">
+  <table class="audit">
+    <tr><th>Ask</th><th>Why we're asking it</th><th>Listen for</th></tr>
+    <tr>
+      <td>"Is there any existing marketing or ad spend today, split between the roofing side and the handyman side, or is it all one bucket?"</td>
+      <td>Tied to the Budget Signal card &mdash; no paid ads were detected on either line during this pass.</td>
+      <td>A real existing budget line (easier deal) vs. no structured spend at all (greenfield, needs education on ROI first).</td>
+    </tr>
+    <tr>
+      <td>"Is marketing something you and Susan decide together, or does one of you own it?"</td>
+      <td>Tied to Decision Authority &amp; Stakeholders &mdash; Susan is a named co-owner, not yet confirmed as a co-decision-maker on marketing specifically.</td>
+      <td>A named second decision-maker (route the next step to both) vs. a confirmed sole owner on this topic.</td>
+    </tr>
+    <tr>
+      <td>"When someone searches for a commercial roofer versus someone searching for a handyman, does your current site or Google listing actually send them to the right place?"</td>
+      <td>Tied directly to the identity-tangle finding in Where They Stand and Site &amp; SEO Audit.</td>
+      <td>Whether he's already noticed lost or misdirected leads because of this, which raises real urgency, versus it being a mostly cosmetic annoyance so far.</td>
+    </tr>
+    <tr>
+      <td>"Did the site update from a couple months back touch this at all, or was that unrelated?"</td>
+      <td>Tied to the Timing block &mdash; the sitemap shows a June 2026 update.</td>
+      <td>A recent, real attempt to fix this that fell short (higher urgency, they already tried) vs. an unrelated update (lower urgency, hasn't been tackled yet).</td>
+    </tr>
+    <tr>
+      <td>"Have you looked at how the bigger local names &mdash; the ones with hundreds or thousands of reviews &mdash; present themselves online, compared to where you're at?"</td>
+      <td>Tied to the Competitive Landscape tab.</td>
+      <td>Active awareness of the review/trust gap (real motivation) vs. no real comparison yet (more of an education conversation).</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3 class="sub">3. Anticipated objections</h3>
+  <div class="objs">
+    <div class="obj"><span class="q">"We don't want to run two separate websites or profiles, that's more to manage."</span><span class="a">This isn't a pitch for two full sites &mdash; it's fixing the shared one so each type of visitor lands somewhere that actually makes sense for them (clear titles, clear service pages, and if needed, distinct GBP categories/service areas under the same ownership). Same team, cleaner discovery.</span></div>
+    <div class="obj"><span class="q">"Our roofing work comes from relationships and referrals, not Google, so this doesn't matter much."</span><span class="a">Fair for the relationship-driven side of the business &mdash; but the truncated title tags are already showing up in search results today, on every page but the homepage, for anyone who does look. That's a visible, avoidable, low-cost fix regardless of how much weight digital carries in the sales process overall.</span></div>
+  </div>
+
+  <h3 class="sub">4. Close: recommended package &amp; next step <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <div class="steps">
+    <div class="step"><i></i><div><b>Ask for a scoped technical/local-listing cleanup, not a broad campaign</b>Given
+    what we found &mdash; a real, licensed, 30-year operation undersold by its own metadata &mdash; the natural next
+    step is a scoped technical SEO and local-listing cleanup engagement covering both business lines, priced and
+    proposed after this call, with a broader content/growth phase as a later step once the foundation is fixed.
+    Don't open with "free audit" and stop there; name the actual next deliverable.</div></div>
+  </div>
+</section>
+
+<section class="panel" id="p-deal">
+  <h2 class="sec">Deal qualification <span style="font-family:var(--mono);font-size:.62rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">&mdash; new tab in v2</span></h2>
+  <p class="sec-sub">Four honest questions, answered from what's actually known.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-warn">Signal, not certainty</span>
+      <h3>Budget signal</h3>
+      <p>Established, multi-state-licensed commercial contractor with a 30-year owner and a nationwide partner
+      network &mdash; this reads as a real, ongoing business, not a startup. No paid-ad spend detected on either
+      business line this pass, which suggests marketing has been mostly word-of-mouth/referral to date. Likely a
+      modest existing budget with real room to grow, not yet confirmed &mdash; ask directly on the call.</p>
+    </div>
+    <div class="card"><span class="badge b-todo">Not yet confirmed</span>
+      <h3>Decision authority &amp; other stakeholders</h3>
+      <p>Thomas is a co-owner; Susan Stevens is named as the other co-owner on the company's Nextdoor page. Not yet
+      confirmed whether marketing decisions are Thomas's alone or shared with Susan &mdash; ask directly (see
+      Discovery Script).</p>
+    </div>
+    <div class="card"><span class="badge b-good">None found</span>
+      <h3>Red flags / walk-away signals</h3>
+      <p>None found. This is a real, licensed, multi-state business with a substantive, engaged reply &mdash; the
+      opposite of a red flag. The only actual risk on file is an internal one: this lead was briefly and
+      incorrectly logged elsewhere as a decline before a live re-read corrected it on 2026-08-20.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Scoped, concrete</span>
+      <h3>Recommended EverEffect package &amp; likely deal size</h3>
+      <p>A scoped technical SEO + local-listing cleanup engagement: fix the site-wide title-tag truncation, add
+      missing interior-page meta descriptions, resolve the single-H1 issue, add real descriptive alt text, and
+      untangle the two business lines across the site and Google Business Profile (distinct service pages and/or
+      GBP categories under one ownership). Position a broader content/growth phase, potentially including video
+      given the complete absence of any YouTube presence, as a follow-on once the technical foundation is fixed
+      rather than the opening ask.</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="p-proof">
+  <h2 class="sec">Proof points, honestly scoped</h2>
+  <p class="sec-sub">No EverEffect case study specific to a multi-brand/two-business-line local-services cleanup was
+  pulled into this pass &mdash; flagging as a gap rather than reaching for a mismatched example. Whoever preps the
+  live call should slot in the closest real EverEffect case study (local SEO / GBP optimization for a
+  multi-location or multi-brand trades business, if one exists) before this ships to Chris.</p>
+  <div class="card"><span class="badge b-todo">TODO before this ships to Chris</span>
+    <h3>Case study placeholder &mdash; needs a human pick</h3>
+    <div class="proof">
+      <div><div class="num">&mdash;</div><div class="cap">Not yet selected</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="p-sources">
+  <h2 class="sec">All sources</h2>
+  <p class="sec-sub">Every source used in this dossier, consolidated.</p>
+
+  <div class="tablewrap">
+  <table class="srctable">
+    <tr><th>Claim</th><th>Source</th><th>Confidence</th><th>Checked</th></tr>
+    <tr><td>Company identity, licensing, services, owner experience</td><td><a href="https://www.subhubroofingsolutions.com/" target="_blank" rel="noopener">subhubroofingsolutions.com</a></td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Co-owners Thomas &amp; Susan Stevens</td><td><a href="https://nextdoor.com/pages/thomas-and-susan-subhub-roofing-solutions-llc-goodyear-az/" target="_blank" rel="noopener">Nextdoor business page</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Title-tag truncation, homepage + interior pages</td><td>Direct curl of homepage, /about, /services-4, /contact</td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Combined "Roofing Solutions and Handyman Services" framing on-site</td><td>Homepage meta description + og:description, live curl</td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Facebook review count (5, 100% recommend)</td><td><a href="https://www.facebook.com/p/SubHub-Roofing-Solutions-LLC-61556112081408/" target="_blank" rel="noopener">Facebook business page</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Local competitor review profiles (Lyons, Roof Boyz, Canyon State, Stapleton)</td><td>Web search of "commercial roofing contractor Goodyear Phoenix Arizona reviews"</td><td><span class="conf c-single">Single-source</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>No YouTube channel found</td><td>Web search of "SubHub Roofing YouTube"</td><td><span class="conf c-single">Single-source</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Original reply thread text</td><td>evereffect lead-ledger.json (thomas-stevens-subhub entry)</td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+  </table>
+  </div>
+
+  <h3 class="sub">Changelog <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <ul class="changelog">
+    <li><time>2026-08-21</time><span>First build. Prepped ahead of booking, per Evans's direction to get in front of leads showing real interest before a call gets scheduled. This lead was briefly mischaracterized elsewhere in the vault as a decline; that correction is carried into this dossier's Actual Thread tab so it isn't accidentally deprioritized again.</span></li>
+  </ul>
+
+  <div class="note">
+    <b>Not yet checked.</b> Core Web Vitals/PageSpeed (blocked by API quota, standing platform limitation). Live
+    Google Business Profile listing detail (category, exact review count, whether it's one listing or two) &mdash;
+    no Maps-scraping tool available this pass, recommend pulling it live just before the call. Outbound
+    System engagement metrics (opens/clicks/reply latency) for this specific thread. A matching EverEffect case
+    study for the Proof Points tab.
+  </div>
+</section>
+
+<footer class="f">
+  <span>Internal BDM prep &middot; shared with Chris for feedback &middot; never sent to the lead &middot; 2026-08-21</span>
+  <span><img class="brand-logo-foot" src="../../../assets/ee-logo.png" alt="EverEffect"></span>
+</footer>
+</div>
+
+<script>
+var tabs=document.querySelectorAll('#tabs button'),panels=document.querySelectorAll('.panel');
+tabs.forEach(function(b){b.addEventListener('click',function(){
+  tabs.forEach(function(x){x.classList.remove('on')});
+  panels.forEach(function(p){p.classList.remove('on')});
+  b.classList.add('on');
+  document.getElementById('p-'+b.dataset.p).classList.add('on');
+  b.scrollIntoView({block:'nearest',inline:'nearest'});
+  window.scrollTo({top:0,behavior:'smooth'});
+})});
+</script>
+</body>
+</html>

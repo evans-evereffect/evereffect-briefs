@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  EverEffect BDM Dossier — starter shell, v2 (proposed 2026-08-20)
+  =================================================================
+  Copy this file to build a new lead's prep. Fill in every TODO, delete none
+  of the 9 panels below without stating why in All Sources — same rule as v1.
+
+  WHAT'S NEW IN V2, AND WHY (see the v1 lesson this fixes in parens):
+  - p-comp   (Competitive Landscape): promoted from a buried card to its own
+             tab, now a side-by-side table instead of a name list.
+  - p-deal   (Deal Qualification): budget signal, decision authority, red
+             flags, recommended package. Every v1 prep had zero of this.
+  - p-seo    gained two audit rows: Core Web Vitals/PageSpeed and Interior
+             Pages — both were "not yet checked" in literally every prep
+             built so far because no tool was ever wired up for them.
+  - p-glance gained a "Timing" block for recent triggers (news, funding,
+             leadership change) — done ad hoc for other leads, never a
+             standard step.
+  - p-thread gained an Engagement Signals strip (opens/clicks/reply latency)
+             above the verbatim thread, so "low-commitment reply" is a
+             measured read, not a guess.
+  - p-sources gained a Checked-date column and a changelog list — Sean
+             Hicks's prep was rebuilt across three separate days with no
+             way to see what changed between opens.
+  - p-disco  restructured into a real call flow — open, then a Qualifying
+             Questions table where every question is tied to a specific
+             finding elsewhere in the dossier (budget → paid-ads/SEO
+             findings, authority → stakeholders, need → the metadata gap
+             found, timing → the Timing block, competitive → the Competitive
+             Landscape tab), then objections, then the v2 close step. Acts
+             on the research instead of just presenting it.
+  - Branding: swapped the placeholder "EE" mark for the real EverEffect
+             logo (pulled live from evereffect.com), inlined as a data URI
+             in the topbar, hero, and footer — no more improvised wordmark.
+  - Build checklist below now checks links resolve and the dossier isn't
+             stale, not just that the 9 tabs exist (v1 only checked tab IDs
+             and empty hrefs — that's how a claim could go unverified into
+             a draft to Chris and still pass).
+
+  MANDATORY BEFORE ANY PUSH OR CHRIS-FACING DRAFT — run all three:
+
+  F=<path to the built prep index.html>
+
+  # 1. All 9 tabs present, or a stated reason for the ones missing
+  for tab in glance stand seo comp thread disco deal proof sources; do
+    grep -q "id=\"p-$tab\"" "$F" && echo "OK      p-$tab" \
+      || echo "MISSING p-$tab (state the reason in All Sources, or build it)"
+  done
+
+  # 2. Every link actually resolves — a broken source is worse than none
+  grep -oE 'href="https?://[^"]+"' "$F" | sed -E 's/href="([^"]+)"//;s/^"//;s/"$//' \
+    | grep -oE 'https?://[^"]+' | sort -u | while read -r url; do
+    code=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 10 "$url")
+    [ "$code" -lt 400 ] && echo "OK      $code  $url" || echo "BROKEN  $code  $url"
+  done
+  grep -c 'href=""' "$F"   # must print 0
+
+  # 3. Staleness — the hero .stamp "Dossier current as of" date must be
+  #    within 2 days of the call date, or re-verify before sending.
+
+  All three clean (or the gaps named in All Sources) before this ships.
+  Reference: evereffect_bdm_dossier_layout.md.
+-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Scott Irwin · EverEffect BDM Call Prep</title>
+<meta name="description" content="Apex Steel Pipe & Piling — a 29-day-old unanswered meeting ask, prepped ahead of booking so the next touch lands well.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#1B4712; --forest-deep:#0A1C08; --ink:#14210F;
+  --ee:#2F8C19; --lime:#8EC63F;
+  --paper:#F7F9F5; --line:rgba(27,71,18,.14); --mist:#5F6E58;
+  --good:#2e8b57; --warn:#c9762d; --bad:#c0392b;
+  --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+*,*:before,*:after{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+
+header.topbar{background:var(--forest-deep);color:#fff;display:flex;justify-content:space-between;
+  align-items:center;gap:1rem;flex-wrap:wrap;padding:.85rem clamp(1rem,4vw,2.5rem);border-bottom:1px solid rgba(255,255,255,.09)}
+.topbar-left{display:flex;align-items:center;gap:.9rem}
+.brand-logo{height:1.9rem;width:auto;display:block;flex:none}
+.brand-logo-hero{height:2.15rem;width:auto;display:block}
+.brand-logo-foot{height:1.3rem;width:auto;display:block;opacity:.92}
+.topbar h1{font-size:.95rem;font-weight:700;letter-spacing:-.01em;margin-top:.15rem}
+.topbar-sub{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.topbar-right{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+.status-badge{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;
+  border-radius:99px;padding:.3rem .75rem;background:rgba(46,139,87,.16);color:var(--good);border:1px solid rgba(46,139,87,.4)}
+
+header.hero{background:linear-gradient(160deg,var(--forest-deep),var(--forest));color:#fff;padding:3rem 0 2.4rem}
+.hero-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:2rem}
+.brand{font-family:var(--serif);font-weight:900;font-size:1.15rem;color:var(--lime)}
+.brand small{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.25em;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:.2rem}
+.stamp{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:rgba(255,255,255,.5);text-transform:uppercase;text-align:right;line-height:1.8}
+h1.big{font-family:var(--serif);font-weight:900;font-size:clamp(1.7rem,3.8vw,2.7rem);line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+h1.big em{font-style:italic;color:var(--lime)}
+.hero-sub{margin-top:1rem;color:rgba(255,255,255,.72);max-width:660px;line-height:1.65;font-size:.92rem}
+.hero-stats{display:flex;gap:2.2rem;flex-wrap:wrap;margin-top:1.8rem}
+.hstat b{display:block;font-family:var(--serif);font-weight:900;font-size:1.5rem;color:var(--lime);font-variant-numeric:tabular-nums}
+.hstat span{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+
+nav.tabbar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);
+  display:flex;gap:.25rem;overflow-x:auto;padding:.6rem clamp(1rem,4vw,2.5rem)}
+nav.tabbar button{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  background:none;border:1px solid transparent;border-radius:99px;padding:.55rem 1.05rem;cursor:pointer;
+  color:var(--mist);white-space:nowrap;transition:all .25s}
+nav.tabbar button:hover{color:var(--forest)}
+nav.tabbar button.on{background:var(--forest);color:#fff}
+nav.tabbar button:focus-visible{outline:2px solid var(--ee);outline-offset:2px}
+
+section.panel{display:none;padding:2.4rem 0 3.4rem}
+section.panel.on{display:block}
+h2.sec{font-family:var(--serif);font-weight:900;font-size:clamp(1.3rem,2.4vw,1.9rem);color:var(--forest);margin-bottom:.5rem;text-wrap:balance}
+.sec-sub{color:var(--mist);font-size:.86rem;margin-bottom:1.8rem;max-width:660px;line-height:1.6}
+h3.sub{font-family:var(--serif);font-weight:900;font-size:1.1rem;color:var(--forest);margin:2rem 0 .9rem}
+
+.grid{display:grid;gap:1rem}
+.g2{grid-template-columns:repeat(auto-fit,minmax(20rem,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.4rem}
+.card h3{font-family:var(--serif);font-weight:600;font-size:1rem;color:var(--forest);margin-bottom:.5rem}
+.card p{font-size:.85rem;color:#3f4d3a;line-height:1.6}
+.card p + p{margin-top:.5rem}
+.badge{display:inline-block;font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;
+  text-transform:uppercase;border-radius:99px;padding:.28rem .7rem;margin-bottom:.7rem}
+.b-good{background:rgba(46,139,87,.1);color:var(--good);border:1px solid rgba(46,139,87,.3)}
+.b-warn{background:rgba(201,118,45,.1);color:var(--warn);border:1px solid rgba(201,118,45,.3)}
+.b-bad{background:rgba(192,57,43,.1);color:var(--bad);border:1px solid rgba(192,57,43,.3)}
+.b-todo{background:rgba(95,110,88,.14);color:var(--mist);border:1px dashed var(--mist)}
+
+.note{background:rgba(142,198,63,.13);border:1px solid rgba(47,140,25,.35);border-radius:12px;
+  padding:1.1rem 1.35rem;font-size:.86rem;line-height:1.65;color:#2b3d25;margin-top:1.2rem}
+.note b{color:var(--forest)}
+.note.warn{background:rgba(201,118,45,.1);border-color:rgba(201,118,45,.35);color:#5c3a1a}
+.note.warn b{color:var(--warn)}
+.note.bad{background:rgba(192,57,43,.08);border-color:rgba(192,57,43,.35);color:#5c231a}
+.note.bad b{color:var(--bad)}
+
+.thread{display:grid;gap:.5rem;margin-top:.6rem}
+.msg{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.7rem .95rem;font-size:.83rem;line-height:1.55}
+.msg .who{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);margin-bottom:.25rem}
+.msg.them{border-left:3px solid var(--ee)}
+
+.steps{display:grid;gap:.6rem;counter-reset:s;margin-top:1.2rem}
+.step{display:grid;grid-template-columns:2rem 1fr;gap:.85rem;align-items:start;font-size:.86rem;
+  color:#3f4d3a;line-height:1.6;background:#fff;border:1px solid var(--line);border-radius:11px;padding:1.05rem 1.15rem}
+.step i{counter-increment:s;font-style:normal;font-family:var(--serif);font-weight:900;color:var(--ee);
+  background:rgba(47,140,25,.1);border:1px solid rgba(47,140,25,.35);border-radius:99px;width:1.8rem;height:1.8rem;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex:none}
+.step i:before{content:counter(s)}
+.step b{display:block;font-weight:650;color:var(--forest);font-size:.94rem;margin-bottom:.2rem}
+
+.objs{display:grid;gap:.6rem;margin-top:1rem}
+.obj{background:#fff;border:1px solid var(--line);border-radius:11px;padding:1rem 1.15rem;font-size:.85rem;line-height:1.6}
+.obj .q{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--warn);display:block;margin-bottom:.4rem}
+.obj .a{color:#3f4d3a}
+
+.proof{display:flex;gap:1.6rem;flex-wrap:wrap;margin-top:.6rem}
+.proof .num{font-family:var(--serif);font-weight:900;font-size:1.6rem;color:var(--ee);font-variant-numeric:tabular-nums}
+.proof .cap{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist)}
+
+table.audit{width:100%;border-collapse:collapse;margin-top:.8rem;font-size:.83rem}
+table.audit th{text-align:left;font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mist);padding:.5rem .6rem;border-bottom:2px solid var(--line)}
+table.audit td{padding:.6rem .6rem;border-bottom:1px solid var(--line);color:#3f4d3a;vertical-align:top}
+table.audit tr:last-child td{border-bottom:none}
+table.audit td b, table.audit th b{font-variant-numeric:tabular-nums}
+
+.srctable{width:100%;border-collapse:collapse;margin-top:.4rem;font-size:.8rem}
+.srctable th{text-align:left;font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mist);padding:.5rem .5rem;border-bottom:2px solid var(--line)}
+.srctable td{padding:.55rem .5rem;border-bottom:1px solid var(--line);color:#3f4d3a;vertical-align:top}
+.srctable a{color:var(--ee);text-decoration:none;border-bottom:1px solid rgba(47,140,25,.32);word-break:break-word}
+.srctable td.date{font-family:var(--mono);font-size:.74rem;color:var(--mist);white-space:nowrap}
+.conf{font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .5rem;border-radius:99px;white-space:nowrap;display:inline-block}
+.c-verified{background:rgba(46,139,87,.12);color:var(--good)}
+.c-single{background:rgba(201,118,45,.12);color:var(--warn)}
+
+.tablewrap{overflow-x:auto}
+
+.changelog{margin-top:.6rem;display:grid;gap:.55rem;list-style:none}
+.changelog li{display:flex;gap:.8rem;font-size:.82rem;line-height:1.55;color:#3f4d3a}
+.changelog time{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;color:var(--mist);white-space:nowrap;padding-top:.15rem;flex:none}
+
+footer.f{padding:2rem 0 2.6rem;border-top:1px solid var(--line);margin-top:.5rem;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem}
+
+@media(max-width:620px){
+  .step{grid-template-columns:2rem 1fr}
+  .hero-stats{gap:1.4rem}
+  table.audit,.srctable{display:block}
+}
+
+@media print{
+  @page{ size:Letter; margin:13mm 12mm 14mm; }
+  body{background:#fff}
+  nav.tabbar{display:none !important}
+  header.topbar{display:none !important}
+  section.panel{display:block !important; padding:0 0 6mm; break-before:page; page-break-before:always}
+  section.panel:first-of-type{break-before:auto; page-break-before:auto}
+  header.hero{break-after:avoid; page-break-after:avoid; margin-bottom:6mm}
+  .card,.step,.msg,.note,.obj,.changelog li{break-inside:avoid; page-break-inside:avoid}
+  h2.sec{break-after:avoid; page-break-after:avoid}
+  .grid{display:block}
+  .grid > *{margin-bottom:4mm}
+  .wrap{max-width:none;padding:0}
+  body{font-size:9.4pt}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <img class="brand-logo" src="../../../assets/ee-logo.png" alt="EverEffect">
+    <div>
+      <h1>Scott Irwin &middot; BDM Call Prep</h1>
+      <div class="topbar-sub">Internal BDM prep &middot; shared with Chris for feedback &middot; never sent to the lead</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="status-badge">Not booked yet &middot; 29-day overdue reply</span>
+  </div>
+</header>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="brand"><img class="brand-logo-hero" src="../../../assets/ee-logo.png" alt="EverEffect"><small>BDM Lead Pack</small></div>
+      <div class="stamp">Call: not yet booked<br>Prep built ahead of outreach<br>Dossier current as of Aug 21, 2026</div>
+    </div>
+    <h1 class="big">Scott Irwin &mdash; <em>Apex Steel Pipe &amp; Piling.</em></h1>
+    <p class="hero-sub">Owner of a 30-plus-year Houston steel pipe and piling supplier personally asked
+    for a coffee meeting on July 23 and has heard nothing back since. This dossier exists to close that
+    gap fast &mdash; the job here is follow-through, not more persuasion.</p>
+    <div class="hero-stats">
+      <div class="hstat"><b>29</b><span>Days his meeting ask has sat unanswered</span></div>
+      <div class="hstat"><b>~5yr</b><span>Since his last YouTube upload</span></div>
+      <div class="hstat"><b>0</b><span>Contacts enrolled in his Apollo sequence</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabbar" id="tabs">
+  <button data-p="glance" class="on">Who You're Meeting</button>
+  <button data-p="stand">Where They Stand</button>
+  <button data-p="seo">Site &amp; SEO Audit</button>
+  <button data-p="comp">Competitive Landscape</button>
+  <button data-p="thread">The Actual Thread</button>
+  <button data-p="disco">Discovery Script</button>
+  <button data-p="deal">Deal Qualification</button>
+  <button data-p="proof">Proof Points</button>
+  <button data-p="sources">All Sources</button>
+</nav>
+
+<div class="wrap">
+
+<section class="panel on" id="p-glance">
+  <h2 class="sec">Scott Irwin &mdash; confirmed across ZoomInfo, RocketReach, LinkedIn &amp; the company site</h2>
+  <p class="sec-sub">Owner/CEO role and company identity cross-checked across four independent sources, not a single-source guess.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-good">Verified across 3 sources</span>
+      <h3>Company &amp; role</h3>
+      <p>Scott Irwin is the owner/CEO of Apex Steel Pipe &amp; Piling in Houston, TX (scott@apexpipe.com;
+      direct line (713) 818-0486 per RocketReach; company main line (713) 355-5200). He personally handles
+      the buy-side of the business &mdash; the company site's own "WE BUY" section lists him by name as the
+      direct contact for pipeline takeups, demolition jobs, and new-surplus/used pipe purchases. BSBA in
+      Marketing, University of Arkansas (1976&ndash;1981), which explains the site's own "Call those Hogs!"
+      sign-off.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Checked live</span>
+      <h3>Company scale &amp; footprint</h3>
+      <p>30-plus years in business (LinkedIn: "over 30 years in the steel pipe" business; listed in the
+      Blue Book Building &amp; Construction Network since 1999). Five active stocking yards: Houston TX
+      (HQ, 1221 S. Shepherd Dr.), Uvalde TX, Oklahoma City OK, Picayune MS, and Abilene KS. Estimated
+      25&ndash;100 employees, $25M&ndash;$100M revenue band (ZoomInfo/Owler &mdash; single-source, treat as
+      directional, not exact).</p>
+    </div>
+  </div>
+
+  <h3 class="sub">Timing &mdash; recent triggers <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <div class="grid g2">
+    <div class="card"><span class="badge b-good">Checked, found &mdash; this is the whole reason for this dossier</span>
+      <h3>An explicit meeting ask has gone unanswered for 29 days</h3>
+      <p>On 2026-07-23, replying to EverEffect's outbound, Scott's side wrote that he'd "love to have a
+      cuppa coffee" &mdash; an unprompted, personal, low-friction ask. EverEffect's own outbound review
+      ranked it the #1 most urgent open reply as of 2026-08-04, purely because of internal inaction, not
+      anything on his end. As of this writing (2026-08-21) it is still unanswered. An Apollo sequence was
+      built for him afterward but sits at 0 contacts enrolled &mdash; both the direct API and the browser
+      Prospect Searcher failed to enroll him, and a CSV-upload fallback was never tried. Nothing has
+      actually gone back to him yet.</p>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>The angle that matters for this call.</b> He already said yes to the meeting &mdash; the entire
+    prep problem here is our own follow-through, not his interest level. Open by owning the delay plainly
+    (no over-apologizing) and get straight to a real time on the calendar. Anything that reads like a
+    fresh cold pitch after a month of silence will land as careless, not thorough.
+  </div>
+</section>
+
+<section class="panel" id="p-stand">
+  <h2 class="sec">Where they actually stand, digitally</h2>
+  <p class="sec-sub">Sourced digital-footprint findings, checked live 2026-08-21. Explicit "checked, not
+  found" callouts for anything searched and confirmed absent, not silently omitted.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-warn">Checked live, found</span>
+      <h3>A broken inventory widget on the homepage</h3>
+      <p>The "Welcome to Apex" page (apexpipe.com/welcome-to-apex-2) renders a "No Rows To Show" placeholder
+      where a live inventory table should load &mdash; confirmed on a direct browser render 2026-08-21.
+      Whatever feed powers that table isn't loading for at least some visitors. A concrete, fixable,
+      visible problem to raise &mdash; more useful on a call than an abstract "your SEO could be better."</p>
+    </div>
+    <div class="card"><span class="badge b-warn">Checked live, thin across every platform</span>
+      <h3>Google Business Profile <span style="font-family:var(--mono);font-size:.58rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+      <p>No standalone Google Business Profile knowledge panel surfaced in a direct search &mdash; review
+      volume is aggregated mainly through Birdeye (4.2&#9733;, 24 reviews) rather than a strong native
+      Google listing. Facebook shows 5.0&#9733; but on only 3 reviews and 350+ followers. LinkedIn is the
+      strongest channel at 830+ followers. None of these alone is a red flag, but together they read as a
+      real 30-year business that has never invested in its digital presence to match its actual scale.</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="p-seo">
+  <h2 class="sec">Site &amp; SEO audit &mdash; apexpipe.com</h2>
+  <p class="sec-sub">Live technical pass, checked 2026-08-21. Direct WebFetch requests to the domain
+  returned HTTP 403 (server-side filtering, not a CAPTCHA) &mdash; so most rows below are a browser-render
+  pass, not a full page-source crawl. Named explicitly, not thinned out silently.</p>
+
+  <table class="audit">
+    <tr><th>Check</th><th>Finding</th><th>Status</th></tr>
+    <tr><td>Title tag</td><td>Confirmed via browser render: "Apex Steel Pipe - Buys and Sells New and Used Steel Pipe" &mdash; page-source not directly checked</td><td><span class="badge b-warn">Partial</span></td></tr>
+    <tr><td>Meta description</td><td>Blocked &mdash; requires page-source access, not reachable this pass</td><td><span class="badge b-todo">Not yet checked</span></td></tr>
+    <tr><td>Open Graph tags</td><td>Blocked &mdash; requires page-source access, not reachable this pass</td><td><span class="badge b-todo">Not yet checked</span></td></tr>
+    <tr><td>Structured data / schema</td><td>Blocked &mdash; requires page-source access, not reachable this pass</td><td><span class="badge b-todo">Not yet checked</span></td></tr>
+    <tr><td>Canonical tag</td><td>Blocked &mdash; requires page-source access, not reachable this pass</td><td><span class="badge b-todo">Not yet checked</span></td></tr>
+    <tr><td>H1 structure</td><td>Blocked &mdash; requires page-source access, not reachable this pass</td><td><span class="badge b-todo">Not yet checked</span></td></tr>
+    <tr><td>robots.txt</td><td>Not checked this pass</td><td><span class="badge b-todo">Not yet checked</span></td></tr>
+    <tr><td>Sitemap</td><td>Not checked this pass</td><td><span class="badge b-todo">Not yet checked</span></td></tr>
+    <tr><td>Image alt text</td><td>Blocked &mdash; requires page-source access, not reachable this pass</td><td><span class="badge b-todo">Not yet checked</span></td></tr>
+    <tr><td>Core Web Vitals / PageSpeed <span style="font-family:var(--mono);font-size:.58rem;color:var(--mist);">(new in v2)</span></td><td>Blocked &mdash; PageSpeed Insights API returned "Quota exceeded ... Queries per day" on this account, the same daily limit hit on other recent EverEffect dossiers. Needs a fresh quota day or Semrush/Ahrefs instead.</td><td><span class="badge b-bad">Blocked (quota)</span></td></tr>
+    <tr><td>Interior pages <span style="font-family:var(--mono);font-size:.58rem;color:var(--mist);">(new in v2)</span></td><td>Homepage confirmed live and content-rich via direct browser render (five yard locations, full product lines, named buy/sell contacts, community program). "Welcome to Apex" interior page also rendered, but with the broken inventory widget noted on Where They Stand. Deeper interior pages (Meet the Team, Conehead Speakers) not checked this pass.</td><td><span class="badge b-warn">Partial</span></td></tr>
+  </table>
+
+  <div class="note warn">
+    <b>Thinner-than-usual pass, flagged honestly.</b> The 403 on direct fetch limited this to a
+    browser-render check rather than a full source crawl, and the PageSpeed quota block is out of our
+    control today. Neither is a reason to hold the call &mdash; a Semrush/Ahrefs re-check is the natural
+    follow-up, not a blocker.
+  </div>
+</section>
+
+<section class="panel" id="p-comp">
+  <h2 class="sec">Competitive landscape <span style="font-family:var(--mono);font-size:.62rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">&mdash; new tab in v2</span></h2>
+  <p class="sec-sub">Not just who the named competitors are &mdash; what they're actually doing on the same
+  channel this pitch is about. A name list is trivia; a side-by-side is a talking point.</p>
+
+  <div class="tablewrap">
+  <table class="audit">
+    <tr><th>Competitor</th><th>YouTube / content presence</th><th>Paid ads (Google/Meta)</th><th>How Apex compares</th></tr>
+    <tr><td>Apex Steel Pipe &amp; Piling (Scott's own line, for reference)</td><td>One video, 141 views, uploaded ~5 years ago &mdash; dormant channel</td><td>No paid ads found (not exhaustively checked)</td><td>&mdash;</td></tr>
+    <tr><td>Rushmore Enterprises Inc. (Baytown, TX &mdash; 30+ yrs, Chevron/BP/ExxonMobil clients per their own site)</td><td>Zero relevant YouTube presence found under the company name</td><td>Not checked</td><td>Ahead on brand pedigree, but shows zero video content either &mdash; the vertical looks underserved on video, not just Apex</td></tr>
+    <tr><td>Midstate Steel</td><td>Not independently found beyond being named a competitor on Owler; no separate research this pass</td><td>Not checked</td><td>Too thin to call &mdash; flagged, not compared</td></tr>
+    <tr><td>Pipe Exchange</td><td>Not independently found beyond being named a competitor on Owler; no separate research this pass</td><td>Not checked</td><td>Too thin to call &mdash; flagged, not compared</td></tr>
+  </table>
+  </div>
+
+  <div class="note">
+    <b>How to use this on the call.</b> The honest pitch isn't "your competitors are beating you on
+    video" &mdash; none of the three named competitors show real YouTube activity either, including
+    Rushmore, the most credentialed one. The real angle is first-mover: a 30-year, five-yard operation
+    with genuine community programs (scholarships, internships, golf sponsorship) already has real
+    content to work with, and zero competitors currently doing anything with theirs.
+  </div>
+</section>
+
+<section class="panel" id="p-thread">
+  <h2 class="sec">The actual conversation, verbatim</h2>
+  <p class="sec-sub">Pulled from EverEffect's internal lead ledger, sourced from the Outbound System
+  reply thread. Verbatim phrase, not a paraphrase.</p>
+
+  <h3 class="sub">Engagement signals <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <p class="sec-sub" style="margin-bottom:.8rem;">Pulled from Outbound System / Unibox / Apollo where available.
+  A measured read of intent, not a guess from tone alone.</p>
+  <div class="proof">
+    <div><div class="num">N/A</div><div class="cap">Opens (not tracked)</div></div>
+    <div><div class="num">N/A</div><div class="cap">Link clicks (not tracked)</div></div>
+    <div><div class="num">29d</div><div class="cap">And counting &mdash; his message is the one waiting on us</div></div>
+  </div>
+
+  <div class="thread" style="margin-top:1.4rem;">
+    <div class="msg them"><div class="who">Scott Irwin (or team) &middot; 2026-07-23</div>"Would love to have a cuppa coffee."</div>
+  </div>
+
+  <div class="note">
+    <b>Not yet re-pulled.</b> The quote above is the verbatim phrase on record in EverEffect's own
+    internal lead ledger (2026-07-23 entry) &mdash; the full original message and channel weren't
+    re-pulled from Outbound System for this pass. Pull the complete thread before the call if a fuller
+    quote is needed.
+  </div>
+</section>
+
+<section class="panel" id="p-disco">
+  <h2 class="sec">Discovery script &mdash; tuned to what we now know</h2>
+  <p class="sec-sub">v2 restructures this tab into a real call flow: open with the specific finding, qualify
+  with questions tied to what we found (not a generic BANT script), handle the objections we can already
+  see coming, then close on a named ask. Acting on the research, not just presenting it.</p>
+
+  <h3 class="sub">1. Open with the specific finding</h3>
+  <div class="steps">
+    <div class="step"><i></i><div><b>Own the delay, then get straight to a time</b> Something like: "I
+    owe you an apology &mdash; you asked for coffee back on July 23 and it fell through the cracks on our
+    end, not yours. I don't want that to turn into a cold restart, so let's just find a time this week."
+    Concrete, no over-explaining, straight to scheduling.</div></div>
+  </div>
+
+  <h3 class="sub">2. Qualifying questions &mdash; tied to what we found <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <p class="sec-sub">Every question below exists because of a specific finding elsewhere in this dossier,
+  not a generic script. Ask them, then write the answer straight into the Deal Qualification tab &mdash; an
+  unanswered qualifying question is itself a finding, log it as "not yet asked," don't leave it silent.</p>
+
+  <div class="tablewrap">
+  <table class="audit">
+    <tr><th>Ask</th><th>Why we're asking it</th><th>Listen for</th></tr>
+    <tr>
+      <td>"With five yards now, is there a marketing budget already carved out anywhere, or would this be a new line item?"</td>
+      <td>Tied to the Budget Signal card in Deal Qualification &mdash; no existing ad spend was found in research.</td>
+      <td>An existing spend line somewhere (real budget authority) vs. no ad spend history anywhere (a greenfield sell).</td>
+    </tr>
+    <tr>
+      <td>"Is this a call where you're the final word, or does anyone else &mdash; a partner, GM, or family member &mdash; weigh in?"</td>
+      <td>Tied to the Decision Authority card &mdash; no co-owner surfaced in research, but that's not confirmed yet.</td>
+      <td>A named co-decision-maker (routes the next step to them too) vs. a confirmed sole owner.</td>
+    </tr>
+    <tr>
+      <td>"When someone searches for a steel pipe supplier near one of your yards, how do you know whether you're the one they find first?"</td>
+      <td>Tied to the thin Google Business Profile / broken inventory-widget findings on Where They Stand and Site &amp; SEO Audit.</td>
+      <td>No real visibility tracking today (bigger, more urgent need) vs. an existing process we'd be improving.</td>
+    </tr>
+    <tr>
+      <td>"Is there something specific going on right now that made 'let's grab coffee' feel timely?"</td>
+      <td>Tied to the Timing block on Who You're Meeting &mdash; his ask itself is the trigger, worth naming directly.</td>
+      <td>A real, dated reason (real urgency) vs. no particular reason (longer, slower sales cycle either way).</td>
+    </tr>
+    <tr>
+      <td>"Are you already looking at anyone else for this, or is this the first real conversation about it?"</td>
+      <td>Tied to the Competitive Landscape tab &mdash; no named competitor shows real content investment either.</td>
+      <td>Active evaluation of a named competitor (real urgency and leverage) vs. no active search (more of an education conversation).</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3 class="sub">3. Anticipated objections</h3>
+  <div class="objs">
+    <div class="obj"><span class="q">"We've been in business 30 years without needing this."</span><span class="a">That's exactly the asset this pitch uses &mdash; the problem isn't credibility, it's that none of that 30-year track record, the five-yard network, or the scholarship/internship programs is visible anywhere outside word-of-mouth and a thin follower count. This isn't "you need to prove yourself," it's "you already have the proof, it's just not findable."</span></div>
+    <div class="obj"><span class="q">"We're a B2B industrial supplier, not a consumer brand &mdash; does content even matter for us?"</span><span class="a">Rushmore Enterprises, the most credentialed named competitor (Chevron/BP/ExxonMobil clients), has zero real YouTube presence either. The whole vertical is underinvested here, which is the opening, not a reason to skip it.</span></div>
+    <div class="obj"><span class="q">"Why is EverEffect reaching out again a month later?"</span><span class="a">Direct answer, no spin: it sat on our side, not because interest cooled. Own it plainly in the open (see step 1), then move straight to scheduling.</span></div>
+  </div>
+
+  <h3 class="sub">4. Close: recommended package &amp; next step <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <div class="steps">
+    <div class="step"><i></i><div><b>Ask for the specific thing this dossier points to</b> Given this is
+    a warm, self-initiated ask rather than a cold pitch, the right close is a real calendar hold this
+    week &mdash; not a proposal, not a free-audit offer. If the call lands well, the natural next step is
+    a scoped visibility audit across the five yard locations' Business Profile presence plus a first video
+    concept built from the community programs already in motion (Conehead Internship Program,
+    scholarships, golf sponsorship).</div></div>
+  </div>
+</section>
+
+<section class="panel" id="p-deal">
+  <h2 class="sec">Deal qualification <span style="font-family:var(--mono);font-size:.62rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">&mdash; new tab in v2</span></h2>
+  <p class="sec-sub">Every prep before v2 was pure research and rapport, with no read on whether this is a
+  deal worth advancing. Four honest questions, answered from what's actually known &mdash; guess less,
+  flag the gap more.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-todo">Signal, not certainty</span>
+      <h3>Budget signal</h3>
+      <p>Estimated $25M&ndash;$100M revenue band, 25&ndash;100 employees (ZoomInfo/Owler, single-source, not
+      cross-verified against a filing). No confirmed existing ad spend found on Google or Meta. A five-yard
+      operation this size plausibly supports a real marketing budget, but that's inferred from scale, not
+      confirmed.</p>
+    </div>
+    <div class="card"><span class="badge b-warn">Confirm on the call</span>
+      <h3>Decision authority &amp; other stakeholders</h3>
+      <p>Scott Irwin appears to be the sole named decision-maker on the ownership/buy side &mdash; no
+      partner, board, or marketing lead surfaced in research. Confirm directly rather than assuming; a
+      family-owned operation this size sometimes has an unlisted co-owner.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Checked &mdash; none found</span>
+      <h3>Red flags / walk-away signals</h3>
+      <p>Nothing found that argues against pursuing this deal. The one real caution is unrelated to Scott
+      himself: EverEffect's own month-long non-response is the actual risk factor here, not anything about
+      the account.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Recommended</span>
+      <h3>Recommended EverEffect package &amp; likely deal size</h3>
+      <p>Given a multi-location B2B industrial supplier with no existing content program and strong latent
+      brand material, the realistic entry point is a scoped local-visibility + video-content package:
+      Google Business Profile buildout across the five yards plus a short recurring YouTube/social cadence
+      anchored in the existing community programs &mdash; not a full-funnel paid-ads engagement on a first
+      deal.</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="p-proof">
+  <h2 class="sec">Proof points, honestly scoped</h2>
+  <p class="sec-sub">State plainly if a case study isn't a direct match for this lead's angle, don't
+  oversell it.</p>
+  <div class="card">
+    <h3>No closely-matching industrial B2B case study on file yet</h3>
+    <p>EverEffect's proof points to date run toward local-service and consumer-facing clients; nothing in
+    the current case-study set is a close vertical match for a multi-location industrial steel supplier.
+    Say this plainly on the call rather than stretching an unrelated case study to fit &mdash; the stronger
+    opening is the Apex-specific findings already in this dossier (the dormant YouTube video, the
+    competitive gap, the ready-to-use community-program content), not a borrowed number.</p>
+  </div>
+</section>
+
+<section class="panel" id="p-sources">
+  <h2 class="sec">All sources</h2>
+  <p class="sec-sub">Every link used anywhere in this dossier, consolidated. Confidence: Verified
+  (cross-checked across independent sources) or Single-source. Checked date is per-claim, not just a
+  single blanket date at the bottom &mdash; this dossier may get revisited and extended more than once.</p>
+
+  <div class="tablewrap">
+  <table class="srctable">
+    <tr><th>Claim</th><th>Source</th><th>Confidence</th><th>Checked</th></tr>
+    <tr><td>Company overview, 5 stocking yards, product lines, buy/sell contacts</td><td><a href="https://apexpipe.com/" target="_blank" rel="noopener">apexpipe.com</a></td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Scott Irwin is owner/CEO; contact scott@apexpipe.com, (713) 818-0486</td><td><a href="https://www.zoominfo.com/p/Scott-Irwin/8764344321" target="_blank" rel="noopener">ZoomInfo</a>, <a href="https://rocketreach.co/scott-irwin-email_10286967" target="_blank" rel="noopener">RocketReach</a>, <a href="https://www.linkedin.com/in/scott-irwin-2590647/" target="_blank" rel="noopener">LinkedIn</a></td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Education: BSBA Marketing, University of Arkansas 1976&ndash;1981</td><td><a href="https://www.zoominfo.com/p/Scott-Irwin/8764344321" target="_blank" rel="noopener">ZoomInfo</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>30+ years in business; Blue Book listing since 1999</td><td><a href="https://www.linkedin.com/company/apex-steel-pipe-piling" target="_blank" rel="noopener">LinkedIn company page</a>, <a href="https://www.thebluebook.com" target="_blank" rel="noopener">Blue Book</a></td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Revenue band $25M&ndash;$100M, 25&ndash;100 employees</td><td><a href="https://www.owler.com/company/apexpipe" target="_blank" rel="noopener">Owler</a> / ZoomInfo</td><td><span class="conf c-single">Single-source</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>4.2&#9733; / 24 reviews (Birdeye), 5.0&#9733; / 3 reviews &amp; 350+ followers (Facebook), 830+ followers (LinkedIn)</td><td><a href="https://reviews.birdeye.com" target="_blank" rel="noopener">Birdeye</a>, <a href="https://www.facebook.com/apexsteelpipe/" target="_blank" rel="noopener">Facebook</a>, LinkedIn</td><td><span class="conf c-single">Single-source per platform</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Homepage inventory widget shows "No Rows To Show"</td><td><a href="https://apexpipe.com/" target="_blank" rel="noopener">apexpipe.com</a> (direct browser render)</td><td><span class="conf c-verified">Verified &mdash; directly observed</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>One YouTube video, 141 views, ~5 years old; no other channel activity</td><td><a href="https://www.youtube.com/results?search_query=Apex+Steel+Pipe+Piling" target="_blank" rel="noopener">YouTube search</a></td><td><span class="conf c-verified">Verified &mdash; directly observed</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>PageSpeed Insights API blocked &mdash; daily quota exceeded</td><td>Direct API call to pagespeedonline.googleapis.com</td><td><span class="conf c-verified">Verified &mdash; directly observed</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Direct WebFetch to apexpipe.com returns HTTP 403</td><td>WebFetch tool, direct attempt</td><td><span class="conf c-verified">Verified &mdash; directly observed</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Rushmore Enterprises: Baytown TX, 30+ yrs, Chevron/BP/ExxonMobil clients, zero YouTube presence found</td><td><a href="https://www.rushmorepipes.com/" target="_blank" rel="noopener">rushmorepipes.com</a>, YouTube search</td><td><span class="conf c-verified">Verified</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>Midstate Steel and Pipe Exchange named as competitors, not independently researched further</td><td><a href="https://www.owler.com/company/apexpipe" target="_blank" rel="noopener">Owler</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">2026-08-21</td></tr>
+    <tr><td>The 29-day-unanswered "cuppa coffee" ask, empty Apollo sequence</td><td>EverEffect internal lead ledger (2026-08-20 entry)</td><td><span class="conf c-verified">Verified &mdash; internal record</span></td><td class="date">2026-08-21</td></tr>
+  </table>
+  </div>
+
+  <h3 class="sub">Changelog <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <p class="sec-sub" style="margin-bottom:.4rem;">What changed since Chris (or anyone re-opening this) last saw it. Newest first.</p>
+  <ul class="changelog">
+    <li><time>2026-08-21</time><span>First build. Prepped ahead of booking, per Evans's direction to get ahead of leads showing real interest before they're on the calendar.</span></li>
+  </ul>
+
+  <div class="note">
+    <b>Not yet checked.</b> Full page-source SEO elements (meta/OG/schema/canonical/H1/robots/sitemap/alt
+    text) &mdash; blocked by a 403 on direct fetch, browser-only pass this round. Individual competitor
+    deep-dives on Midstate Steel and Pipe Exchange. A re-pulled, full verbatim quote of the original
+    "cuppa coffee" message &mdash; only the short phrase on record was used here.
+  </div>
+</section>
+
+<footer class="f">
+  <span>Internal BDM prep &middot; shared with Chris for feedback &middot; never sent to the lead &middot; 2026-08-21</span>
+  <span><img class="brand-logo-foot" src="../../../assets/ee-logo.png" alt="EverEffect"></span>
+</footer>
+</div>
+
+<script>
+var tabs=document.querySelectorAll('#tabs button'),panels=document.querySelectorAll('.panel');
+tabs.forEach(function(b){b.addEventListener('click',function(){
+  tabs.forEach(function(x){x.classList.remove('on')});
+  panels.forEach(function(p){p.classList.remove('on')});
+  b.classList.add('on');
+  document.getElementById('p-'+b.dataset.p).classList.add('on');
+  b.scrollIntoView({block:'nearest',inline:'nearest'});
+  window.scrollTo({top:0,behavior:'smooth'});
+})});
+</script>
+</body>
+</html>

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  EverEffect BDM Dossier — starter shell, v2 (proposed 2026-08-20)
+  =================================================================
+  Copy this file to build a new lead's prep. Fill in every TODO, delete none
+  of the 9 panels below without stating why in All Sources — same rule as v1.
+
+  WHAT'S NEW IN V2, AND WHY (see the v1 lesson this fixes in parens):
+  - p-comp   (Competitive Landscape): promoted from a buried card to its own
+             tab, now a side-by-side table instead of a name list.
+  - p-deal   (Deal Qualification): budget signal, decision authority, red
+             flags, recommended package. Every v1 prep had zero of this.
+  - p-seo    gained two audit rows: Core Web Vitals/PageSpeed and Interior
+             Pages — both were "not yet checked" in literally every prep
+             built so far because no tool was ever wired up for them.
+  - p-glance gained a "Timing" block for recent triggers (news, funding,
+             leadership change) — done ad hoc for other leads, never a
+             standard step.
+  - p-thread gained an Engagement Signals strip (opens/clicks/reply latency)
+             above the verbatim thread, so "low-commitment reply" is a
+             measured read, not a guess.
+  - p-sources gained a Checked-date column and a changelog list — Sean
+             Hicks's prep was rebuilt across three separate days with no
+             way to see what changed between opens.
+  - p-disco  restructured into a real call flow — open, then a Qualifying
+             Questions table where every question is tied to a specific
+             finding elsewhere in the dossier (budget → paid-ads/SEO
+             findings, authority → stakeholders, need → the metadata gap
+             found, timing → the Timing block, competitive → the Competitive
+             Landscape tab), then objections, then the v2 close step. Acts
+             on the research instead of just presenting it.
+  - Branding: swapped the placeholder "EE" mark for the real EverEffect
+             logo (pulled live from evereffect.com), inlined as a data URI
+             in the topbar, hero, and footer — no more improvised wordmark.
+  - Build checklist below now checks links resolve and the dossier isn't
+             stale, not just that the 9 tabs exist (v1 only checked tab IDs
+             and empty hrefs — that's how a claim could go unverified into
+             a draft to Chris and still pass).
+  - p-aivis   (AI Visibility) — new tab, added 2026-08-21 after reviewing
+             Visto's AI Search Visibility Audit run on Keller & Keller.
+             Every prior tab audits traditional SEO signals (meta tags,
+             schema, backlinks) but none of them ever asked an AI model a
+             buying question and recorded the answer — which is the actual
+             mechanism deciding whether a prospect's future customers hear
+             this lead's name at all. Covers: buying-question sample results,
+             share of voice against named competitors, citation-source
+             tally, zero-presence topic map, and AI-answer sentiment. Manual
+             process for now (no tool wired up yet — see All Sources for
+             the caveat this implies), same category of gap Core Web
+             Vitals/PageSpeed was before it got wired up. This also
+             supersedes the "add Visibility Scoring to Site & SEO Audit"
+             ask below — it's a dedicated tab now, not a row.
+
+  THOMAS'S REVIEW PASS, 2026-08-21 — 4 standing changes to how p-stand
+  and p-seo get filled in (not just this one prep):
+  1. Employer-review platforms (Glassdoor, Indeed) are OUT of p-stand.
+     They rate the company as a workplace, not as a vendor — not what an
+     AI model or a customer is evaluating. Google + Yelp stay; Google
+     especially, since LLMs weigh it heavily when deciding who to cite.
+  2. Site & SEO Audit's "Visibility Scoring" ask is now covered by the
+     p-aivis tab above (see that entry) — no separate SEO-tab row needed.
+  3. Negative sentiment/reviews findings get surfaced ALWAYS, never gated
+     on "only raise if the prospect brings it up." Locked 2026-08-21,
+     overriding the v1/early-v2 instinct to hold reputational negatives in
+     reserve: naming them first builds credibility and opens a concrete
+     solution angle, and AI models weigh sentiment when deciding which
+     businesses get recommended, not just cited.
+  4. p-deal (Deal Qualification): Thomas is drafting a YouTube Channel
+     Optimization deliverables list to fold in here — pending his send,
+     not yet built. Don't invent deliverables in the meantime.
+
+  MANDATORY BEFORE ANY PUSH OR CHRIS-FACING DRAFT — run all three:
+
+  F=<path to the built prep index.html>
+
+  # 1. All 10 tabs present, or a stated reason for the ones missing
+  for tab in glance stand seo aivis comp thread disco deal proof sources; do
+    grep -q "id=\"p-$tab\"" "$F" && echo "OK      p-$tab" \
+      || echo "MISSING p-$tab (state the reason in All Sources, or build it)"
+  done
+
+  # 2. Every link actually resolves — a broken source is worse than none
+  grep -oE 'href="https?://[^"]+"' "$F" | sed -E 's/href="([^"]+)"//;s/^"//;s/"$//' \
+    | grep -oE 'https?://[^"]+' | sort -u | while read -r url; do
+    code=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 10 "$url")
+    [ "$code" -lt 400 ] && echo "OK      $code  $url" || echo "BROKEN  $code  $url"
+  done
+  grep -c 'href=""' "$F"   # must print 0
+
+  # 3. Staleness — the hero .stamp "Dossier current as of" date must be
+  #    within 2 days of the call date, or re-verify before sending.
+
+  All three clean (or the gaps named in All Sources) before this ships.
+  Reference: evereffect_bdm_dossier_layout.md.
+-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Sylvain Aubé · EverEffect BDM Call Prep</title>
+<meta name="description" content="EverEffect BDM call prep for Sylvain Aub&eacute;, CTO/Co-founder of HIZITIV: a real inbound self-booking with zero prior outreach, real company research, and an honest AI-visibility test.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#1B4712; --forest-deep:#0A1C08; --ink:#14210F;
+  --ee:#2F8C19; --lime:#8EC63F;
+  --paper:#F7F9F5; --line:rgba(27,71,18,.14); --mist:#5F6E58;
+  --good:#2e8b57; --warn:#c9762d; --bad:#c0392b;
+  --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+*,*:before,*:after{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+
+header.topbar{background:var(--forest-deep);color:#fff;display:flex;justify-content:space-between;
+  align-items:center;gap:1rem;flex-wrap:wrap;padding:.85rem clamp(1rem,4vw,2.5rem);border-bottom:1px solid rgba(255,255,255,.09)}
+.topbar-left{display:flex;align-items:center;gap:.9rem}
+.brand-logo{height:1.9rem;width:auto;display:block;flex:none}
+.brand-logo-hero{height:2.15rem;width:auto;display:block}
+.brand-logo-foot{height:1.3rem;width:auto;display:block;opacity:.92}
+.topbar h1{font-size:.95rem;font-weight:700;letter-spacing:-.01em;margin-top:.15rem}
+.topbar-sub{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.topbar-right{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+.status-badge{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;
+  border-radius:99px;padding:.3rem .75rem;background:rgba(46,139,87,.16);color:var(--good);border:1px solid rgba(46,139,87,.4)}
+
+header.hero{background:linear-gradient(160deg,var(--forest-deep),var(--forest));color:#fff;padding:3rem 0 2.4rem}
+.hero-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:2rem}
+.brand{font-family:var(--serif);font-weight:900;font-size:1.15rem;color:var(--lime)}
+.brand small{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.25em;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:.2rem}
+.stamp{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:rgba(255,255,255,.5);text-transform:uppercase;text-align:right;line-height:1.8}
+h1.big{font-family:var(--serif);font-weight:900;font-size:clamp(1.7rem,3.8vw,2.7rem);line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+h1.big em{font-style:italic;color:var(--lime)}
+.hero-sub{margin-top:1rem;color:rgba(255,255,255,.72);max-width:660px;line-height:1.65;font-size:.92rem}
+.hero-stats{display:flex;gap:2.2rem;flex-wrap:wrap;margin-top:1.8rem}
+.hstat b{display:block;font-family:var(--serif);font-weight:900;font-size:1.5rem;color:var(--lime);font-variant-numeric:tabular-nums}
+.hstat span{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+
+nav.tabbar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);
+  display:flex;gap:.25rem;overflow-x:auto;padding:.6rem clamp(1rem,4vw,2.5rem)}
+nav.tabbar button{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  background:none;border:1px solid transparent;border-radius:99px;padding:.55rem 1.05rem;cursor:pointer;
+  color:var(--mist);white-space:nowrap;transition:all .25s}
+nav.tabbar button:hover{color:var(--forest)}
+nav.tabbar button.on{background:var(--forest);color:#fff}
+nav.tabbar button:focus-visible{outline:2px solid var(--ee);outline-offset:2px}
+
+section.panel{display:none;padding:2.4rem 0 3.4rem}
+section.panel.on{display:block}
+h2.sec{font-family:var(--serif);font-weight:900;font-size:clamp(1.3rem,2.4vw,1.9rem);color:var(--forest);margin-bottom:.5rem;text-wrap:balance}
+.sec-sub{color:var(--mist);font-size:.86rem;margin-bottom:1.8rem;max-width:660px;line-height:1.6}
+h3.sub{font-family:var(--serif);font-weight:900;font-size:1.1rem;color:var(--forest);margin:2rem 0 .9rem}
+
+.grid{display:grid;gap:1rem}
+.g2{grid-template-columns:repeat(auto-fit,minmax(20rem,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.4rem}
+.card h3{font-family:var(--serif);font-weight:600;font-size:1rem;color:var(--forest);margin-bottom:.5rem}
+.card p{font-size:.85rem;color:#3f4d3a;line-height:1.6}
+.card p + p{margin-top:.5rem}
+.badge{display:inline-block;font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;
+  text-transform:uppercase;border-radius:99px;padding:.28rem .7rem;margin-bottom:.7rem}
+.b-good{background:rgba(46,139,87,.1);color:var(--good);border:1px solid rgba(46,139,87,.3)}
+.b-warn{background:rgba(201,118,45,.1);color:var(--warn);border:1px solid rgba(201,118,45,.3)}
+.b-bad{background:rgba(192,57,43,.1);color:var(--bad);border:1px solid rgba(192,57,43,.3)}
+.b-todo{background:rgba(95,110,88,.14);color:var(--mist);border:1px dashed var(--mist)}
+
+.note{background:rgba(142,198,63,.13);border:1px solid rgba(47,140,25,.35);border-radius:12px;
+  padding:1.1rem 1.35rem;font-size:.86rem;line-height:1.65;color:#2b3d25;margin-top:1.2rem}
+.note b{color:var(--forest)}
+.note.warn{background:rgba(201,118,45,.1);border-color:rgba(201,118,45,.35);color:#5c3a1a}
+.note.warn b{color:var(--warn)}
+.note.bad{background:rgba(192,57,43,.08);border-color:rgba(192,57,43,.35);color:#5c231a}
+.note.bad b{color:var(--bad)}
+
+.thread{display:grid;gap:.5rem;margin-top:.6rem}
+.msg{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.7rem .95rem;font-size:.83rem;line-height:1.55}
+.msg .who{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);margin-bottom:.25rem}
+.msg.them{border-left:3px solid var(--ee)}
+
+.steps{display:grid;gap:.6rem;counter-reset:s;margin-top:1.2rem}
+.step{display:grid;grid-template-columns:2rem 1fr;gap:.85rem;align-items:start;font-size:.86rem;
+  color:#3f4d3a;line-height:1.6;background:#fff;border:1px solid var(--line);border-radius:11px;padding:1.05rem 1.15rem}
+.step i{counter-increment:s;font-style:normal;font-family:var(--serif);font-weight:900;color:var(--ee);
+  background:rgba(47,140,25,.1);border:1px solid rgba(47,140,25,.35);border-radius:99px;width:1.8rem;height:1.8rem;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex:none}
+.step i:before{content:counter(s)}
+.step b{display:block;font-weight:650;color:var(--forest);font-size:.94rem;margin-bottom:.2rem}
+
+.objs{display:grid;gap:.6rem;margin-top:1rem}
+.obj{background:#fff;border:1px solid var(--line);border-radius:11px;padding:1rem 1.15rem;font-size:.85rem;line-height:1.6}
+.obj .q{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--warn);display:block;margin-bottom:.4rem}
+.obj .a{color:#3f4d3a}
+
+.proof{display:flex;gap:1.6rem;flex-wrap:wrap;margin-top:.6rem}
+.proof .num{font-family:var(--serif);font-weight:900;font-size:1.6rem;color:var(--ee);font-variant-numeric:tabular-nums}
+.proof .cap{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist)}
+
+table.audit{width:100%;border-collapse:collapse;margin-top:.8rem;font-size:.83rem}
+table.audit th{text-align:left;font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mist);padding:.5rem .6rem;border-bottom:2px solid var(--line)}
+table.audit td{padding:.6rem .6rem;border-bottom:1px solid var(--line);color:#3f4d3a;vertical-align:top}
+table.audit tr:last-child td{border-bottom:none}
+table.audit td b, table.audit th b{font-variant-numeric:tabular-nums}
+
+.srctable{width:100%;border-collapse:collapse;margin-top:.4rem;font-size:.8rem}
+.srctable th{text-align:left;font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mist);padding:.5rem .5rem;border-bottom:2px solid var(--line)}
+.srctable td{padding:.55rem .5rem;border-bottom:1px solid var(--line);color:#3f4d3a;vertical-align:top}
+.srctable a{color:var(--ee);text-decoration:none;border-bottom:1px solid rgba(47,140,25,.32);word-break:break-word}
+.srctable td.date{font-family:var(--mono);font-size:.74rem;color:var(--mist);white-space:nowrap}
+.conf{font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .5rem;border-radius:99px;white-space:nowrap;display:inline-block}
+.c-verified{background:rgba(46,139,87,.12);color:var(--good)}
+.c-single{background:rgba(201,118,45,.12);color:var(--warn)}
+
+.tablewrap{overflow-x:auto}
+
+.changelog{margin-top:.6rem;display:grid;gap:.55rem;list-style:none}
+.changelog li{display:flex;gap:.8rem;font-size:.82rem;line-height:1.55;color:#3f4d3a}
+.changelog time{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;color:var(--mist);white-space:nowrap;padding-top:.15rem;flex:none}
+
+footer.f{padding:2rem 0 2.6rem;border-top:1px solid var(--line);margin-top:.5rem;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem}
+
+@media(max-width:620px){
+  .step{grid-template-columns:2rem 1fr}
+  .hero-stats{gap:1.4rem}
+  table.audit,.srctable{display:block}
+}
+
+@media print{
+  @page{ size:Letter; margin:13mm 12mm 14mm; }
+  body{background:#fff}
+  nav.tabbar{display:none !important}
+  header.topbar{display:none !important}
+  section.panel{display:block !important; padding:0 0 6mm; break-before:page; page-break-before:always}
+  section.panel:first-of-type{break-before:auto; page-break-before:auto}
+  header.hero{break-after:avoid; page-break-after:avoid; margin-bottom:6mm}
+  .card,.step,.msg,.note,.obj,.changelog li{break-inside:avoid; page-break-inside:avoid}
+  h2.sec{break-after:avoid; page-break-after:avoid}
+  .grid{display:block}
+  .grid > *{margin-bottom:4mm}
+  .wrap{max-width:none;padding:0}
+  body{font-size:9.4pt}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <img class="brand-logo" src="../../../assets/ee-logo.png" alt="EverEffect">
+    <div>
+      <h1>Sylvain Aub&eacute; &middot; BDM Call Prep</h1>
+      <div class="topbar-sub">Internal BDM prep &middot; shared with Chris for feedback &middot; never sent to the lead</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="status-badge">Inbound self-booking &middot; zero prior contact</span>
+  </div>
+</header>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="brand"><img class="brand-logo-hero" src="../../../assets/ee-logo.png" alt="EverEffect"><small>BDM Lead Pack</small></div>
+      <div class="stamp">Call: Mon, Aug 25 2026<br>4:00&ndash;4:30pm ET<br>Dossier current as of Aug 22 2026</div>
+    </div>
+    <h1 class="big">Sylvain Aub&eacute; &mdash; <em>HIZITIV.</em></h1>
+    <p class="hero-sub">CTO and co-founder of HIZITIV, a pre-launch quantum-secure Layer 1 blockchain
+    (public testnet targeted Q3 2026). Self-booked this call through the public calendar link with
+    zero prior outreach &mdash; a real inbound, not a worked lead. The buyer profile and pitch angle
+    here are different from every other prep built this week: a Web3 project trying to build market
+    awareness ahead of launch, not a local-services business optimizing an existing channel.</p>
+    <div class="hero-stats">
+      <div class="hstat"><b>0</b><span>Prior touches &mdash; fully inbound</span></div>
+      <div class="hstat"><b>Q3 2026</b><span>Testnet target, not yet live</span></div>
+      <div class="hstat"><b>3 of 3</b><span>Named competitors ahead in AI-search visibility</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabbar" id="tabs">
+  <button data-p="glance" class="on">Who You're Meeting</button>
+  <button data-p="stand">Where They Stand</button>
+  <button data-p="seo">Site &amp; SEO Audit</button>
+  <button data-p="aivis">AI Visibility</button>
+  <button data-p="comp">Competitive Landscape</button>
+  <button data-p="thread">The Actual Thread</button>
+  <button data-p="disco">Discovery Script</button>
+  <button data-p="deal">Deal Qualification</button>
+  <button data-p="proof">Proof Points</button>
+  <button data-p="sources">All Sources</button>
+</nav>
+
+<div class="wrap">
+
+<section class="panel on" id="p-glance">
+  <h2 class="sec">Sylvain Aub&eacute; &mdash; confirmed from public sources</h2>
+  <p class="sec-sub">Verified via live web search and the company's own site cross-checked against
+  press coverage, not a single source taken at face value.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-good">Confirmed</span>
+      <h3>Role &amp; background</h3>
+      <p>CTO and Co-founder of HIZITIV. MSc Computer Science, McGill University. Prior roles: SLAKE,
+      Cognitain.AI, FINSTORM, IBM. Based in Miami, FL.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Confirmed</span>
+      <h3>Recent recognition</h3>
+      <p>Awarded the &ldquo;Business Leadership Excellence Award&rdquo; at the CXO 2.0 Conference,
+      April 2025 (Las Vegas), for leadership in blockchain/decentralized networks at &ldquo;Hizitiv
+      Labs.&rdquo;</p>
+    </div>
+    <div class="card"><span class="badge b-warn">Confirmed &mdash; new in v2</span>
+      <h3>Timing / trigger</h3>
+      <p>No dated trigger found (no news, funding round, or launch tied to the booking date). This
+      is a self-initiated booking, not a reaction to anything found in research &mdash; worth asking
+      directly on the call what prompted it now.</p>
+    </div>
+    <div class="card"><span class="badge b-good">Confirmed, the real finding</span>
+      <h3>Zero prior outreach</h3>
+      <p>This is a cold, self-booked inbound. The first EverEffect touchpoint with Sylvain or HIZITIV
+      of any kind is this call itself &mdash; there is no reply to qualify, no thread to read back.</p>
+    </div>
+  </div>
+
+  <div class="note warn">
+    <b>Process gap, not a lead fact.</b> This booking sat undetected for roughly two hours (booked
+    2026-08-22 14:24 UTC, discovered ~16:30 UTC) because nothing watches the calendar automatically.
+    Neither Evans nor Chris was alerted by any system &mdash; this was caught only because it was
+    asked about directly. Worth a real fix, logged in the lead ledger.
+  </div>
+</section>
+
+<section class="panel" id="p-stand">
+  <h2 class="sec">Where HIZITIV actually stands, digitally</h2>
+  <p class="sec-sub">HIZITIV is a pre-launch B2B/Web3 infrastructure company, not a local
+  consumer-facing business &mdash; Google/Yelp/BBB/Business-Profile checks that anchor every other
+  prep this week are structurally not applicable here, marked N/A rather than silently skipped or
+  forced.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-good">Confirmed</span>
+      <h3>Company site &mdash; hizitiv.org</h3>
+      <p>Clear positioning: &ldquo;Quantum-Native Settlement Layer 1&rdquo; targeting RWA
+      tokenization, payments, industrial IoT, and decentralized AI. Organized nav (RWA, Payments,
+      DeAI, Docs, Team, Blog, Partnerships), &ldquo;Join Waitlist&rdquo;/&ldquo;Try the Live
+      Demo&rdquo; CTAs, cites BCG/McKinsey/PwC/NIST data in its own content.</p>
+    </div>
+    <div class="card"><span class="badge b-warn">Confirmed, real finding</span>
+      <h3>Product stage: pre-launch</h3>
+      <p>Public testnet targeted <b>Q3 2026</b> &mdash; the core network is not live yet. A live demo
+      exists for one specific product, <b>TEF</b> (Trust &amp; Exchange Framework, a decentralized
+      renewable-energy marketplace for solar/wind/EV/hydro), which is more concretely built out than
+      the rest of the platform.</p>
+    </div>
+    <div class="card"><span class="badge b-warn">Confirmed</span>
+      <h3>Social presence</h3>
+      <p>X (@hizitiv), Telegram (t.me/hizitiv), Medium (@hizitiv) &mdash; all active. <b>No YouTube
+      channel found</b>, on their own site or via search.</p>
+    </div>
+    <div class="card"><span class="badge b-todo">N/A, not a silent skip</span>
+      <h3>Consumer-review checks (Google/Yelp/GBP/BBB)</h3>
+      <p>Explicitly not applicable &mdash; HIZITIV has no local presence and no consumer-facing
+      product to review. Do not force these checks on future B2B/pre-launch leads either.</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="p-seo">
+  <h2 class="sec">Site &amp; SEO audit &mdash; hizitiv.org</h2>
+  <p class="sec-sub">Reviewed via a summarized live fetch this pass, not a raw-HTML curl &mdash;
+  title tag, meta, OG, schema, canonical, H1, robots.txt, sitemap, and alt-text are flagged as not
+  independently verified rather than guessed at.</p>
+
+  <table class="audit">
+    <tr><th>Check</th><th>Finding</th><th>Status</th></tr>
+    <tr><td>Title tag / meta description</td><td>Not independently verified this pass (summarized fetch only, not raw HTML)</td><td><span class="badge b-todo">Not yet checked</span></td></tr>
+    <tr><td>Open Graph tags</td><td>Not independently verified this pass</td><td><span class="badge b-todo">Not yet checked</span></td></tr>
+    <tr><td>Structured data / schema</td><td>Not independently verified this pass</td><td><span class="badge b-todo">Not yet checked</span></td></tr>
+    <tr><td>Canonical tag</td><td>Not independently verified this pass</td><td><span class="badge b-todo">Not yet checked</span></td></tr>
+    <tr><td>H1 structure</td><td>Not independently verified this pass</td><td><span class="badge b-todo">Not yet checked</span></td></tr>
+    <tr><td>robots.txt / sitemap</td><td>Not independently verified this pass</td><td><span class="badge b-todo">Not yet checked</span></td></tr>
+    <tr><td>Image alt text</td><td>Not independently verified this pass</td><td><span class="badge b-todo">Not yet checked</span></td></tr>
+    <tr><td>Core Web Vitals / PageSpeed</td><td>PageSpeed Insights API hit the same daily quota-exceeded (429) wall as every other dossier built today &mdash; a platform-wide limit, not lead-specific.</td><td><span class="badge b-bad">Blocked, attempted</span></td></tr>
+    <tr><td>Interior pages</td><td>Not independently verified this pass</td><td><span class="badge b-todo">Not yet checked</span></td></tr>
+  </table>
+
+  <div class="note warn">
+    <b>Real gap, not yet closed.</b> A genuine technical SEO pass on hizitiv.org has not actually
+    been run &mdash; this tab is honestly thin. Close before the call if time allows, or say so on
+    the call rather than presenting confidence that isn't earned yet.
+  </div>
+</section>
+
+<section class="panel" id="p-aivis">
+  <h2 class="sec">AI visibility &mdash; does an AI model recommend HIZITIV at all <span style="font-family:var(--mono);font-size:.62rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">&mdash; new tab in v2.1</span></h2>
+  <p class="sec-sub">Real test, run live 2026-08-22, not simulated. A blind category buying-question
+  search was run for the quantum-resistant-blockchain space HIZITIV competes in.</p>
+
+  <div class="hero-stats" style="margin-top:0;">
+    <div class="hstat" style="color:var(--forest);"><b style="color:var(--forest);">0 of 1</b><span>Named in the sampled blind category question</span></div>
+    <div class="hstat" style="color:var(--forest);"><b style="color:var(--forest);">0%</b><span>Share of mentions vs. 3 named competitors</span></div>
+    <div class="hstat" style="color:var(--forest);"><b style="color:var(--forest);">Not cited</b><span>Across every source in the sampled answer</span></div>
+  </div>
+
+  <h3 class="sub">Buying question sampled</h3>
+  <p class="sec-sub">1 blind category question run this pass &mdash; a real, honest sample size, not
+  padded to look more rigorous than it is.</p>
+  <div class="tablewrap">
+  <table class="audit">
+    <tr><th>Question asked</th><th>HIZITIV named?</th><th>Who else was named</th><th>Sources cited</th></tr>
+    <tr><td>&ldquo;Quantum-resistant layer 1 blockchain competitors 2026&rdquo;</td><td><span class="badge b-bad">No</span></td><td><b>Naoris Protocol</b> (mainnet live, first NIST-approved post-quantum L1, 106M+ tx processed in testing), <b>QANplatform</b> ($15M from MBK Holding, EU ministry pilot), <b>Quranium</b> (PwC/Animoca Brands/The Sandbox partnerships, live testnet)</td><td>coindesk.com, analyticsinsight.net, blockmanity.com, coincodex.com, research.tokenmetrics.com, tangem.com, bmic.ai, quranium.org, mexc.com</td></tr>
+  </table>
+  </div>
+
+  <h3 class="sub">Citation sources AI leans on in this category</h3>
+  <div class="tablewrap">
+  <table class="audit">
+    <tr><th>Source domain</th><th>Times cited</th><th>Type</th></tr>
+    <tr><td>bmic.ai</td><td>2</td><td>Explainer/listicle</td></tr>
+    <tr><td>coindesk.com, analyticsinsight.net, blockmanity.com, coincodex.com, research.tokenmetrics.com, tangem.com, mexc.com</td><td>1 each</td><td>Crypto news / explainer</td></tr>
+    <tr><td>quranium.org</td><td>1</td><td>A named competitor's own site</td></tr>
+  </table>
+  </div>
+
+  <h3 class="sub">Topics with zero presence &mdash; but not total invisibility</h3>
+  <div class="note warn">
+    <b>The real finding is more specific than &ldquo;HIZITIV is invisible.&rdquo;</b> A direct,
+    branded search ("HIZITIV blockchain AI company") surfaces HIZITIV's own site, X, Medium, and a
+    jobs board fine &mdash; brand-name search works. What's missing is category presence: when the
+    question is framed the way a real buyer would ask it (best/leading quantum-resistant L1
+    blockchain), HIZITIV doesn't appear at all, and three direct competitors do, each with a
+    concrete external validation point (a live mainnet, disclosed funding, or named enterprise
+    partnerships) that HIZITIV's own site doesn't yet show.
+  </div>
+
+  <h3 class="sub">AI-answer sentiment</h3>
+  <div class="grid g2">
+    <div class="card"><span class="badge b-todo">Not enough signal to score</span>
+      <h3>Overall tone</h3>
+      <p>No category-level AI answer mentions HIZITIV at all, so there's no sentiment to score there.
+      Brand-level mentions found (a job listing, a LinkedIn post, a press release about Sylvain's
+      award) are neutral-to-positive but aren't sales-relevant sentiment signals.</p>
+    </div>
+    <div class="card"><span class="badge b-warn">Confirmed</span>
+      <h3>The competitive gap itself is the sentiment risk</h3>
+      <p>Not a reputation problem &mdash; an awareness problem. The three named competitors have
+      external validation (live product, funding, or partnerships) that shows up in AI-surfaced
+      answers; HIZITIV's does not yet, regardless of how good the underlying technology is.</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="p-comp">
+  <h2 class="sec">Competitive landscape <span style="font-family:var(--mono);font-size:.62rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">&mdash; new tab in v2</span></h2>
+  <p class="sec-sub">Not just who the named competitors are &mdash; what they're actually doing on the
+  same axis, side-by-side.</p>
+
+  <div class="tablewrap">
+  <table class="audit">
+    <tr><th>Company</th><th>Product stage</th><th>Funding / partnerships</th><th>AI-search visibility</th></tr>
+    <tr><td><b>HIZITIV</b></td><td>Pre-testnet (target Q3 2026); one live demo (TEF energy marketplace)</td><td>None disclosed</td><td><span class="badge b-bad">Absent from blind category answer</span></td></tr>
+    <tr><td>Naoris Protocol</td><td>Mainnet live</td><td>First NIST-approved post-quantum L1; 106M+ tx processed, 603M threats blocked in testing</td><td><span class="badge b-good">Named</span></td></tr>
+    <tr><td>QANplatform</td><td>Live, EVM-compatible</td><td>$15M from MBK Holding (Apr 2024); EU ministry pilot (May 2025)</td><td><span class="badge b-good">Named</span></td></tr>
+    <tr><td>Quranium</td><td>Live testnet</td><td>PwC, Animoca Brands, The Sandbox partnerships</td><td><span class="badge b-good">Named</span></td></tr>
+  </table>
+  </div>
+
+  <div class="note">
+    <b>What this means for the pitch.</b> HIZITIV's technical ambition (quantum security + AI +
+    RWA + energy tokenization in one platform) is broad, but the one concretely-built product (TEF)
+    is a narrower, more specific story than the platform-wide pitch on its homepage. The gap versus
+    all three named competitors isn't the technology, it's external validation showing up where
+    people (and AI models) actually look for it.
+  </div>
+</section>
+
+<section class="panel" id="p-thread">
+  <h2 class="sec">The actual thread &mdash; there isn't one</h2>
+  <p class="sec-sub">This is the single most important operational fact for whoever preps this call.</p>
+
+  <div class="note warn">
+    <b>No outreach thread exists.</b> Sylvain self-booked &ldquo;30 min with Evans&rdquo; directly
+    through the public Google Calendar booking page on 2026-08-22 at 14:24 UTC, filling in only his
+    name and email &mdash; no message field, no context. There is no prior email, LinkedIn message,
+    or reply to read back. Treat this call as a genuine first meeting / discovery conversation, not
+    a follow-up to anything &mdash; every other prep built this week started from an existing reply;
+    this one starts from nothing.
+  </div>
+
+  <h3 class="sub">Engagement Signals <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <div class="note">
+    <b>Not applicable.</b> No email or message thread exists to measure opens, clicks, or reply
+    latency against.
+  </div>
+</section>
+
+<section class="panel" id="p-disco">
+  <h2 class="sec">Discovery script &mdash; tuned to a first meeting, not a follow-up</h2>
+  <p class="sec-sub">No prior message to open with &mdash; the first job on this call is establishing
+  why he booked, before anything else.</p>
+
+  <h3 class="sub">1. Open by establishing context</h3>
+  <div class="steps">
+    <div class="step"><i></i><div><b>Ask what prompted the booking</b>&ldquo;You booked time through
+    our calendar link directly, no message attached &mdash; what prompted that, and what are you
+    hoping to get out of this call?&rdquo; There is genuinely no other context to open with.</div></div>
+  </div>
+
+  <h3 class="sub">2. Qualifying questions &mdash; tied to what we found <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <div class="tablewrap">
+  <table class="audit">
+    <tr><th>Ask</th><th>Why we're asking it</th><th>Listen for</th></tr>
+    <tr>
+      <td>Is there a marketing budget allocated yet, or would content work be a new line item ahead of the testnet launch?</td>
+      <td>No paid-ads or budget signal exists to check for a pre-launch company &mdash; this has to come from him directly.</td>
+      <td>An already-planned marketing spend (real budget authority) vs. nothing allocated yet (earlier-stage, slower sell).</td>
+    </tr>
+    <tr>
+      <td>Is content/marketing strategy something you and your co-founder(s) decide together, or does someone else own that function?</td>
+      <td>Tied to Decision Authority in Deal Qualification &mdash; don't assume a CTO title means sole marketing authority.</td>
+      <td>A named co-decision-maker vs. confirmed sole authority.</td>
+    </tr>
+    <tr>
+      <td>How are you currently getting HIZITIV in front of the Web3/crypto audience ahead of the Q3 testnet &mdash; X, Medium, elsewhere?</td>
+      <td>Tied to the AI Visibility tab's zero-category-presence finding.</td>
+      <td>Whether he already knows about the visibility gap versus named competitors, or this is new information to him.</td>
+    </tr>
+    <tr>
+      <td>What made now the right time to explore this, rather than after the testnet goes live?</td>
+      <td>Tied to the missing dated trigger in Who You're Meeting.</td>
+      <td>A real reason (competitive pressure, an investor conversation, a launch deadline) vs. no particular reason.</td>
+    </tr>
+    <tr>
+      <td>Are you tracking that Naoris, QANplatform, and Quranium are already dominating the category conversation ahead of you?</td>
+      <td>Tied to the Competitive Landscape tab.</td>
+      <td>Awareness of the gap (real urgency) vs. this being news to him.</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3 class="sub">3. Anticipated objections</h3>
+  <div class="objs">
+    <div class="obj"><span class="q">&ldquo;We're pre-revenue / pre-launch, why spend on content now?&rdquo;</span><span class="a">Organic content compounds before launch the same way it does after &mdash; waiting until the testnet is live means launching into a category three competitors already own the AI-surfaced narrative in, per the AI Visibility finding.</span></div>
+    <div class="obj"><span class="q">&ldquo;We already have Medium and X, isn't that enough?&rdquo;</span><span class="a">Those are owned channels without the same organic-discovery compounding YouTube provides, and none of the AI-surfaced category answers checked this pass cite Medium or X for HIZITIV specifically.</span></div>
+  </div>
+
+  <h3 class="sub">4. Close: recommended package &amp; next step <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <div class="steps">
+    <div class="step"><i></i><div><b>Don't pitch a package on this first call</b>Given zero prior
+    context, the honest next step is a scoped visibility/content audit as a concrete deliverable,
+    not a priced package &mdash; see Deal Qualification for why a specific number would be
+    premature here.</div></div>
+  </div>
+</section>
+
+<section class="panel" id="p-deal">
+  <h2 class="sec">Deal qualification <span style="font-family:var(--mono);font-size:.62rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">&mdash; new tab in v2</span></h2>
+  <p class="sec-sub">Genuinely unknown on most axes here &mdash; a first-meeting inbound with no
+  research trail to qualify against yet. Marked TODO honestly rather than guessed at.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="badge b-todo">Unknown, ask directly</span>
+      <h3>Budget signal</h3>
+      <p>No paid-ads history or disclosed funding to infer from &mdash; unlike every other lead
+      prepped this week. Must be asked on the call.</p>
+    </div>
+    <div class="card"><span class="badge b-warn">Open question</span>
+      <h3>Decision authority &amp; stakeholders</h3>
+      <p>Sylvain is CTO/co-founder &mdash; likely real authority, but unconfirmed whether marketing
+      decisions are shared with other co-founders. Ask directly (see Discovery Script).</p>
+    </div>
+    <div class="card"><span class="badge b-warn">Real, worth naming</span>
+      <h3>Red flags</h3>
+      <p>Pre-revenue, pre-launch company with no disclosed funding &mdash; genuine budget risk.
+      Not a reason to disqualify, but a reason not to lead with a big-number pitch.</p>
+    </div>
+    <div class="card"><span class="badge b-todo">Deliberately not invented</span>
+      <h3>Recommended package</h3>
+      <p>Too early to recommend a specific package on zero context. Recommended first deliverable:
+      a scoped visibility/content audit, not a priced package &mdash; matches the Discovery
+      Script's close.</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="p-proof">
+  <h2 class="sec">Proof points, honestly scoped</h2>
+  <p class="sec-sub">No matching case study for a pre-launch Web3/blockchain client exists at
+  EverEffect yet &mdash; say so plainly if asked, don't imply one does.</p>
+
+  <div class="card">
+    <h3>Midwest personal injury law firm &mdash; YouTube campaign rebuild</h3>
+    <div class="proof">
+      <div><div class="num">71%</div><div class="cap">Spend reduction</div></div>
+      <div><div class="num">103%</div><div class="cap">Conversion increase</div></div>
+      <div><div class="num">1%</div><div class="cap">CPL vs. search, after fix</div></div>
+    </div>
+    <p style="margin-top:.8rem;">9 structural errors fixed: no content suitability exclusions, no
+    conversion goals, ads running across 17,000+ irrelevant YouTube channels.</p>
+  </div>
+
+  <div class="note warn">
+    <b>Not a direct match.</b> This is paid YouTube ads for a law firm, lead-gen focused &mdash; not
+    organic content strategy for a pre-launch Web3 infrastructure company. Use only to demonstrate
+    general YouTube-optimization capability, not as a stand-in for a comparable result in this
+    vertical.
+  </div>
+</section>
+
+<section class="panel" id="p-sources">
+  <h2 class="sec">All sources</h2>
+  <p class="sec-sub">Every link used anywhere in this dossier, consolidated.</p>
+
+  <div class="tablewrap">
+  <table class="srctable">
+    <tr><th>Claim</th><th>Source</th><th>Confidence</th><th>Checked</th></tr>
+    <tr><td>Product/positioning, testnet Q3 2026, TEF demo</td><td><a href="https://hizitiv.org/" target="_blank" rel="noopener">hizitiv.org</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">Aug 22</td></tr>
+    <tr><td>CXO 2.0 Business Leadership Excellence Award, Apr 2025</td><td><a href="https://www.streetinsider.com/Press+Releases/CXO+2.0+Conference+2025,+USA+Celebrates+Sylvain+Aub%C3%A9%E2%80%99s+Leadership+With+%E2%80%9CBusiness+Leadership+Excellence+Award%E2%80%9D/24651491.html" target="_blank" rel="noopener">streetinsider.com</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">Aug 22</td></tr>
+    <tr><td>Role, background, prior companies</td><td><a href="https://rocketreach.co/sylvain-aube-email_82179897" target="_blank" rel="noopener">rocketreach.co</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">Aug 22</td></tr>
+    <tr><td>Naoris Protocol mainnet live, NIST-approved</td><td><a href="https://www.coindesk.com/markets/2026/04/03/naoris-protocol-s-quantum-resistance-blockchain-goes-live-as-bitcoin-and-ethereum-face-q-day-threats" target="_blank" rel="noopener">coindesk.com</a></td><td><span class="conf c-verified">Verified</span></td><td class="date">Aug 22</td></tr>
+    <tr><td>QANplatform funding &amp; EU pilot</td><td><a href="https://research.tokenmetrics.com/p/deep-dive-quranium-quantum-resistant-layer-1-for-the-ai-driven-web3-future" target="_blank" rel="noopener">tokenmetrics.com / bmic.ai</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">Aug 22</td></tr>
+    <tr><td>Quranium partnerships (PwC, Animoca, Sandbox)</td><td><a href="https://www.quranium.org/" target="_blank" rel="noopener">quranium.org</a></td><td><span class="conf c-single">Single-source</span></td><td class="date">Aug 22</td></tr>
+    <tr><td>Booking record, no message field filled</td><td>Google Calendar, evans.diaz@evereffect.com</td><td><span class="conf c-verified">Verified</span></td><td class="date">Aug 22</td></tr>
+    <tr><td>HubSpot contact completed (email, hs_lead_status)</td><td>HubSpot contact 243637831055</td><td><span class="conf c-verified">Verified</span></td><td class="date">Aug 22</td></tr>
+  </table>
+  </div>
+
+  <h3 class="sub">Changelog <span style="font-family:var(--mono);font-size:.6rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">(new in v2)</span></h3>
+  <ul class="changelog">
+    <li><time>Aug 22</time><span>First build. Discovered via a live calendar check after Evans asked who'd just booked &mdash; the booking itself happened at 14:24 UTC and sat undetected until ~16:30 UTC, since nothing watches the calendar automatically. HubSpot contact completed (email + hs_lead_status), a Basecamp to-do created, and this dossier built same-pass.</span></li>
+  </ul>
+
+  <div class="note">
+    <b>Not yet checked.</b> Raw HTML title/meta/OG/schema tags on hizitiv.org (reviewed via
+    summarized fetch only). PageSpeed/Core Web Vitals (API quota exhausted, platform-wide). Whether
+    HIZITIV has other co-founders beyond Sylvain, and who they are. Sylvain's own LinkedIn activity
+    beyond aggregate search snippets. Whether a YouTube channel exists under a different handle than
+    searched.
+  </div>
+</section>
+
+</div>
+
+<footer class="f">
+  <span>Internal BDM prep &middot; shared with Chris for feedback &middot; never sent to the lead &middot; Aug 22 2026</span>
+  <span><img class="brand-logo-foot" src="../../../assets/ee-logo.png" alt="EverEffect"></span>
+</footer>
+
+<script>
+var tabs=document.querySelectorAll('#tabs button'),panels=document.querySelectorAll('.panel');
+tabs.forEach(function(b){b.addEventListener('click',function(){
+  tabs.forEach(function(x){x.classList.remove('on')});
+  panels.forEach(function(p){p.classList.remove('on')});
+  b.classList.add('on');
+  document.getElementById('p-'+b.dataset.p).classList.add('on');
+  b.scrollIntoView({block:'nearest',inline:'nearest'});
+  window.scrollTo({top:0,behavior:'smooth'});
+})});
+</script>
+</body>
+</html>

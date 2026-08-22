@@ -37,13 +37,45 @@
              stale, not just that the 9 tabs exist (v1 only checked tab IDs
              and empty hrefs — that's how a claim could go unverified into
              a draft to Chris and still pass).
+  - p-aivis   (AI Visibility) — new tab, added 2026-08-21 after reviewing
+             Visto's AI Search Visibility Audit run on Keller & Keller.
+             Every prior tab audits traditional SEO signals (meta tags,
+             schema, backlinks) but none of them ever asked an AI model a
+             buying question and recorded the answer — which is the actual
+             mechanism deciding whether a prospect's future customers hear
+             this lead's name at all. Covers: buying-question sample results,
+             share of voice against named competitors, citation-source
+             tally, zero-presence topic map, and AI-answer sentiment. Manual
+             process for now (no tool wired up yet — see All Sources for
+             the caveat this implies), same category of gap Core Web
+             Vitals/PageSpeed was before it got wired up. This also
+             supersedes the "add Visibility Scoring to Site & SEO Audit"
+             ask below — it's a dedicated tab now, not a row.
+
+  THOMAS'S REVIEW PASS, 2026-08-21 — 4 standing changes to how p-stand
+  and p-seo get filled in (not just this one prep):
+  1. Employer-review platforms (Glassdoor, Indeed) are OUT of p-stand.
+     They rate the company as a workplace, not as a vendor — not what an
+     AI model or a customer is evaluating. Google + Yelp stay; Google
+     especially, since LLMs weigh it heavily when deciding who to cite.
+  2. Site & SEO Audit's "Visibility Scoring" ask is now covered by the
+     p-aivis tab above (see that entry) — no separate SEO-tab row needed.
+  3. Negative sentiment/reviews findings get surfaced ALWAYS, never gated
+     on "only raise if the prospect brings it up." Locked 2026-08-21,
+     overriding the v1/early-v2 instinct to hold reputational negatives in
+     reserve: naming them first builds credibility and opens a concrete
+     solution angle, and AI models weigh sentiment when deciding which
+     businesses get recommended, not just cited.
+  4. p-deal (Deal Qualification): Thomas is drafting a YouTube Channel
+     Optimization deliverables list to fold in here — pending his send,
+     not yet built. Don't invent deliverables in the meantime.
 
   MANDATORY BEFORE ANY PUSH OR CHRIS-FACING DRAFT — run all three:
 
   F=<path to the built prep index.html>
 
-  # 1. All 9 tabs present, or a stated reason for the ones missing
-  for tab in glance stand seo comp thread disco deal proof sources; do
+  # 1. All 10 tabs present, or a stated reason for the ones missing
+  for tab in glance stand seo aivis comp thread disco deal proof sources; do
     grep -q "id=\"p-$tab\"" "$F" && echo "OK      p-$tab" \
       || echo "MISSING p-$tab (state the reason in All Sources, or build it)"
   done
@@ -254,6 +286,7 @@ footer.f{padding:2rem 0 2.6rem;border-top:1px solid var(--line);margin-top:.5rem
   <button data-p="glance" class="on">Who You're Meeting</button>
   <button data-p="stand">Where They Stand</button>
   <button data-p="seo">Site &amp; SEO Audit</button>
+  <button data-p="aivis">AI Visibility</button>
   <button data-p="comp">Competitive Landscape</button>
   <button data-p="thread">The Actual Thread</button>
   <button data-p="disco">Discovery Script</button>
@@ -294,7 +327,10 @@ footer.f{padding:2rem 0 2.6rem;border-top:1px solid var(--line);margin-top:.5rem
 <section class="panel" id="p-stand">
   <h2 class="sec">Where they actually stand, digitally</h2>
   <p class="sec-sub">TODO: sourced digital-footprint findings. Explicit "checked, not found" callouts
-  for anything searched and confirmed absent, don't just omit it silently.</p>
+  for anything searched and confirmed absent, don't just omit it silently. Check Google and Yelp for
+  reputation — skip Glassdoor/Indeed (employer-review platforms, not what a customer or an AI model is
+  evaluating). If a negative sentiment finding turns up, put it here plainly: always surfaced, never
+  held back for the prospect to raise first.</p>
 
   <div class="grid g2">
     <div class="card"><span class="badge b-todo">TODO: source this or mark it not found</span>
@@ -332,6 +368,68 @@ footer.f{padding:2rem 0 2.6rem;border-top:1px solid var(--line);margin-top:.5rem
 
   <div class="note warn">
     <b>TODO.</b> Real gaps only, each sourced to the exact page or file checked.
+  </div>
+</section>
+
+<section class="panel" id="p-aivis">
+  <h2 class="sec">AI visibility &mdash; does an AI model recommend TODO Name at all <span style="font-family:var(--mono);font-size:.62rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400;">&mdash; new tab in v2.1</span></h2>
+  <p class="sec-sub">Traditional SEO answers "can a model read this site." This tab answers the actual
+  question a prospect's future customers are asking: when someone asks ChatGPT/Perplexity/Gemini who to
+  hire in this category, does TODO Name's name come back at all. TODO: sample of TODO buying questions
+  run TODO date, modeled on the same method a firm called Visto used gratis on a competing lead (Keller
+  &amp; Keller) &mdash; see All Sources for that reference.</p>
+
+  <div class="hero-stats" style="margin-top:0;">
+    <div class="hstat" style="color:var(--forest);"><b style="color:var(--forest);">TODO%</b><span>Named in sampled AI answers</span></div>
+    <div class="hstat" style="color:var(--forest);"><b style="color:var(--forest);">TODO%</b><span>Share of mentions vs. named competitors</span></div>
+    <div class="hstat" style="color:var(--forest);"><b style="color:var(--forest);">TODO of TODO</b><span>Domain citation rank</span></div>
+  </div>
+
+  <h3 class="sub">Buying questions sampled</h3>
+  <p class="sec-sub">TODO N questions a real prospect in this category would ask, run through TODO
+  models (list which). For each: does TODO Name get named, who else does, and which sources the answer
+  cites.</p>
+  <div class="tablewrap">
+  <table class="audit">
+    <tr><th>Question asked</th><th>TODO Name named?</th><th>Who else was named</th><th>Sources cited</th></tr>
+    <tr><td>TODO question, e.g. &ldquo;Who should I hire for TODO in TODO market?&rdquo;</td><td><span class="badge b-todo">TODO yes/no</span></td><td>TODO competitor names or none</td><td>TODO domains cited in the answer</td></tr>
+  </table>
+  </div>
+
+  <h3 class="sub">Citation sources AI leans on in this category</h3>
+  <p class="sec-sub">Tally of every domain cited across the sampled answers above. Directories and
+  explainer sites usually dominate this list over any single firm &mdash; that's expected, not a red flag.</p>
+  <div class="tablewrap">
+  <table class="audit">
+    <tr><th>Source domain</th><th>Times cited</th><th>Type</th></tr>
+    <tr><td>TODO domain</td><td>TODO</td><td>TODO directory / explainer / competitor / TODO Name's own site</td></tr>
+  </table>
+  </div>
+
+  <h3 class="sub">Topics with zero firm presence</h3>
+  <p class="sec-sub">Buying-intent topics where the sample above returned no firm name at all &mdash; the
+  white space, not a gap to apologize for. Framing for the call: this is ground nobody has taken yet, not
+  share being clawed back from a competitor.</p>
+  <div class="note">
+    <b>TODO.</b> List the specific topics that came back empty across every firm checked, not just TODO
+    Name.
+  </div>
+
+  <h3 class="sub">AI-answer sentiment</h3>
+  <p class="sec-sub">Where TODO Name is named or discussed, how favorable is the model's language &mdash;
+  scored roughly from the answers themselves, cross-checked against Google/Yelp review sentiment already
+  captured in Where They Stand. Models weigh sentiment when deciding who gets recommended, not just who
+  gets cited.</p>
+  <div class="grid g2">
+    <div class="card"><span class="badge b-todo">TODO</span>
+      <h3>Overall tone</h3>
+      <p>TODO: broadly favorable, mixed, or too little AI-answer coverage yet to score.</p>
+    </div>
+    <div class="card"><span class="badge b-todo">TODO</span>
+      <h3>Weakest topic, if any</h3>
+      <p>TODO: a topic where AI language runs cooler than the rest &mdash; worth naming even if the
+      prospect hasn't brought it up, since it also shapes future citations.</p>
+    </div>
   </div>
 </section>
 
